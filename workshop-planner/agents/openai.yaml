@@ -1,0 +1,4 @@
+interface:
+  display_name: "Workshop Planner"
+  short_description: "Plan workshops and produce FigJam handoff briefs"
+  default_prompt: "Use $workshop-planner to design a workshop plan and generate a handoff brief for $figjam-workshop-prompt-creator."

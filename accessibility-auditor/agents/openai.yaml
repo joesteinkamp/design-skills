@@ -1,0 +1,4 @@
+interface:
+  display_name: "Accessibility Auditor"
+  short_description: "Audit designs for WCAG compliance with remediation guidance"
+  default_prompt: "Use $accessibility-auditor to audit a design for WCAG compliance and produce prioritized findings with remediation guidance."

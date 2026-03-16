@@ -1,0 +1,4 @@
+interface:
+  display_name: "FigJam Workshop Prompt Creator"
+  short_description: "Generate structured FigJam workshop prompts"
+  default_prompt: "Use $figjam-workshop-prompt-creator to draft an AI-Native design workshop facilitation prompt for FigJam."

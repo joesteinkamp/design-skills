@@ -1,0 +1,4 @@
+interface:
+  display_name: "Persona Creator"
+  short_description: "Build evidence-based personas from research and behavioral data"
+  default_prompt: "Use $persona-creator to build structured persona cards from research inputs or user descriptions."

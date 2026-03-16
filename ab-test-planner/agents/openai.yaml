@@ -1,0 +1,4 @@
+interface:
+  display_name: "A/B Test Planner"
+  short_description: "Design rigorous A/B test plans with hypotheses and metrics"
+  default_prompt: "Use $ab-test-planner to design an A/B test plan with a falsifiable hypothesis, variant definitions, and metric framework."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Heuristic Evaluator"
+  short_description: "Evaluate interfaces against usability heuristics with scored assessments"
+  default_prompt: "Use $heuristic-evaluator to evaluate an interface against Nielsen's 10 usability heuristics and produce a scored assessment."

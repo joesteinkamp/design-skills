@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Spec Writer"
+  short_description: "Write structured design specs with user stories and interaction details"
+  default_prompt: "Use $design-spec-writer to create a design spec with user stories, interaction specs, and acceptance criteria."
