@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Success Metrics Writer"
+  short_description: "Define measurable success metrics and KPIs for design work"
+  default_prompt: "Use $design-success-metrics-writer to define success metrics, KPIs, and a measurement plan for a design initiative."

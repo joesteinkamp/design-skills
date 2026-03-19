@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Spectrums Creator"
+  short_description: "Map opposing design principles and trade-offs as spectrums"
+  default_prompt: "Use $design-spectrums-creator to identify key design tensions and trade-offs as spectrums for a design challenge."
