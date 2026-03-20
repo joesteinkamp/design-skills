@@ -126,3 +126,35 @@ Document the primary path from entry to success.
 - [ ] First-time vs. returning user differences are noted
 - [ ] Permission/role variations are documented
 - [ ] No dead ends exist without recovery
+
+---
+
+## Starter Example
+
+Below is a concrete example of a completed happy path segment and decision point. Use as a quality reference.
+
+### Happy Path: Add to Cart
+
+| Step | Screen/State | User Action | System Response | Transition |
+|------|-------------|-------------|-----------------|------------|
+| 1 | Product Detail Page | Taps "Add to Cart" button | Button shows spinner (150ms), then changes to "Added ✓" with green background | Inline update |
+| 2 | Product Detail Page (updated) | — | Cart badge in nav increments by 1. Slide-in toast: "Added to cart" with "View Cart" link (auto-dismiss 4s) | Inline update |
+| 3 | Cart (if user taps "View Cart") | Taps "View Cart" on toast or nav cart icon | Cart drawer slides in from right (300ms ease-out) showing added item at top | Modal / drawer |
+
+### Decision Point: Checkout Eligibility
+
+```
+[Cart Page] → User taps "Checkout"
+    │
+    ├── IF signed in AND cart > 0 → [Checkout: Shipping]
+    ├── IF not signed in AND cart > 0 → [Sign In / Guest Checkout modal]
+    ├── IF cart = 0 → [Empty Cart State] "Your cart is empty" + "Continue Shopping" link
+    └── IF item out of stock since add → [Cart Page with warning] "1 item is no longer available" + "Remove" action
+```
+
+### Error Path: Payment Failure
+
+| Step | Screen/State | User Action | System Response | Recovery |
+|------|-------------|-------------|-----------------|----------|
+| E1 | Checkout: Payment | Submits payment form | API returns 402 (card declined) | — |
+| E2 | Checkout: Payment (error) | — | Inline error above payment form: "Your card was declined. Please try a different payment method." Card field highlighted red. | User corrects card or selects different method → returns to Step P5 of happy path |

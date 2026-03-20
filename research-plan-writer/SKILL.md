@@ -11,7 +11,7 @@ Use this skill to create structured research plans that set up studies for succe
 
 This is the upstream counterpart to `$research-synthesizer`—it plans the study; Research Synthesizer analyzes the results.
 
-The output should be execution-ready: a clear methodology, a complete discussion guide or survey instrument, recruitment criteria, and a timeline a researcher can follow.
+The output should be execution-ready: a clear methodology, a complete discussion guide or survey instrument, recruitment criteria, and a timeline a researcher can follow. Output is formatted for use in Dovetail, Google Docs, Notion, or Confluence. When the target tool is specified, adapt the plan structure and linking conventions accordingly.
 
 ## Workflow
 
@@ -68,15 +68,16 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Research questions are answerable with yes/no.
-- Methodology is not justified against the research questions.
-- Discussion guide contains leading or closed questions.
-- Survey has more than 30 questions without justification.
-- Recruitment criteria do not include exclusion criteria.
-- Sample size is not justified.
-- Timeline is missing or unrealistic.
+- Any research question is answerable with yes/no instead of revealing behavior, motivation, or process.
+- Methodology section does not explain why the chosen method answers the specific research questions (not just "we chose interviews" but "interviews because we need to understand the mental model behind [behavior]").
+- Discussion guide contains leading questions ("Don't you think X is confusing?") or closed questions ("Did you find it easy?").
+- Discussion guide does not start with warm-up questions and end with cool-down questions.
+- Survey has more than 30 questions without justification for length.
+- Recruitment screener has fewer than 3 qualifying criteria or zero disqualifying criteria.
+- Sample size is stated without justification (e.g., "5 participants per segment for qualitative saturation" or "384 responses for ±5% margin of error").
+- Timeline does not include recruitment, sessions, analysis, and reporting phases with estimated durations.
 - Consent and data handling are not addressed.
-- Plan does not name the business decision it informs.
+- Plan does not name the specific business decision the research will inform.
 
 ## Reference Navigation
 

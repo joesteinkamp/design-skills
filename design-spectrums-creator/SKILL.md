@@ -9,7 +9,7 @@ description: "Identify and map key opposing design principles, patterns, and tra
 
 Use this skill to surface and map the key design tensions for a given challenge. Every design decision sits somewhere on a spectrum between opposing principles — simplicity vs. power, guidance vs. freedom, density vs. clarity. This skill makes those tensions explicit so the team can make intentional, aligned decisions rather than unconscious defaults.
 
-Accepts a design brief, feature description, problem statement, or output from upstream skills like `$persona-creator`, `$journey-mapper`, `$inspiration-browser`, or `$design-spec-writer` and produces a set of labeled spectrums with positions, rationale, and design implications.
+Accepts a design brief, feature description, problem statement, or output from upstream skills like `$persona-creator`, `$journey-mapper`, `$inspiration-browser`, or `$design-spec-writer` and produces a set of labeled spectrums with positions, rationale, and design implications. Output is formatted for use in FigJam, Miro, or as structured markdown in Notion. When the target tool is specified, adapt the spectrum visualization format for that tool's canvas or layout.
 
 ## Workflow
 
@@ -62,14 +62,14 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Fewer than 5 spectrums are identified without justification.
-- Either pole of a spectrum is a strawman (no one would advocate for it).
-- Spectrums lack real-world examples at each pole.
-- Recommended positions are all "somewhere in the middle" with no strong stances.
-- Positions are not justified by user or business factors.
-- Derived principles are generic (could apply to any product).
-- Derived principles do not have meaningful opposites.
-- Trade-offs are not explained for each spectrum.
+- Fewer than 5 spectrums are identified without justification for the smaller set.
+- Either pole of a spectrum is a strawman — both sides must be defensible positions that a reasonable designer would advocate for (e.g., "Simple ←→ Powerful" is valid; "Good ←→ Bad" is not).
+- Any spectrum is missing a real-world product example at each pole (e.g., "Guided: TurboTax ←→ Exploratory: Figma").
+- All recommended positions cluster in the center — at least 2 spectrums should have a strong left or right stance with clear rationale.
+- Positions are justified with personal preference ("I think...") instead of user or business evidence ("Maya persona needs X because..." or "Our 35% onboarding drop-off indicates...").
+- Derived principles are generic enough to apply to any product ("Be user-friendly") instead of specific to this challenge ("Prioritize setup speed over configuration completeness for first-time users").
+- Derived principles do not have a meaningful opposite — if no one would argue the other side, it's not a useful principle.
+- Trade-offs are one-sided — each spectrum must state what you gain AND what you lose at each pole.
 
 ## Reference Navigation
 

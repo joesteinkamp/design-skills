@@ -9,7 +9,7 @@ description: "Structure compelling design presentations for stakeholder audience
 
 Use this skill to structure persuasive design presentations that communicate decisions, rationale, and recommendations to stakeholders. Accepts design specs (from `$design-spec-writer`), research findings (from `$research-synthesizer`), critique outcomes (from `$design-critique`), or any design artifact and produces a structured presentation narrative.
 
-The output should be presentation-ready: a clear narrative arc, evidence-backed arguments, anticipated objections, and explicit decision asks that drive alignment.
+The output should be presentation-ready: a clear narrative arc, evidence-backed arguments, anticipated objections, and explicit decision asks that drive alignment. Output is formatted for use in Google Slides, Keynote, Figma, or as a structured Notion document. When the target tool is specified, adapt the slide structure and layout guidance accordingly.
 
 ## Workflow
 
@@ -62,14 +62,14 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Audience and their priorities are not identified.
-- Presentation lacks a clear narrative arc (problem → context → solution → ask).
-- Design decisions are presented without rationale or evidence.
-- No alternatives were considered or shown.
-- Objections are not anticipated.
-- The ask is vague or missing.
-- Presentation exceeds the stated time constraint.
-- Trade-offs are hidden rather than acknowledged.
+- Audience is described generically ("stakeholders") rather than specifically ("VP of Product, 2 Engineering leads, Head of Design").
+- Narrative does not follow the problem → context → solution → ask arc.
+- Any design decision is presented without at least one supporting evidence point (research quote, metric, competitive example, or heuristic).
+- No alternatives were shown — the presentation must include at least one deprioritized option with rationale.
+- Objection handling section is empty or has fewer than 2 anticipated pushbacks.
+- The ask is vague ("let us know what you think") instead of specific ("approve Option B so engineering can begin sprint planning next Monday").
+- Presentation exceeds the stated time constraint by more than 10%.
+- Trade-offs are hidden — every recommendation must acknowledge what it costs (time, scope, complexity, or risk).
 
 ## Reference Navigation
 

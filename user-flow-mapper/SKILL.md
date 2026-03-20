@@ -11,7 +11,7 @@ Use this skill to map detailed, screen-level user flows that document how users 
 
 Unlike journey maps (which capture high-level experience arcs across touchpoints), user flows document the granular, click-by-click paths through a specific interface.
 
-The output should be implementation-ready: every screen, decision point, and error state is accounted for so that designers and developers have a complete picture of the interaction.
+The output should be implementation-ready: every screen, decision point, and error state is accounted for so that designers and developers have a complete picture of the interaction. Output is formatted for use in FigJam, Miro, Whimsical, or as structured markdown in Notion. When the target tool is specified, adapt the flow notation for that tool's shapes and connectors.
 
 ## Workflow
 
@@ -63,13 +63,14 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Happy path is incomplete or has gaps between steps.
-- Decision points are missing conditions or destinations.
-- Error states are not documented for steps that can fail.
-- Dead ends exist with no recovery path.
-- Steps are at inconsistent granularity.
-- Edge cases (empty state, first-time use, permissions) are not addressed.
-- Flow has no clear start and end state.
+- Happy path has any gap where the next screen or action is ambiguous.
+- Any decision point is missing its condition expression ("if [condition]") and at least 2 destination branches.
+- Error states are not documented for steps that involve user input, API calls, or system processing.
+- Any dead end exists without a documented recovery path or explicit "terminal state" label.
+- Steps are at inconsistent granularity — e.g., one step is "User clicks Submit" and another is "User completes entire onboarding."
+- Flow does not define a specific entry point ("User arrives at [screen] from [source]") and success exit ("User sees [confirmation]").
+- Edge cases (empty state, first-time user, permission denied, offline) are not mapped for flows with conditional content.
+- Flow notation is inconsistent — all nodes must use the notation from `references/flow-notation-guide.md`.
 
 ## Reference Navigation
 

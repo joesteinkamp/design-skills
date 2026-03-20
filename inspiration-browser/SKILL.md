@@ -9,7 +9,7 @@ description: "Research and curate design inspiration from across the web for a s
 
 Use this skill to research and curate relevant design inspiration from across the web for a specific design challenge. Accepts a design brief, feature description, problem statement, or output from upstream skills like `$persona-creator` or `$journey-mapper` and produces a structured inspiration board with categorized examples, pattern observations, and design implications.
 
-This skill actively searches the internet for real-world examples — landing pages, product interfaces, interaction patterns, visual treatments, and cross-industry analogies. The output should spark ideas, not prescribe solutions. Each example should include why it is relevant and what principle it demonstrates.
+This skill actively searches the internet for real-world examples — landing pages, product interfaces, interaction patterns, visual treatments, and cross-industry analogies. The output should spark ideas, not prescribe solutions. Each example should include why it is relevant and what principle it demonstrates. Search sources include Mobbin, Savee, Godly, Awwwards, Dribbble (shipped products only), Product Hunt, Apple Design Awards, Google Material Studies, and industry-specific blogs. Output is formatted for use in Figma, FigJam, Miro, or as a structured Notion gallery. When the target tool is specified, adapt the board layout accordingly.
 
 ## Workflow
 
@@ -19,13 +19,13 @@ This skill actively searches the internet for real-world examples — landing pa
 - Define search dimensions: direct competitors, adjacent industries, analogous experiences, and cross-domain inspiration.
 - Accept upstream inputs from `$persona-creator`, `$journey-mapper`, or `$design-spec-writer` to focus the search.
 
-2. Search broadly across categories.
-- Search for direct examples: products solving the same problem in the same domain.
-- Search for adjacent examples: products in related domains with similar interaction patterns.
-- Search for analogous examples: unrelated industries solving structurally similar problems.
-- Search for visual and emotional references: treatments that evoke the desired tone.
-- Prioritize real, shippable products over concept work or dribbble shots.
-- Search design galleries, pattern libraries, award sites, product showcases, and industry blogs.
+2. Search broadly across categories using canonical sources.
+- **Direct examples:** Search Mobbin, Product Hunt, and competitor websites for products solving the same problem in the same domain.
+- **Adjacent examples:** Search Awwwards, Godly, and industry blogs for products in related domains with similar interaction patterns.
+- **Analogous examples:** Search across unrelated industries (healthcare, gaming, finance, education) for structurally similar problems solved differently.
+- **Visual and emotional references:** Search Savee, Dribbble (filter for shipped/real products), and Apple Design Awards for treatments that evoke the desired tone.
+- Prioritize real, shipped products over concept work or awards pieces with no evidence of production use.
+- For each source, note the URL, product name, and the specific screen or interaction worth studying.
 
 3. Curate and categorize findings.
 - Select 8-15 examples that offer meaningfully different approaches.
@@ -61,13 +61,13 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Fewer than 8 examples are included without justification.
-- All examples are from the same domain or industry.
-- Examples lack explanation of why they are relevant.
-- No cross-industry or analogous inspiration is included.
-- Pattern analysis only describes what was found without connecting to the design challenge.
-- Examples are concept work or awards pieces with no evidence of real-world use.
-- Design implications are generic and not tied to specific examples or patterns.
+- Fewer than 8 examples are included without justification for the smaller set.
+- All examples are from the same domain or industry — at least 2 must be from analogous or cross-industry sources.
+- Any example is missing a source URL, a description of what it does well, and an explanation of its relevance to the current challenge.
+- No cross-industry or analogous inspiration is included — at least 2 examples must come from outside the product's direct domain.
+- Pattern analysis only lists what was found without stating a design implication for the current challenge.
+- Examples are concept work, dribbble shots, or awards pieces with no evidence of real-world production use — unless explicitly labeled as "concept inspiration."
+- Design implications are generic ("good onboarding is important") instead of specific ("3 of 5 examples use progressive disclosure to reduce initial cognitive load — consider collapsing advanced settings behind a 'More options' toggle").
 - Sources are not provided for each example.
 
 ## Reference Navigation

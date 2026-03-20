@@ -98,3 +98,30 @@ Every slide should have:
 - [ ] Total slide count fits the time allocation
 - [ ] The ask slide is explicit and actionable
 - [ ] Appendix contains detail that supports but doesn't clutter the main deck
+
+---
+
+## Copy-Ready Slide Language
+
+Use these as starting points for slide titles and framing. Adapt to the specific presentation context.
+
+### Act 1: Problem (1-2 slides)
+- **Slide title:** "Users are [specific behavior] because [root cause]."
+- **Opening line:** "Right now, [X% of users / N users per week] are [observable problem]. This costs us [business impact]."
+- **Evidence format:** "[User quote]" — P3, Enterprise segment, Usability Study #12
+
+### Act 2: Context (2-3 slides)
+- **Slide title:** "What we learned from [research method / data source]."
+- **Key finding format:** "Finding: [Insight]. Evidence: [data point]. Impact: [what this means for the business]."
+- **Comparison format:** "We evaluated [N] approaches. Here's how they compare on [criteria]."
+
+### Act 3: Solution (2-4 slides)
+- **Slide title:** "Our recommendation: [one-line description of direction]."
+- **Rationale format:** "We chose this because [evidence]. We deprioritized [alternative] because [trade-off]."
+- **Before/after format:** "Current: [pain point]. Proposed: [solution]. Expected impact: [metric change]."
+
+### Act 4: Ask (1 slide)
+- **Slide title:** "We need [specific decision] by [date]."
+- **Option format:** "Option A: [description]. Pros: [X]. Cons: [Y]. Our recommendation: [A/B]."
+- **Next steps format:** "If approved: [action 1] by [date], [action 2] by [date]. Owner: [name]."
+- **Deferral risk:** "If we delay this decision, [consequence] by [date]."

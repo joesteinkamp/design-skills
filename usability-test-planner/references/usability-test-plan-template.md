@@ -141,3 +141,66 @@ For each task:
 - Findings report format:
 - Stakeholder presentation:
 - Recommended downstream skill: (e.g., `$research-synthesizer` for full synthesis)
+
+---
+
+## Copy-Ready Moderator Script
+
+Use these verbatim during moderated sessions.
+
+### Session Introduction
+"Thank you for taking the time to help us today. I'm [name], and I'll be walking you through some tasks on [product/prototype]. Before we start, I want to set expectations:
+
+- There are no right or wrong answers. We're testing the design, not you.
+- I'd like you to think aloud as you go — tell me what you're looking at, what you're thinking, and what you expect to happen.
+- If you get stuck, that's valuable information. I may not help you right away because I want to see where the design could be clearer.
+- We'll be recording this session for our team's reference. Your feedback will be anonymized.
+- Do you have any questions before we begin?"
+
+### Think-Aloud Prompt
+"As you work through each task, please think out loud. Tell me what you see, what you're trying to do, and what you expect will happen when you take an action. If you go quiet for a bit, I may prompt you with 'What are you thinking right now?'"
+
+### Task Introduction
+"I'm going to give you a scenario. Please read it aloud, and then try to complete the task as you normally would. Remember, think aloud as you go."
+
+### Neutral Probing Questions
+- "What are you thinking right now?"
+- "What did you expect to happen there?"
+- "Can you tell me more about why you chose that?"
+- "Where would you look for that?"
+- "How does this compare to what you expected?"
+
+### Post-Task Questions
+- "On a scale of 1-7, how difficult was that task? (1 = very easy, 7 = very difficult)"
+- "How would you describe that experience in your own words?"
+- "Was there a point where you felt unsure about what to do next?"
+
+### Session Wrap-Up
+"That's all the tasks I have for you today. Before we finish:
+- Is there anything about [product] that we didn't cover that you'd like to mention?
+- If you could change one thing about what you just saw, what would it be?
+Thank you for your time — your feedback is extremely helpful."
+
+## Starter Task Scenario Example
+
+### Task 3: Recover from a failed payment
+
+**Context:** "You just placed an order for a new pair of headphones. Your credit card was declined."
+
+**User goal:** Find out why the payment failed and successfully complete the purchase using a different payment method.
+
+**Success criteria:**
+- User navigates to the failed order or payment error screen.
+- User identifies the reason for failure (or acknowledges the error message).
+- User adds or selects an alternative payment method.
+- User successfully completes the purchase.
+
+**Measurables:**
+- Completion: yes/no
+- Time on task: target < 90 seconds
+- Errors: count of wrong paths taken
+- Path: expected vs. actual navigation sequence
+
+**Probing questions for this task:**
+- "What did you expect to see after the payment failed?"
+- "How confident are you that the purchase went through this time?"

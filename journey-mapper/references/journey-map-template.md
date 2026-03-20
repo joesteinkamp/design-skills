@@ -69,3 +69,40 @@ For each opportunity:
 ## Downstream Handoff
 
 Produce this section using `journey-handoff-schema.md` when passing to other skills.
+
+---
+
+## Starter Example
+
+Below is a concrete example of one completed journey phase. Use as a quality reference.
+
+### Phase 3: First Configuration (Day 1, 15-45 minutes)
+
+**Goal:** Set up the product to match the user's workflow.
+
+**Touchpoints:** Web app settings page, email invite flow, help docs
+**Channels:** Desktop browser, email
+**Duration:** 15-45 minutes
+
+**Actions:**
+- Opens settings from the sidebar.
+- Searches for "team" to find team management.
+- Invites 3 colleagues via email.
+- Attempts to configure notification preferences — gives up after 2 minutes.
+
+**Thoughts:**
+- "Where is the team setup? I expected it in onboarding."
+- "Why can't I set roles when I invite people?"
+- "I'll figure out notifications later — this is too buried."
+
+**Emotions:**
+- Valence: Negative → Neutral
+- Intensity: Medium (frustration, not rage — user persists but notes friction)
+
+**Pain Points:**
+- Team setup is not part of onboarding flow — users must hunt for it. (Severity: Major)
+- Role assignment requires a separate step after invite acceptance. (Severity: Minor)
+- Notification settings are 4 levels deep in the settings hierarchy. (Severity: Major)
+
+**Moments of Delight:**
+- Email invites are sent instantly with a clear preview of what the recipient will see.

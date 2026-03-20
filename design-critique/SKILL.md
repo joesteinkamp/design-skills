@@ -9,7 +9,7 @@ description: "Facilitate structured design critiques producing actionable, sever
 
 Use this skill to produce structured, actionable design critiques. Accepts design descriptions, screenshots, specs (from `$design-spec-writer`), or prototypes and produces severity-ranked feedback across multiple evaluation lenses.
 
-The output should be constructive and specific: every concern comes with a recommendation, and strengths are acknowledged alongside issues.
+The output should be constructive and specific: every concern comes with a recommendation, and strengths are acknowledged alongside issues. Output is formatted for use in Figma comments, Notion, or Loom script. When the target format is specified, adapt the critique structure accordingly.
 
 ## Workflow
 
@@ -19,7 +19,12 @@ The output should be constructive and specific: every concern comes with a recom
 - Determine design stage: concept, mid-fi, hi-fi, or pre-ship.
 - Adjust critique depth to match the stage (concepts get directional feedback, pre-ship gets detailed findings).
 
-2. Apply evaluation lenses.
+2. Apply evaluation lenses using the Ladder of Feedback method.
+- Follow the canonical sequence: Clarify → Value → Concern → Suggest.
+- **Clarify:** Ask what is unclear about the design intent before judging.
+- **Value:** Name what works well and why — be specific about the principle it satisfies.
+- **Concern:** State concerns as questions ("I wonder if..." / "Have you considered...") with evidence.
+- **Suggest:** Offer concrete alternatives, not vague direction.
 - Use `references/critique-rubric.md` for the full lens set.
 - Evaluate across: user goals, interaction clarity, visual hierarchy, design system consistency, content quality, edge cases, emotional tone.
 - Note both strengths and weaknesses per lens.
@@ -53,12 +58,13 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Findings lack specific recommendations.
-- Severity ratings are missing or inconsistent.
-- Critique is purely negative with no acknowledgment of strengths.
-- Feedback is vague ("this could be better") rather than specific.
-- Critique depth does not match the design stage.
-- Accessibility is not considered.
+- Any concern lacks a specific, implementable recommendation (not "improve this" but "replace the icon-only button with an icon+label button to satisfy Fitts's Law").
+- Severity ratings are inconsistent (e.g., a missing error state rated as "minor" while a color nit is rated "major").
+- Critique contains zero praise items — every critique must acknowledge at least 2 strengths.
+- Feedback references a principle without naming it (not "this feels off" but "this violates the principle of progressive disclosure because...").
+- Edge cases (empty state, error state, loading state) are not evaluated for any interactive component.
+- Accessibility is not mentioned in any finding.
+- Critique depth does not match design stage — concept critiques should not nitpick pixel alignment; pre-ship critiques should not question overall direction.
 
 ## Reference Navigation
 

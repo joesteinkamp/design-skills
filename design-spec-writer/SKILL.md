@@ -7,7 +7,7 @@ description: "Write structured design specs bridging design intent with engineer
 
 ## Overview
 
-Use this skill to produce design specs that bridge the gap between design intent and engineering requirements. Accepts feature descriptions, personas (from `$persona-creator`), journey context (from `$journey-mapper`), or research insights (from `$research-synthesizer`) and produces structured specifications.
+Use this skill to produce design specs that bridge the gap between design intent and engineering requirements. Accepts feature descriptions, personas (from `$persona-creator`), journey context (from `$journey-mapper`), or research insights (from `$research-synthesizer`) and produces structured specifications. Output is formatted for use in Notion, Confluence, Linear, or Google Docs. When the target tool is specified, adapt the spec structure and linking conventions accordingly.
 
 The output should be build-ready: every user story has acceptance criteria, every screen has states documented, and every edge case is addressed.
 
@@ -56,12 +56,14 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- User stories lack testable acceptance criteria.
-- Screens are missing states (empty, loading, error).
-- Edge cases are not identified.
-- Problem statement is vague or not tied to user needs.
-- Success metrics are not measurable.
-- Open questions have no owners.
+- User stories do not follow "As a [persona], I want to [action] so that [outcome]" format.
+- Any user story is missing numbered acceptance criteria in Given/When/Then format.
+- Any interactive component is missing at least 3 of these states: default, empty, loading, error, disabled.
+- Edge cases section has fewer than 3 entries for a feature with user input.
+- Problem statement does not name the specific user pain point it addresses.
+- Success metrics use vanity terms ("improve engagement") instead of measurable targets ("increase task completion rate from 60% to 80%").
+- Open questions have no assigned owner or resolution deadline.
+- Responsive behavior is not specified for at least 2 breakpoints (mobile, desktop).
 
 ## Reference Navigation
 

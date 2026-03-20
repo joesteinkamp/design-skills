@@ -9,7 +9,7 @@ description: "Produce structured competitive and comparative analyses of product
 
 Use this skill to produce structured competitive analyses that inform design decisions. Accepts a focal product or feature plus a competitor set and produces comparison matrices, competitor profiles, and design-focused opportunity maps.
 
-The output should be actionable for designers: not just what competitors do, but what it means for your design strategy.
+The output should be actionable for designers: not just what competitors do, but what it means for your design strategy. Output is formatted for use in Notion, Google Sheets, Airtable, or as a FigJam board. When the target tool is specified, adapt the comparison matrix and profile format accordingly.
 
 ## Workflow
 
@@ -53,12 +53,14 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Ratings lack supporting evidence.
-- Analysis is feature-checklist only without experiential evaluation.
-- Opportunities are not tied to specific gaps in the comparison.
-- Anti-patterns are listed without explaining why they fail.
-- Recommendations are generic and not grounded in the analysis.
-- Fewer than 3 competitors are analyzed without justification.
+- Any rating (strong / adequate / weak) lacks a 1-2 sentence evidence justification.
+- Analysis evaluates only feature presence/absence ("has dark mode: yes/no") without assessing experiential quality.
+- Opportunity map does not distinguish between table-stakes (must-have), differentiation (where to win), and anti-patterns (what to avoid).
+- Fewer than 3 competitors are analyzed without explicit justification for the smaller set.
+- Anti-patterns section says "avoid this" without explaining the specific user problem it creates.
+- Recommendations are generic ("improve onboarding") instead of grounded in a specific gap found in the analysis ("no competitor offers inline progress saving during onboarding — implement auto-save to differentiate").
+- Comparison matrix has fewer than 4 evaluation dimensions.
+- Design recommendations lack priority ratings (must-do / should-do / could-do).
 
 ## Reference Navigation
 

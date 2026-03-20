@@ -68,3 +68,42 @@ Reference for writing effective semi-structured interview and discussion guides.
 - [ ] Guide fits within the session time budget
 - [ ] Language matches the participant's vocabulary, not internal jargon
 - [ ] Key research questions are covered by at least 2 discussion questions
+
+---
+
+## Copy-Ready Interview Language
+
+Use these verbatim as starting points. Adapt the bracketed sections.
+
+### Opening Script
+"Thank you for taking the time to speak with me today. I'm [name] from the [team] team. We're doing research to better understand how people [broad activity area]. There are no right or wrong answers — I'm here to learn from your experience. Everything you share will be anonymized and used only to improve our product. The session will take about [duration]. Is it okay if I record this for my notes?"
+
+### Warm-Up Questions
+- "To start, can you tell me a bit about your role and what a typical day looks like for you?"
+- "How long have you been doing [relevant activity]?"
+- "What tools or processes do you currently use for [activity]?"
+
+### Core Question Starters
+- "Walk me through the last time you [relevant task]. Start from the beginning."
+- "What was going through your mind when you [specific moment]?"
+- "You mentioned [X] — can you tell me more about that?"
+- "What would have made that experience better for you?"
+- "If you could change one thing about how [process] works, what would it be?"
+
+### Probing Techniques
+- **Echo probe:** Repeat the participant's last phrase as a question. ("The notification confused you?")
+- **Silence probe:** Wait 5-7 seconds after the participant finishes. They often elaborate.
+- **Tell-me-more probe:** "Can you say more about that?"
+- **Example probe:** "Can you give me a specific example of when that happened?"
+- **Contrast probe:** "How does that compare to [alternative / previous experience]?"
+
+### Cool-Down
+- "Is there anything about [topic] that I didn't ask about that you think is important?"
+- "Is there anyone else you'd recommend I speak with about this?"
+- "Thank you so much — this has been really helpful."
+
+### Screener Question Examples
+- "How often do you [relevant behavior]?" (Qualify: at least [frequency])
+- "Which of these tools do you use regularly?" (Qualify: uses [target tool])
+- "Have you [relevant experience] in the past [timeframe]?" (Qualify: yes)
+- "What is your role?" (Disqualify: UX designers, product managers — too close to the product)

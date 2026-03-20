@@ -9,7 +9,7 @@ description: "Audit designs and specs for WCAG compliance, producing prioritized
 
 Use this skill to audit designs, specs, or implementations for accessibility compliance. Accepts screen descriptions, design specs (from `$design-spec-writer`), component inventories, or flow descriptions and produces structured findings with remediation guidance.
 
-The output should be actionable for both designers and developers: issues are severity-ranked, and every finding includes a specific remediation path.
+The output should be actionable for both designers and developers: issues are severity-ranked, and every finding includes a specific remediation path. Output is formatted for use alongside axe DevTools, Stark (Figma plugin), WAVE, or Lighthouse. When the target tool is specified, reference its finding format and severity conventions.
 
 ## Workflow
 
@@ -53,12 +53,14 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Findings lack WCAG criterion references.
-- Remediation guidance is vague ("make it accessible") rather than specific.
-- Severity ratings are missing or inconsistent.
-- Compliance summary does not match the detailed findings.
-- Assistive technology considerations are ignored.
-- Conformance level target is not stated.
+- Any finding is missing its WCAG criterion reference number (e.g., "1.4.3 Contrast (Minimum)").
+- Remediation guidance says "make it accessible" or "fix the contrast" instead of specifying the exact fix ("increase text color from #999 to #767676 to meet 4.5:1 ratio against #FFFFFF background").
+- Severity ratings are inconsistent — a missing form label (blocks screen reader users entirely) must be rated higher than a low-contrast decorative element.
+- Compliance summary pass/fail counts do not match the sum of individual findings.
+- Assistive technology notes are absent — every audit must address screen reader, keyboard, and at least one additional AT (voice control, magnification, or switch access).
+- Conformance level target (A, AA, or AAA) is not stated in the audit scope.
+- Any must-fix finding lacks an effort estimate (small / medium / large).
+- Remediation patterns reference is not used — common fixes should cite `references/remediation-patterns.md` for consistency.
 
 ## Reference Navigation
 

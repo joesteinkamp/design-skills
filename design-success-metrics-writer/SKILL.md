@@ -11,6 +11,8 @@ Use this skill to define clear, measurable success metrics for design initiative
 
 The output should connect user outcomes to measurable signals — not just business KPIs, but behavioral indicators that reveal whether the design is working as intended. Every metric should be traceable to a user goal or pain point.
 
+Output is formatted for use in Amplitude, Mixpanel, Google Analytics, or as a structured metrics brief in Notion, Google Sheets, or Confluence. When the target platform is specified, adapt the metric definitions and event naming conventions accordingly.
+
 ## Workflow
 
 1. Understand the design intent.
@@ -64,14 +66,15 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Primary metrics do not tie directly to a user goal or behavioral change.
-- Metrics are all lagging indicators with no leading signals.
-- More than 2 primary metrics are defined.
-- No guardrail metrics are included.
-- Metrics lack definitions, measurement methods, or targets.
-- Vanity metrics (pageviews, downloads) are listed without behavioral context.
-- Measurement plan does not specify data sources or instrumentation needs.
-- Assumptions about baselines or targets are not logged.
+- Primary metrics do not name a specific user behavior they measure (not "engagement" but "percentage of users who complete [task] within [timeframe]").
+- All metrics are lagging indicators (revenue, retention) with no leading signals (feature adoption rate, task completion rate, time-to-value).
+- More than 2 primary metrics are defined — if everything is primary, nothing is.
+- No guardrail metrics are included — every metrics framework must define at least one metric that must not degrade.
+- Any metric is missing a definition, measurement method, data source, or target.
+- Metrics include vanity signals (total pageviews, total downloads) without connecting them to a behavioral outcome ("pageviews per session on help docs" is acceptable; "total pageviews" is not).
+- Measurement plan does not specify which events need instrumentation and whether they exist today.
+- Assumptions about baselines or targets are not logged with confidence levels.
+- Metric targets are round numbers with no justification ("increase by 10%") instead of evidence-based ("increase from 62% to 70% based on competitive benchmark").
 
 ## Reference Navigation
 
