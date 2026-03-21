@@ -1,0 +1,4 @@
+interface:
+  display_name: "Report Objective Tracker"
+  short_description: "Track progress on design report objectives and flag risks"
+  default_prompt: "Use $report-objective-tracker to assess progress against objectives, flag at-risk goals, and generate a mid-cycle check-in summary."
