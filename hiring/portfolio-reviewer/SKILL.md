@@ -90,6 +90,7 @@ Revise before finalizing if any of these are true:
 ## Reference Navigation
 
 Read only what is needed:
+- shared competency definitions, level expectations, and scoring scale: `../references/design-competencies.md`
 - scoring rubric and scale: `references/portfolio-rubric.md`
 - review output shell: `references/portfolio-review-template.md`
 - follow-up question patterns: `references/interview-question-bank.md`
