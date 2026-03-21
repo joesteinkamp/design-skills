@@ -12,6 +12,39 @@ Use this as the default response structure for `one-on-one-agenda-automator`.
 - Date:
 - Active projects:
 - Recent context: (wins, struggles, upcoming events)
+- Notion workspace scanned: (yes / no — if no, note why and proceed with manual context)
+
+## Notion Activity Summary
+
+Automated scan of the report's Notion activity in the past 7 days.
+
+### Completed This Week
+| Item | Project/Database | Completed |
+|------|-----------------|-----------|
+| | | |
+
+### In Progress
+| Item | Project/Database | Status | Due | Notes |
+|------|-----------------|--------|-----|-------|
+| | | | | |
+
+### Overdue / At Risk
+| Item | Project/Database | Due | Days Overdue | Signal |
+|------|-----------------|-----|-------------|--------|
+| | | | | (overdue / status changed to at-risk / blocked) |
+
+### Shared Pages with Recent Activity
+| Page | Last Edited | Activity | Discussion Needed? |
+|------|------------|----------|-------------------|
+| | | (comments, edits, new content) | (yes / no) |
+
+### Upcoming Deadlines (Next 14 Days)
+| Item | Project/Database | Due | Status |
+|------|-----------------|-----|--------|
+| | | | |
+
+**High-signal items for discussion:**
+-
 
 ## Prior Action Items
 
@@ -82,6 +115,40 @@ Below is a concrete example of a completed weekly check-in agenda. Use as a qual
 - **Date:** 2026-03-25
 - **Active projects:** Checkout redesign (shipped last week), Dashboard v2 (starting discovery)
 - **Recent context:** Checkout shipped to positive eng feedback. Sarah mentioned feeling "stretched thin" in last week's standup. Dashboard v2 is her first 0→1 project.
+- **Notion workspace scanned:** Yes
+
+### Notion Activity Summary
+
+**Completed This Week:**
+| Item | Project/Database | Completed |
+|------|-----------------|-----------|
+| User interview synthesis | Dashboard v2 — Design Tasks | Mar 22 |
+| Error state audit | Checkout — Design Tasks | Mar 20 |
+
+**Overdue / At Risk:**
+| Item | Project/Database | Due | Days Overdue | Signal |
+|------|-----------------|-----|-------------|--------|
+| Q1 design retrospective write-up | Team Rituals | Mar 18 | 7 days | Overdue |
+| Competitive analysis | Dashboard v2 — Design Tasks | — | — | Status → At Risk (Mar 23) |
+
+**Shared Pages with Recent Activity:**
+| Page | Last Edited | Activity | Discussion Needed? |
+|------|------------|----------|-------------------|
+| Dashboard v2 — Research Brief | Mar 24 (Sarah) | 2 new comments from PM about scope | Yes |
+| Design Team OKRs Q2 | Mar 23 (Jordan) | Sarah hasn't viewed since Mar 15 | Yes — share context |
+
+**Upcoming Deadlines (Next 14 Days):**
+| Item | Project/Database | Due | Status |
+|------|-----------------|-----|--------|
+| Persona cards | Dashboard v2 | Mar 28 | In progress |
+| Stakeholder presentation dry-run | Dashboard v2 | Apr 1 | Not started |
+
+**High-signal items for discussion:**
+1. 🔴 Q1 retrospective 7 days overdue — deprioritize or knock out?
+2. 🟡 Competitive analysis moved to "at risk" — what changed?
+3. 🟢 Interview synthesis completed — recognize + discuss findings
+4. 💬 PM has unanswered scope questions on research brief
+5. 📋 Sarah hasn't seen Q2 OKRs updates — share context
 
 ### Prior Action Items
 
@@ -104,24 +171,26 @@ Below is a concrete example of a completed weekly check-in agenda. Use as a qual
 ### Discussion Prompts
 
 **Check-in:**
-- "Checkout shipped last week — how are you feeling about it now that it's live? Proud, relieved, already moved on?"
-- "You mentioned feeling stretched in standup. What's your energy like this week on a 1-10?"
+- "You mentioned feeling stretched in standup last week. Looking at your Notion board, you completed 2 items and have 2 overdue — how's your energy this week on a 1-10?"
+- "Checkout shipped and the error state audit is done — are you feeling closure on that project, or is there loose thread?"
 
 **Sarah's Topics:**
-- "You're kicking off Dashboard v2 discovery — how are you thinking about scoping the problem? What feels unclear?"
-- "Is there anything from the checkout project you want to carry forward or do differently this time?"
+- "The PM left 2 comments on the Dashboard v2 Research Brief about scope — have you had a chance to respond? Do you need to align with them before the persona work progresses?" *(from Notion scan: shared page with unresolved comments)*
+- "The competitive analysis moved to 'at risk' on Tuesday — what changed? Is this a time issue, access issue, or scope issue?" *(from Notion scan: status regression)*
 
 **Jordan's Topics:**
-- "I want to recognize the checkout work specifically — the way you handled the eng feedback mid-sprint and adapted the error states was exactly the kind of senior-level responsiveness I want to see more of."
-- "You mentioned feeling stretched — let's look at your plate. What could we defer, delegate, or drop to protect your focus for Dashboard v2?"
+- "I want to recognize the interview synthesis you completed this week — getting that done while closing out checkout shows strong project juggling. That's a senior-level skill." *(from Notion scan: completed item)*
+- "The Q1 retro write-up is 7 days overdue. Should we deprioritize it given Dashboard v2, set a new deadline, or timebox it to 30 minutes this week?" *(from Notion scan: overdue item)*
+- "I updated the Q2 OKRs page on Sunday — I want to walk you through what changed so you have context for your Dashboard v2 planning." *(from Notion scan: shared page Sarah hasn't viewed)*
 
 **Growth & Development:**
-- "Dashboard v2 is your first 0→1 project. What's the one thing you're most uncertain about in the discovery phase? Let's talk about how to approach it."
+- "The stakeholder presentation dry-run is coming up April 1. That's your growth objective this quarter. How are you thinking about preparing? Do you want to do a practice run with me beforehand?"
 
 ### Manager Prep Notes
 
-- **Recognition to deliver:** Checkout error state adaptation mid-sprint — specific, recent, tied to senior-level behavior she's growing into.
-- **Observation to discuss:** Sarah may be taking on too much without pushing back. This is a coaching moment about workload advocacy — not a problem to solve for her.
-- **Upcoming events:** Mid-year review cycle opens April 1. Sarah should start self-review prep.
+- **Recognition to deliver:** Interview synthesis completion — shipped while finishing checkout, demonstrates growing ability to manage parallel workstreams (senior-level signal).
+- **Observation to discuss:** Sarah has 2 overdue items and mentioned feeling stretched. This is a coaching moment about workload advocacy and saying no — not a problem to solve for her. Ask her what she'd deprioritize.
+- **Notion signals to surface:** PM's unresolved scope questions on research brief could block persona work. Ensure Sarah resolves this before end of week.
+- **Upcoming events:** Persona cards due Mar 28 (3 days). Stakeholder dry-run Apr 1 (7 days). Mid-year review cycle opens April 1.
 - **Weeks since last career conversation:** 2 — on track (aim for every 3-4 weeks).
-- **Energy/mood trend:** Dipped last week (standup comment). Monitor.
+- **Energy/mood trend:** Dipped last week (standup comment) + 2 overdue items. Monitor closely.
