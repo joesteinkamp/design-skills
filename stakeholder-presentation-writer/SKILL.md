@@ -1,6 +1,6 @@
 ---
 name: stakeholder-presentation-writer
-description: "Structure compelling design presentations for stakeholder audiences with narrative arcs, evidence framing, and clear decision asks. Use when requests involve design reviews, stakeholder updates, executive summaries, design rationale presentations, or communicating design decisions to non-design audiences."
+description: "Structure compelling design presentations for stakeholder audiences with narrative arcs, evidence framing, and clear decision asks. Use when requests involve stakeholder updates, executive summaries, design rationale presentations, or communicating design decisions to non-design audiences — not design critiques, not dev handoffs."
 ---
 
 # Stakeholder Presentation Writer

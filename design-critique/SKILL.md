@@ -1,6 +1,6 @@
 ---
 name: design-critique
-description: "Facilitate structured design critiques producing actionable, severity-ranked feedback across usability, visual, content, consistency, and accessibility lenses. Use when requests involve design review, design feedback, critique sessions, or evaluating design quality."
+description: "Facilitate structured design critiques producing actionable, severity-ranked feedback across usability, visual, content, consistency, and accessibility lenses. Use when requests involve design review, design feedback, or critique sessions for your team's work — not heuristic scoring, not WCAG auditing, not candidate evaluation."
 ---
 
 # Design Critique
@@ -80,9 +80,12 @@ Positive:
 - "What are the biggest issues with this hi-fi mockup?"
 
 Negative:
-- "Write a design spec for this feature."
-- "Map the user journey for onboarding."
-- "Create a dev handoff document."
+- "Evaluate this dashboard against Nielsen's heuristics." (use `$heuristic-evaluator` — heuristic scoring, not open-ended critique)
+- "Audit this design for WCAG compliance." (use `$accessibility-auditor` — standards-based audit, not design critique)
+- "Review this candidate's portfolio." (use `$portfolio-reviewer` — candidate evaluation, not team design feedback)
+- "Write a design spec for this feature." (use `$design-spec-writer`)
+- "Map the user journey for onboarding." (use `$journey-mapper`)
 
 Ambiguous:
 - "Is this design good?" (clarify design goals, target persona, and stage to provide structured critique)
+- "Review this design for usability." (clarify: do you want broad design feedback, a heuristic evaluation with scores, or an accessibility audit?)

@@ -119,10 +119,12 @@ Positive:
 - "Create a 1:1 agenda — here are my notes from last week."
 
 Negative:
+- "Write objectives for my designer for Q2." (use `$report-objective-creator` — setting OKRs and goals, not preparing a 1:1 agenda)
+- "Check in on Sarah's Q2 objectives." (use `$report-objective-tracker` — tracking OKR progress, not preparing a meeting)
 - "Plan a team workshop." (use `$workshop-planner`)
-- "Write a stakeholder presentation." (use `$stakeholder-presentation-writer`)
 - "Review this candidate's portfolio." (use `$portfolio-reviewer`)
 
 Ambiguous:
 - "Help me prepare for a meeting with my designer." (clarify: is this a 1:1, design review, or project discussion?)
-- "I need to talk to my report about their performance." (clarify: is this a routine check-in, formal feedback, or performance improvement plan?)
+- "I need to talk to my report about their performance." (clarify: do you need a 1:1 agenda, performance objectives, or an OKR progress check?)
+- "Help me with my report." (clarify: do you need a 1:1 agenda, new objectives, or a progress review?)

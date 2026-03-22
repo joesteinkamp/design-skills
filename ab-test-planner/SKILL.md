@@ -1,6 +1,6 @@
 ---
 name: ab-test-planner
-description: "Design rigorous A/B test plans with falsifiable hypotheses, variant definitions, metric selection, sample sizing, and analysis criteria. Use when requests involve A/B testing, experiment design, hypothesis creation, or evaluating design decisions through controlled experiments."
+description: "Design rigorous A/B test plans with falsifiable hypotheses, variant definitions, metric selection, sample sizing, and analysis criteria. Use when requests involve A/B testing, experiment design, or hypothesis creation — not usability testing, not research plans."
 ---
 
 # A/B Test Planner
@@ -81,9 +81,11 @@ Positive:
 - "Help me set up an experiment to test single-page vs. multi-step signup."
 
 Negative:
-- "Write a design spec for the checkout flow."
-- "Audit this design for accessibility."
-- "Create a competitive analysis."
+- "Plan a usability test for the checkout flow." (use `$usability-test-planner` — observational user testing, not controlled experiments)
+- "Write a test script with task scenarios." (use `$usability-test-planner` — task-based testing, not metric-based experiments)
+- "Write a design spec for the checkout flow." (use `$design-spec-writer`)
+- "Create a competitive analysis." (use `$competitive-analyzer`)
 
 Ambiguous:
-- "Should we test this?" (clarify the specific design decision and what success looks like)
+- "Should we test this?" (clarify: do you want a controlled A/B experiment with metrics, or observational usability testing with users?)
+- "I want to test this design change." (clarify: A/B test measuring conversion, or usability test observing behavior?)

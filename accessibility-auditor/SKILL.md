@@ -77,9 +77,11 @@ Positive:
 - "What accessibility problems does this flow have?"
 
 Negative:
-- "Write a design spec for the settings page."
-- "Create a persona for our users."
-- "Do a competitive analysis of checkout flows."
+- "Evaluate this dashboard against Nielsen's heuristics." (use `$heuristic-evaluator` — usability heuristics, not WCAG compliance)
+- "Give me feedback on this design." (use `$design-critique` — open-ended critique, not accessibility audit)
+- "Write a design spec for the settings page." (use `$design-spec-writer`)
+- "Do a competitive analysis of checkout flows." (use `$competitive-analyzer`)
 
 Ambiguous:
 - "Is this design accessible?" (clarify conformance level target and which screens/components to audit)
+- "Review this design for usability." (clarify: do you want an accessibility audit, heuristic evaluation, or broad design critique?)

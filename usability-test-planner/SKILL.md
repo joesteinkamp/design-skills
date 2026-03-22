@@ -1,6 +1,6 @@
 ---
 name: usability-test-planner
-description: "Plan and script moderated or unmoderated usability tests with task scenarios, recruitment screeners, and analysis frameworks. Use when requests involve usability testing, task-based testing, user testing scripts, test facilitation guides, or evaluating designs through direct user observation."
+description: "Plan and script moderated or unmoderated usability tests with task scenarios, recruitment screeners, and analysis frameworks. Use when requests involve usability testing, task-based testing, user testing scripts, or test facilitation guides — not A/B tests, not research plans, not candidate evaluation."
 ---
 
 # Usability Test Planner
@@ -89,9 +89,11 @@ Positive:
 - "Create task scenarios to test the search experience."
 
 Negative:
-- "Design an A/B test for the checkout flow."
-- "Synthesize these usability test results."
-- "Write a design spec for the settings page."
+- "Design an A/B test for the checkout flow." (use `$ab-test-planner` — controlled experiment with metrics, not observational testing)
+- "Synthesize these usability test results." (use `$research-synthesizer` — analyzing existing data, not planning a test)
+- "Plan a research study with interviews and surveys." (use `$research-plan-writer` — generative research, not task-based usability testing)
+- "Write a design spec for the settings page." (use `$design-spec-writer`)
 
 Ambiguous:
-- "I want to test this design with users." (clarify whether they need a usability test plan, A/B test plan, or survey)
+- "I want to test this design with users." (clarify: do you want a usability test observing users complete tasks, an A/B test measuring metrics, or a research study exploring needs?)
+- "Should we test this?" (clarify: observational usability testing, controlled A/B experiment, or user research?)

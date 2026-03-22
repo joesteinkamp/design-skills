@@ -95,9 +95,11 @@ Positive:
 - "Turn this workshop goal into board instructions and discussion prompts."
 
 Negative:
+- "Plan a workshop agenda with exercises and timing." (use `$workshop-planner` — workshop strategy and agenda design, not board-level prompts)
+- "Help me scope a workshop and decide on exercises." (use `$workshop-planner` — planning comes before prompt generation)
 - "Design a dashboard UI."
-- "Write React code for a form component."
 - "Summarize this meeting note."
 
 Ambiguous:
-- "Help me run a team session next week." (clarify that the user wants a prompt pack and FigJam format)
+- "Help me run a team session next week." (clarify: do you need FigJam board prompts for an already-planned workshop, or do you need to plan the workshop first?)
+- "I need a workshop." (use `$workshop-planner` first for strategy and agenda, then this skill for FigJam prompts)

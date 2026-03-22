@@ -85,10 +85,11 @@ Positive:
 - "Browse the web for inspiration on empty states."
 
 Negative:
-- "Write a design spec for the dashboard."
-- "Do a competitive analysis of checkout flows."
-- "Create personas for our users."
+- "Compare our checkout against Shopify, Amazon, and Stripe." (use `$competitive-analyzer` — structured competitor comparison, not creative inspiration)
+- "Do a competitive analysis of checkout flows." (use `$competitive-analyzer` — market positioning, not design references)
+- "Write a design spec for the dashboard." (use `$design-spec-writer`)
+- "Create personas for our users." (use `$persona-creator`)
 
 Ambiguous:
-- "What are other products doing?" (clarify whether they want competitive analysis or creative inspiration)
+- "What are other products doing?" (clarify: do you want creative design inspiration and pattern examples, or a structured competitive analysis with positioning?)
 - "Show me examples." (clarify the specific design challenge or feature area)

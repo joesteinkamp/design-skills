@@ -80,9 +80,11 @@ Positive:
 - "Spec out the interaction details for the settings page."
 
 Negative:
-- "Synthesize these interview transcripts."
-- "Create a persona for our power users."
-- "Audit this design for accessibility."
+- "Create a dev handoff doc for these components." (use `$dev-handoff-writer` — implementation-ready specs for engineers, not design intent documentation)
+- "Write implementation specs with component states and responsive behavior." (use `$dev-handoff-writer` — developer documentation, not design documentation)
+- "Synthesize these interview transcripts." (use `$research-synthesizer`)
+- "Audit this design for accessibility." (use `$accessibility-auditor`)
 
 Ambiguous:
-- "Help me document this feature." (clarify whether a design spec, dev handoff doc, or something else is needed)
+- "Help me document this feature." (clarify: do you want a design spec capturing intent and requirements, or a dev handoff doc with implementation details?)
+- "Write specs for this feature." (clarify: design-level specs with user stories and rationale, or developer-level specs with component states and code guidance?)

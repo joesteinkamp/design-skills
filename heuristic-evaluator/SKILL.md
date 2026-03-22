@@ -88,9 +88,11 @@ Positive:
 - "Score this design on usability heuristics."
 
 Negative:
-- "Audit this design for WCAG compliance."
-- "Write a design spec for this feature."
-- "Compare this product against competitors."
+- "Audit this design for WCAG compliance." (use `$accessibility-auditor` — standards-based compliance, not heuristic scoring)
+- "Give me feedback on this design." (use `$design-critique` — open-ended critique, not heuristic scoring)
+- "Review this candidate's portfolio." (use `$portfolio-reviewer` — candidate evaluation, not interface assessment)
+- "Write a design spec for this feature." (use `$design-spec-writer`)
+- "Compare this product against competitors." (use `$competitive-analyzer`)
 
 Ambiguous:
-- "Review this design for usability." (clarify whether heuristic evaluation, design critique, or accessibility audit is needed)
+- "Review this design for usability." (clarify: do you want heuristic scoring against Nielsen's 10, broad design critique, or an accessibility audit?)

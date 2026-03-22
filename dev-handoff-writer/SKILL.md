@@ -77,9 +77,11 @@ Positive:
 - "Translate this design spec into developer documentation."
 
 Negative:
-- "Write a design spec for this feature."
-- "Audit this design for accessibility."
-- "Create personas for our users."
+- "Write a design spec with user stories and acceptance criteria." (use `$design-spec-writer` — design intent and requirements, not implementation specs)
+- "Spec out the interaction details and edge cases." (use `$design-spec-writer` — design-level documentation, not developer-ready handoff)
+- "Audit this design for accessibility." (use `$accessibility-auditor`)
+- "Create personas for our users." (use `$persona-creator`)
 
 Ambiguous:
-- "Help the engineers understand this design." (clarify whether dev handoff documentation, a design spec, or a meeting is needed)
+- "Help the engineers understand this design." (clarify: do you want implementation-ready handoff docs with component specs, or a design spec capturing intent and requirements?)
+- "Document this feature." (clarify: design-level spec or developer-level handoff?)

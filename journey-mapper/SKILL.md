@@ -72,9 +72,11 @@ Positive:
 - "Identify pain points across the customer support flow."
 
 Negative:
-- "Write a design spec for the settings page."
-- "Create a persona for our mobile users."
-- "Evaluate this design against heuristics."
+- "Map the user flow for the signup page." (use `$user-flow-mapper` — screen-level task flow, not cross-touchpoint journey)
+- "Document all paths through the checkout." (use `$user-flow-mapper` — granular decision trees, not experience arcs)
+- "Write a design spec for the settings page." (use `$design-spec-writer`)
+- "Evaluate this design against heuristics." (use `$heuristic-evaluator`)
 
 Ambiguous:
-- "Help me understand where users struggle." (clarify whether journey mapping, research synthesis, or heuristic evaluation is needed)
+- "Help me understand where users struggle." (clarify: do you want a journey map across touchpoints, research synthesis from data, or a heuristic evaluation of screens?)
+- "Help me map out this feature." (clarify: do you want a high-level journey across touchpoints and emotions, or a granular screen-level task flow?)

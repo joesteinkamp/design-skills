@@ -81,9 +81,11 @@ Positive:
 - "Turn this survey data into actionable design recommendations."
 
 Negative:
-- "Design a new onboarding flow."
-- "Write a user story for the settings page."
-- "Create a persona for our mobile users."
+- "Plan a research study for our new feature." (use `$research-plan-writer` — planning research, not synthesizing existing data)
+- "Write an interview guide for upcoming sessions." (use `$research-plan-writer` — preparing to conduct research, not analyzing results)
+- "Create a persona for our mobile users." (use `$persona-creator`)
+- "Design a new onboarding flow." (use `$design-spec-writer`)
 
 Ambiguous:
 - "Help me make sense of this research." (clarify what research inputs are available and what output format is needed)
+- "I need help with research." (clarify: do you have raw data to synthesize, or do you need to plan a new study?)

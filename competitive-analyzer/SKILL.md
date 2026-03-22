@@ -76,9 +76,11 @@ Positive:
 - "What design patterns are our competitors using for their dashboards?"
 
 Negative:
-- "Write a design spec for our dashboard."
-- "Create personas for our user base."
-- "Audit this page for accessibility."
+- "Find inspiration for our onboarding redesign." (use `$inspiration-browser` — creative inspiration, not structured competitor comparison)
+- "Show me how other products handle dashboards." (use `$inspiration-browser` — design pattern examples, not competitive positioning)
+- "Write a design spec for our dashboard." (use `$design-spec-writer`)
+- "Audit this page for accessibility." (use `$accessibility-auditor`)
 
 Ambiguous:
 - "How does our product compare?" (clarify which feature/area to focus on and which competitors to include)
+- "What are other products doing?" (clarify: do you want a structured competitive analysis with positioning, or creative design inspiration and pattern examples?)

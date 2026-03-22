@@ -94,9 +94,11 @@ Positive:
 - "Build a workshop plan we can pass to figjam-workshop-prompt-creator."
 
 Negative:
-- "Make a FigJam board directly."
+- "Write FigJam prompts and board instructions." (use `$figjam-workshop-prompt-creator` — board-level prompt packs, not workshop strategy and agenda)
+- "Create sticky-note exercise prompts for a FigJam session." (use `$figjam-workshop-prompt-creator` — exercise prompts, not workshop planning)
 - "Write frontend code."
 - "Summarize this random article."
 
 Ambiguous:
-- "Help me run a workshop next month." (plan first; clarify workshop objective and desired decision/output)
+- "Help me run a workshop next month." (clarify: do you need the strategy, agenda, and exercise design — or FigJam board prompts and instructions for an already-planned workshop?)
+- "I need a workshop for my team." (clarify workshop objective and desired decision/output first — plan before prompts)
