@@ -1,6 +1,6 @@
 ---
 name: portfolio-reviewer
-description: "Evaluate design candidate portfolios with structured rubrics, calibrated scoring, and hiring-decision frameworks. Use when requests involve portfolio review, design hiring, candidate evaluation, interview preparation, or assessing design work samples."
+description: "Evaluate a design candidate's portfolio website or case study deck with structured rubrics, calibrated scoring, and hiring-decision frameworks. Use when the input is a portfolio URL, PDF, or case study deck — not a screen transcript or exercise notes. Produces rubric-scored assessments with interview follow-up questions."
 ---
 
 # Portfolio Reviewer
@@ -104,10 +104,13 @@ Positive:
 - "Help me prepare for a portfolio review debrief."
 
 Negative:
-- "Critique this design for usability issues." (use `$design-critique`)
-- "Evaluate this interface against heuristics." (use `$heuristic-evaluator`)
+- "Critique this design for usability issues." (use `$design-critique` — this is design feedback, not candidate evaluation)
+- "Evaluate this interface against heuristics." (use `$heuristic-evaluator` — this is interface assessment, not hiring)
 - "Help me present my design work to stakeholders." (use `$stakeholder-presentation-writer`)
+- "Debrief this hiring manager screen." (use `$evaluate-hiring-manager-screen` — input is a screen transcript, not a portfolio)
+- "Evaluate this candidate's case study exercise." (use `$case-study-evaluation` — input is exercise notes, not a portfolio)
 
 Ambiguous:
 - "Is this designer good?" (clarify: which role, which level, and share the portfolio)
 - "Review this design work." (clarify: is this a candidate portfolio review or a design critique of your team's work?)
+- "Evaluate this candidate." (clarify: what material — portfolio URL, screen notes, or exercise transcript?)

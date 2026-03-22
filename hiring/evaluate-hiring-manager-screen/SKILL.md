@@ -1,6 +1,6 @@
 ---
 name: evaluate-hiring-manager-screen
-description: "Evaluate a design candidate's hiring manager screen responses. Scores answers against competencies, identifies gaps, calibrates for level, and generates follow-up questions for the next interview round. Use when a hiring manager has completed a screen and needs a structured debrief."
+description: "Evaluate a design candidate after a hiring manager screen using interviewer notes or a call transcript. Scores the candidate's responses against competencies, identifies gaps, and generates targeted questions for the next interview round. Use when the input is screen notes or a transcript — not a portfolio, not exercise notes."
 ---
 
 # Evaluate Hiring Manager Screen
@@ -96,10 +96,13 @@ Positive:
 - "I screened a candidate for our mid-level product designer role. What signal did I get?"
 
 Negative:
-- "Review this candidate's portfolio." (use `$portfolio-reviewer`)
-- "Evaluate this candidate's case study exercise." (use `$case-study-evaluation`)
-- "Help me write questions for an upcoming screen." (this skill evaluates after, not before)
+- "Review this candidate's portfolio." (use `$portfolio-reviewer` — input is a portfolio URL or deck, not screen notes)
+- "Evaluate this candidate's whiteboard exercise." (use `$case-study-evaluation` — input is exercise notes, not a screen transcript)
+- "Help me write questions for an upcoming screen." (this skill evaluates after a screen, not before)
+- "Critique this design for usability." (use `$design-critique` — this is design feedback, not candidate evaluation)
+- "Score this candidate's take-home presentation." (use `$case-study-evaluation` — a take-home is an exercise, not a screen)
 
 Ambiguous:
-- "How did this candidate do?" (clarify: in what format — screen, portfolio, case study?)
-- "Evaluate this candidate." (clarify: which interview stage and what materials are available?)
+- "How did this candidate do?" (clarify: what material — screen notes, portfolio, or exercise transcript?)
+- "Evaluate this candidate." (clarify: which interview stage and what input do you have?)
+- "Debrief this interview." (clarify: was it a hiring manager screen or a case study/exercise round?)

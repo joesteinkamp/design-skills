@@ -1,6 +1,6 @@
 ---
 name: case-study-evaluation
-description: "Evaluate a design candidate's case study or design exercise performance from interview transcripts and notes. Scores the candidate's process, thinking, communication, and output quality against competencies. Use when interviewers need a structured debrief after a case study or design exercise interview."
+description: "Evaluate a design candidate after a case study or design exercise round using interviewer notes, exercise artifacts, or a session transcript. Scores process, thinking, and output quality against competencies with format-aware expectations (whiteboard, take-home, live Figma, critique, system design). Use when the input is exercise notes or artifacts — not a portfolio, not screen notes."
 ---
 
 # Case Study Evaluation
@@ -107,10 +107,13 @@ Positive:
 - "Score this take-home exercise against our competencies and give me a hiring recommendation."
 
 Negative:
-- "Review this candidate's portfolio." (use `$portfolio-reviewer`)
-- "Help me evaluate a hiring manager screen." (use `$evaluate-hiring-manager-screen`)
-- "Create a case study prompt for our interview loop." (this skill evaluates, not creates)
+- "Review this candidate's portfolio." (use `$portfolio-reviewer` — input is a portfolio URL or deck, not exercise notes)
+- "Debrief this hiring manager screen." (use `$evaluate-hiring-manager-screen` — a screen is a conversation, not an exercise)
+- "Create a case study prompt for our interview loop." (this skill evaluates exercises after they happen, not creates them)
+- "Critique this design for usability." (use `$design-critique` — this is design feedback, not candidate evaluation)
+- "Score this candidate's screen responses." (use `$evaluate-hiring-manager-screen` — a screen is a conversational interview, not a design exercise)
 
 Ambiguous:
-- "How did the candidate do?" (clarify: which exercise format, and share the notes or transcript)
-- "Evaluate this design work." (clarify: is this an interview exercise or a portfolio review?)
+- "How did the candidate do?" (clarify: what material — exercise notes, portfolio, or screen transcript?)
+- "Evaluate this design work." (clarify: is this a candidate's interview exercise or a portfolio review?)
+- "Debrief this interview." (clarify: was it a case study/exercise round or a hiring manager screen?)
