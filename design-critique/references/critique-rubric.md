@@ -53,3 +53,29 @@ Use this rubric to evaluate designs systematically across multiple lenses.
 - **Content:** Is the copy clear and appropriate?
 - **Consistency:** Does the design follow established patterns?
 - **Accessibility:** Can all users perceive and operate the interface?
+
+---
+
+## Copy-Ready Critique Phrasing
+
+Use these sentence starters to maintain constructive, specific critique language.
+
+### Clarify
+- "Can you walk me through the intended flow when a user [specific action]?"
+- "What happens if the user [edge case]? I want to make sure I understand the expected behavior."
+- "Is the assumption here that the user has already [prerequisite]?"
+
+### Value (Strengths)
+- "This works well because [principle] — specifically, [element] makes it clear that [outcome]."
+- "The [pattern] is a strong choice here because it reduces [cognitive load / decision fatigue / error risk]."
+- "I appreciate that [specific element] addresses [user need] — this is evidence of [design thinking quality]."
+
+### Concern
+- "I wonder if [user type] would understand [element] without [missing context] — because [evidence]."
+- "Have you considered what happens when [edge case]? Right now, the design assumes [assumption], but [counter-evidence]."
+- "This pattern works for [scenario A], but I'm concerned it breaks down when [scenario B] because [reason]."
+
+### Suggest
+- "One approach: replace [current element] with [alternative] — this would [benefit] because [principle]."
+- "Consider adding [element] to address [concern] — [product/pattern] does this well by [example]."
+- "For the [edge case], try [specific solution] — it maintains [current strength] while addressing [gap]."

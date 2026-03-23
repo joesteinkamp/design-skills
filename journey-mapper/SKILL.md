@@ -9,7 +9,7 @@ description: "Map end-to-end user experiences across touchpoints, identifying pa
 
 Use this skill to map complete user experiences across touchpoints, channels, and time. Accepts personas (from `$persona-creator`), research insights (from `$research-synthesizer`), or scenario descriptions and produces structured journey maps with emotional arcs and opportunity identification.
 
-The output should reveal where the experience breaks down and where design effort will have the most impact.
+The output should reveal where the experience breaks down and where design effort will have the most impact. Output is formatted for use in FigJam, Miro, or as structured markdown in Notion. When the target tool is specified, adapt the map layout and notation accordingly.
 
 ## Workflow
 
@@ -19,17 +19,12 @@ The output should reveal where the experience breaks down and where design effor
 - Determine channels and touchpoints to cover.
 - If persona input comes from `$persona-creator`, use the handoff schema directly.
 
-2. Map phases.
+2. Map phases using the 5-layer emotional arc method.
 - Break the journey into 4-7 sequential phases.
 - Each phase needs a goal, touchpoints, channels, and duration.
 - Keep phases at a consistent level of granularity.
-
-3. Layer details per phase.
-- Document actions (what the user does).
-- Document thoughts (what the user thinks).
-- Document emotions with valence (positive/neutral/negative) and intensity.
-- Identify pain points with severity ratings.
-- Note moments of delight.
+- Apply the canonical 5 layers per phase: Actions (what the user does) → Thoughts (what the user thinks) → Emotions (valence + intensity) → Pain Points (severity-rated) → Moments of Delight.
+- Plot the emotional arc across all phases to reveal the experience shape (where it rises, where it crashes).
 
 4. Identify opportunities.
 - Map each pain point to a design opportunity.
@@ -54,12 +49,14 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Phases are missing actions, thoughts, or emotions.
-- Pain points lack severity ratings.
-- Opportunities do not map to specific pain points.
-- Emotional arc has gaps or inconsistencies across phases.
-- Journey lacks clear start and end points.
-- Phases are at inconsistent levels of granularity.
+- Any phase is missing one or more of the 5 layers (actions, thoughts, emotions, pain points, moments of delight).
+- Pain points do not have severity ratings (critical / major / minor).
+- Emotional valence is flat across all phases — if the arc never dips or rises, the journey is under-analyzed.
+- Fewer than 4 phases are mapped for a multi-touchpoint journey.
+- Opportunities do not map 1:1 to specific pain points (every pain point should have a corresponding opportunity).
+- Opportunity classification is missing (quick-win / strategic / systemic) or impact/effort ratings are absent.
+- Journey has no clear start trigger ("user arrives at...") and end condition ("user has successfully...").
+- Phases are at inconsistent granularity — e.g., one phase covers 5 minutes and another covers 3 weeks.
 
 ## Reference Navigation
 
@@ -75,9 +72,11 @@ Positive:
 - "Identify pain points across the customer support flow."
 
 Negative:
-- "Write a design spec for the settings page."
-- "Create a persona for our mobile users."
-- "Evaluate this design against heuristics."
+- "Map the user flow for the signup page." (use `$user-flow-mapper` — screen-level task flow, not cross-touchpoint journey)
+- "Document all paths through the checkout." (use `$user-flow-mapper` — granular decision trees, not experience arcs)
+- "Write a design spec for the settings page." (use `$design-spec-writer`)
+- "Evaluate this design against heuristics." (use `$heuristic-evaluator`)
 
 Ambiguous:
-- "Help me understand where users struggle." (clarify whether journey mapping, research synthesis, or heuristic evaluation is needed)
+- "Help me understand where users struggle." (clarify: do you want a journey map across touchpoints, research synthesis from data, or a heuristic evaluation of screens?)
+- "Help me map out this feature." (clarify: do you want a high-level journey across touchpoints and emotions, or a granular screen-level task flow?)

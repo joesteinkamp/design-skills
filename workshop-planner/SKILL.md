@@ -7,7 +7,7 @@ description: "Plan high-impact workshops from objective through facilitation des
 
 ## Overview
 
-Use this skill to convert a vague workshop request into a concrete plan that can be executed by a facilitator and handed off to `figjam-workshop-prompt-creator`.
+Use this skill to convert a vague workshop request into a concrete plan that can be executed by a facilitator and handed off to `figjam-workshop-prompt-creator`. Output is formatted for use in FigJam, Miro, or as a structured brief in Notion or Google Docs. When the target tool is specified, adapt the exercise formats and board structure accordingly.
 
 The output should be decision-ready: objective, audience, agenda, exercises, facilitation notes, and clear expected artifacts.
 
@@ -70,11 +70,14 @@ If the user asks for AI-Native workshop planning:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Agenda lacks time boxes or exceeds total duration.
-- Exercises do not define expected outputs.
-- Plan has no ownership/accountability path.
-- Handoff schema is incomplete or not machine-readable by a downstream skill.
-- Outcomes are abstract and not observable.
+- Agenda time boxes do not sum to the stated total duration (±5 minutes for buffer).
+- Any exercise is missing an explicit expected output (what artifact or decision it produces).
+- Ownership path is absent — the plan must specify who owns follow-up for each key outcome.
+- Handoff schema has placeholder values ("add details here") instead of specific content from the plan.
+- Outcomes are abstract ("alignment") instead of observable ("written list of 3 prioritized initiatives with named owners and 2-week deadlines").
+- Facilitation risks section has fewer than 3 identified risks for a workshop longer than 60 minutes.
+- Discussion prompts are generic ("What do you think?") instead of forcing specificity ("What is the first thing you would change about [X], and who should own it?").
+- No time is allocated for wrap-up and commitment capture in the last 10% of the session.
 
 ## Reference Navigation
 
@@ -91,9 +94,11 @@ Positive:
 - "Build a workshop plan we can pass to figjam-workshop-prompt-creator."
 
 Negative:
-- "Make a FigJam board directly."
+- "Write FigJam prompts and board instructions." (use `$figjam-workshop-prompt-creator` — board-level prompt packs, not workshop strategy and agenda)
+- "Create sticky-note exercise prompts for a FigJam session." (use `$figjam-workshop-prompt-creator` — exercise prompts, not workshop planning)
 - "Write frontend code."
 - "Summarize this random article."
 
 Ambiguous:
-- "Help me run a workshop next month." (plan first; clarify workshop objective and desired decision/output)
+- "Help me run a workshop next month." (clarify: do you need the strategy, agenda, and exercise design — or FigJam board prompts and instructions for an already-planned workshop?)
+- "I need a workshop for my team." (clarify workshop objective and desired decision/output first — plan before prompts)

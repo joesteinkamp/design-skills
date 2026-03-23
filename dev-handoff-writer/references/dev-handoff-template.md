@@ -121,3 +121,43 @@ For each content block:
 ## Implementation Checklist
 
 Produce this section using `implementation-checklist.md`.
+
+---
+
+## Starter Example
+
+Below is a concrete example of a completed component handoff. Use as a quality reference.
+
+### Component: Search Input
+
+**Design system token:** `input-search`
+**Variants:** default, with-filters, compact
+
+| State | Visual | Behavior |
+|-------|--------|----------|
+| Default | Placeholder "Search...", muted text, search icon left | Field is focusable via Tab or `/` keyboard shortcut |
+| Focused | 2px primary border, placeholder dims | Cursor active, recent searches dropdown appears after 100ms |
+| Typing | User input replaces placeholder, clear button (×) appears right | Debounce 300ms before triggering search. Show loading spinner in place of search icon |
+| Loading | Spinner replaces search icon | Results update incrementally (optimistic rendering) |
+| Results | Result count badge appears right of input | Arrow keys navigate results, Enter selects, Escape clears and closes |
+| Empty results | Input retains query text | Dropdown shows "No results for '[query]'" with suggested alternatives |
+| Error | Red 2px border, error icon replaces search icon | Toast: "Search unavailable. Try again." Input remains editable |
+| Disabled | Muted background, no cursor | Not focusable via Tab. Tooltip on hover: "Search is unavailable during import" |
+
+**Transitions:**
+- Default → Focused: `border-color 150ms ease-in`
+- Focused → Typing: instant (no transition)
+- Typing → Loading: `opacity 200ms ease-out` on spinner
+- Loading → Results: `opacity 150ms ease-in` on result list
+
+**Keyboard Interaction:**
+- `/` — Focus search input from anywhere on the page
+- `Escape` — Clear input and close results dropdown
+- `↑` `↓` — Navigate results
+- `Enter` — Select highlighted result
+- `Tab` — Move focus to first result item
+
+**ARIA:**
+- Role: `combobox` with `aria-expanded`, `aria-autocomplete="list"`
+- Results list: `role="listbox"`, each result `role="option"`
+- Live region: `aria-live="polite"` announces result count changes

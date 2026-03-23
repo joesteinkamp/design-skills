@@ -1,0 +1,4 @@
+interface:
+  display_name: "One-on-One Agenda Automator"
+  short_description: "Generate structured 1:1 agendas with coaching prompts"
+  default_prompt: "Use $one-on-one-agenda-automator to generate a structured 1:1 agenda with discussion prompts, feedback frameworks, and follow-up tracking."

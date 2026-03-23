@@ -1,0 +1,4 @@
+interface:
+  display_name: "Stakeholder Presentation Writer"
+  short_description: "Structure design presentations with narrative arcs and decision asks"
+  default_prompt: "Use $stakeholder-presentation-writer to structure a stakeholder presentation with narrative arc, evidence framing, and clear decision asks."

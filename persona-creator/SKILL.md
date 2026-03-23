@@ -9,6 +9,8 @@ description: "Build evidence-based personas from research data, behavioral obser
 
 Use this skill to build personas grounded in evidence rather than assumptions. Accepts research synthesis (from `$research-synthesizer`), raw interview data, behavioral observations, or stakeholder descriptions and produces structured persona cards.
 
+Output is formatted for use in Figma, FigJam, Notion, or Miro. When the target tool is specified, adapt the persona card structure accordingly.
+
 Personas should be behavioral, not demographic -- group users by goals, frustrations, and decision patterns, not age or job title alone.
 
 ## Workflow
@@ -52,12 +54,14 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Personas are demographic stereotypes rather than behavioral archetypes.
-- Goals or frustrations are missing from any persona card.
-- Evidence quality is not stated per persona.
-- Assumptions are not logged with confidence levels.
-- Day-in-the-life scenarios are generic and not tied to the product context.
-- Anti-personas are missing when scope boundaries are unclear.
+- Personas are grouped by demographics (age, job title) rather than behavioral patterns (goals, frustrations, decision triggers).
+- Any persona card is missing a primary goal, at least one frustration, or at least two behavioral dimensions.
+- Evidence quality is not tagged per attribute as research-backed, partially-evidenced, or assumed.
+- Day-in-the-life scenario does not reference a specific task the user performs with the product.
+- Day-in-the-life scenario is fewer than 3 sentences or more than 5 sentences.
+- Assumptions log is missing or has fewer entries than the number of assumed attributes.
+- Anti-personas are absent when the product has clear "not for this user" boundaries.
+- Persona names are generic labels ("Power User", "New User") rather than memorable, descriptive names.
 
 ## Reference Navigation
 

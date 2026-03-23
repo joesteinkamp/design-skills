@@ -9,7 +9,7 @@ description: "Generate complete design-to-developer handoff documentation -- com
 
 Use this skill to produce developer-ready handoff documentation from design specs. Accepts design specs (from `$design-spec-writer`), accessibility findings (from `$accessibility-auditor`), or direct design descriptions and produces detailed implementation documentation.
 
-The output should be engineering-ready: component specs with all states, responsive behavior at every breakpoint, edge cases with expected behavior, and a verification checklist.
+The output should be engineering-ready: component specs with all states, responsive behavior at every breakpoint, edge cases with expected behavior, and a verification checklist. Output is formatted for use in Figma Dev Mode, Storybook, Zeplin, or as structured markdown in Notion or Linear. When the target tool is specified, adapt the component spec format and token references accordingly.
 
 ## Workflow
 
@@ -54,13 +54,13 @@ Always return sections in this order:
 ## Quality Bar
 
 Revise before finalizing if any of these are true:
-- Components are missing states (especially error, loading, empty).
-- Responsive behavior skips a breakpoint.
-- Edge cases are not documented.
-- Accessibility requirements are absent.
-- Implementation checklist is generic and not tailored to the feature.
-- Transitions lack timing and easing specs.
-- Design system tokens are not referenced.
+- Any component is missing at least 5 of these states: default, hover, focus, active, disabled, error, loading, empty.
+- Responsive behavior does not specify layout at all 3 breakpoints (desktop ≥1024px, tablet 768-1023px, mobile <768px).
+- Any transition is missing from-state, to-state, duration, and easing values.
+- Edge cases section has fewer than 3 entries for a data-driven component (zero items, one item, max items, long text, missing data).
+- Accessibility requirements do not include keyboard interaction pattern and ARIA roles for interactive components.
+- Implementation checklist is generic — every checklist item must reference a specific component or interaction from this handoff.
+- Design system tokens (color, spacing, typography) are described with raw values ("16px", "#333") instead of token names ("spacing-4", "text-primary").
 
 ## Reference Navigation
 
@@ -77,9 +77,11 @@ Positive:
 - "Translate this design spec into developer documentation."
 
 Negative:
-- "Write a design spec for this feature."
-- "Audit this design for accessibility."
-- "Create personas for our users."
+- "Write a design spec with user stories and acceptance criteria." (use `$design-spec-writer` — design intent and requirements, not implementation specs)
+- "Spec out the interaction details and edge cases." (use `$design-spec-writer` — design-level documentation, not developer-ready handoff)
+- "Audit this design for accessibility." (use `$accessibility-auditor`)
+- "Create personas for our users." (use `$persona-creator`)
 
 Ambiguous:
-- "Help the engineers understand this design." (clarify whether dev handoff documentation, a design spec, or a meeting is needed)
+- "Help the engineers understand this design." (clarify: do you want implementation-ready handoff docs with component specs, or a design spec capturing intent and requirements?)
+- "Document this feature." (clarify: design-level spec or developer-level handoff?)

@@ -88,3 +88,32 @@ Use this as the default response structure for `ab-test-planner`.
   - If primary metric is neutral: evaluate secondary metrics
   - If guardrails degrade: stop test, investigate
   - If results are inconclusive: extend test or redesign
+
+---
+
+## Starter Example
+
+Below is a concrete example of a completed hypothesis and metric definition. Use as a quality reference.
+
+### Hypothesis Example
+
+- **Statement:** If we replace the multi-step checkout (3 pages) with a single-page checkout, then checkout completion rate will increase by at least 8% (relative) because users will encounter fewer abandonment points and maintain purchase momentum through a continuous flow.
+- **Null hypothesis:** There is no difference in checkout completion rate between the multi-step and single-page checkout.
+- **Falsifiable:** Yes — completion rate is measurable and the 8% MDE is testable with our traffic volume.
+
+### Primary Metric Example
+
+- **Metric:** Checkout completion rate
+- **Definition:** Number of users who reach the order confirmation page ÷ number of users who reach the first checkout page, measured per-session.
+- **Measurement method:** Server-side event logging (`checkout_started` → `order_confirmed`)
+- **Current baseline:** 62% (30-day average, excludes guest checkout)
+- **MDE:** 8% relative (62% → 67%)
+- **Direction:** Increase
+
+### Guardrail Metric Example
+
+- **Metric:** Average order value (AOV)
+- **Definition:** Total revenue ÷ number of completed orders
+- **Current baseline:** $84.50
+- **Threshold:** Must not decrease by more than 3% ($81.97)
+- **Why it matters:** A faster checkout that pressures users into removing items would be a false positive on completion rate.

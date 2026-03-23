@@ -1,0 +1,4 @@
+interface:
+  display_name: "Portfolio Reviewer"
+  short_description: "Evaluate design candidate portfolios with structured rubrics"
+  default_prompt: "Use $portfolio-reviewer to evaluate a design candidate's portfolio with rubric scoring, level calibration, and interview questions."
