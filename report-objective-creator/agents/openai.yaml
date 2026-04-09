@@ -1,4 +1,0 @@
-interface:
-  display_name: "Report Objective Creator"
-  short_description: "Create structured objectives and OKRs for design reports"
-  default_prompt: "Use $report-objective-creator to create measurable performance objectives and growth goals for a design report."
