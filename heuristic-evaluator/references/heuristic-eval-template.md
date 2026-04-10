@@ -1,5 +1,28 @@
 # Heuristic Evaluation Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Target | yes | text | screens, flows, or components evaluated |
+> | Heuristic set | yes | enum | Nielsen's 10 / extended / custom |
+> | Evaluation depth | yes | enum | quick scan / deep evaluation |
+> | Context | yes | text | platform, user type, design stage |
+> | Scorecard | yes | table | one row per heuristic (H1-H10); columns: Score (0-4), Violations count, Key Finding |
+> | Overall Score | yes | number | average or weighted average of heuristic scores |
+> | Findings | yes | list | min 3 findings |
+> | Finding — Heuristic | yes | enum | H1-H10 |
+> | Finding — Severity | yes | number | 0-4 scale |
+> | Finding — Location | yes | text | specific screen, component, or flow step |
+> | Finding — Description | yes | text | specific and observable |
+> | Finding — Evidence | yes | text | must reference specific element or behavior |
+> | Finding — Recommendation | yes | text | actionable fix |
+> | Finding — Rationale | yes | text | why the recommendation works |
+> | Severity Matrix | yes | table | rows: Catastrophe (4), Major (3), Minor (2), Cosmetic (1); columns: Count, Findings |
+> | Top 3 Priority Fixes | yes | list | exactly 3; each has Heuristic, Severity, Impact, Recommendation, Effort |
+> | Effort | yes | enum | small / medium / large |
+> | Positive Patterns | yes | list | min 1 pattern; each has Heuristic and Why it works |
+
 Use this as the default response structure for `heuristic-evaluator`.
 
 ## Evaluation Scope

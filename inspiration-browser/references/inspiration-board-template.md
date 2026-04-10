@@ -1,5 +1,30 @@
 # Inspiration Board Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Design challenge | yes | text | specific design problem |
+> | Domain | yes | text | product domain or industry |
+> | Key attributes | yes | list | must include interaction type, emotional tone, user context, constraints |
+> | Search dimensions explored | yes | enum | direct / adjacent / analogous / visual-emotional (min 2 used) |
+> | Upstream inputs | no | text | references to personas, journeys, specs if available |
+> | Inspiration Themes | yes | list | min 3 themes; each with 1-sentence summary and example count |
+> | Curated Examples | yes | list | 8-15 total examples across themes |
+> | Example — Source | yes | text | URL or product name |
+> | Example — What it does | yes | text | 1-2 sentence description |
+> | Example — What it does well | yes | text | specific design quality |
+> | Example — Design principle | yes | text | underlying principle demonstrated |
+> | Example — Relevance | yes | text | must connect to current design challenge |
+> | Example — Category | yes | enum | direct / adjacent / analogous / visual-emotional |
+> | Recurring Patterns | yes | list | min 2 patterns; each with Seen in (list examples) and Why it works |
+> | Contrasting Approaches | yes | list | min 1; each with Examples of A, Examples of B, Trade-offs |
+> | Surprising or Unconventional Solutions | no | list | each has Seen in and Why it is notable |
+> | Patterns That May Not Transfer | no | list | each has Seen in and Why it may not work here |
+> | Design Implications | yes | list | one implication per theme |
+> | Most relevant examples | yes | list | min 2 examples with why each is the strongest reference |
+> | Gaps & Open Questions | yes | list | min 1 gap or open question |
+
 Use this as the default response structure for `inspiration-browser`.
 
 ## Search Context

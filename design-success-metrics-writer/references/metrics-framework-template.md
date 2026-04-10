@@ -1,5 +1,29 @@
 # Metrics Framework Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Product/feature | yes | text | specific product or feature name |
+> | Design initiative | yes | text | describes the initiative |
+> | Core user problem | yes | text | specific user problem being addressed |
+> | Business objective | yes | text | measurable business goal |
+> | Upstream inputs | no | text | references to personas, journeys, specs if available |
+> | User Outcomes | yes | list | min 1 per persona; each has Persona/segment, Desired behavioral change, Current state, Target state |
+> | Business Outcomes | yes | list | min 1 objective; each has Leading indicator and Lagging indicator |
+> | Primary Metrics | yes | list | 1-2 only; each has Definition, Type, Measurement method, Data source, Baseline, Target, Timeframe, Tied to user goal |
+> | Metric Type | yes | enum | behavioral / attitudinal / business |
+> | Secondary Metrics | yes | list | 2-4 metrics; same fields as Primary minus Tied to user goal |
+> | Guardrail Metrics | yes | list | min 1; each has Definition, Measurement method, Threshold, Why it matters |
+> | Metrics NOT to Track | no | list | each has Why excluded and Better alternative |
+> | Why excluded | yes | enum | vanity metric / not actionable / gameable |
+> | Instrumentation Needed | yes | list | min 1; each has Status and Owner |
+> | Status | yes | enum | exists / needs implementation |
+> | Data Sources | yes | list | min 1 source |
+> | Cadence | yes | key-value | Daily monitoring, Weekly review, Post-launch milestone reviews |
+> | Decision Triggers | yes | key-value | if exceeds target, if flat, if guardrail degrades |
+> | Assumptions & Risks | yes | list | min 1; Confidence is high/medium/low; each has Validation needed |
+
 Use this as the default response structure for `design-success-metrics-writer`.
 
 ## Design Context

@@ -1,5 +1,21 @@
 # FigJam Workshop Prompt Pack Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Topic | yes | text | specific workshop topic |
+> | Audience | yes | text | who will participate |
+> | Duration | yes | text | total workshop time |
+> | Team size | yes | number | number of participants |
+> | Workshop objective | yes | text | clear, measurable objective |
+> | Key constraints | yes | list | min 1 constraint |
+> | Assumptions | yes | list | min 2 assumptions |
+> | Prompt A — FigJam Board Builder | yes | text | must include board title, section sequence, time boxes, section instructions, sticky-note prompts, owner/next-steps zones, visual organization constraints |
+> | Prompt B — Facilitator Script | yes | text | must include opening framing, segment-by-segment script with timing, transition lines, group management guidance, commitment prompts |
+> | Prompt C — Synthesis + Action Plan | yes | text | must require output schema with Decisions, Risks/Blockers, Commitments, Owners, Immediate Next Steps, Future Next Steps, Success Signals |
+> | Output Rules | yes | list | prompts must be copy/paste-ready, specific, facilitation-friendly, with explicit ownership and time framing |
+
 Use this template as the default output format when invoking the skill.
 
 ## Workshop Profile

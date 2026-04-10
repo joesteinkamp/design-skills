@@ -1,5 +1,29 @@
 # Dev Handoff Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Feature/project name | yes | text | concise name |
+> | Design spec source | yes | text | link or reference to design spec |
+> | Engineering audience | yes | enum | frontend / backend / fullstack / mobile |
+> | Design system | no | text | name and version if applicable |
+> | Priority | yes | enum | P0 / P1 / P2 |
+> | Target release | yes | text | release version or date |
+> | Component Inventory | yes | list | min 1 component |
+> | Design system token/reference | no | text | token name from design system |
+> | Variants | yes | list | min 1 variant per component |
+> | Properties | yes | key-value | each has type, default, options |
+> | States | yes | list | min Default, Hover, Focus, Disabled, Error; each has Visual description |
+> | Transitions | no | list | each has From state, To state, Duration, Easing, Property |
+> | Interaction Specs | yes | list | min 1 flow; each has Trigger, Steps, Success outcome, Error outcome, Keyboard equivalent, Screen reader announcement |
+> | Responsive Behavior | yes | key-value | Desktop, Tablet, Mobile breakpoints with layout and component adaptations |
+> | Overflow & Truncation | yes | key-value | text overflow, container overflow, min/max widths |
+> | Content Specs | yes | list | each has Max characters, Truncation rule, Localization notes |
+> | Data Edge Cases | yes | list | must cover: zero items, one item, max items, long text, missing data, slow connection, offline |
+> | Accessibility Requirements | yes | key-value | ARIA roles, ARIA labels, Keyboard navigation, Screen reader announcements, Focus management, Color contrast notes |
+> | Implementation Checklist | yes | list | uses implementation-checklist template |
+
 Use this as the default response structure for `dev-handoff-writer`.
 
 ## Handoff Overview
