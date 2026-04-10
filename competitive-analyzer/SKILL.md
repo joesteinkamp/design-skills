@@ -98,10 +98,10 @@ Return sections in this order. Sections marked required must always appear.
 | Section | Required | Min Items | Format |
 |---------|----------|-----------|--------|
 | Analysis Scope | yes | - | key-value fields: focal product, competitors, evaluation dimensions, dimension weights |
-| Comparison Matrix | yes | 4 dimensions | matrix of competitors x dimensions with strong/adequate/weak ratings and evidence |
-| Competitor Profiles | yes | 3 profiles | per-competitor cards with strengths, weaknesses, and notable patterns |
-| Opportunity Map | yes | 1 item per category | table-stakes, differentiation opportunities, and anti-patterns |
-| Design Recommendations | yes | 1 recommendation | prioritized recommendations (must-do / should-do / could-do) grounded in analysis gaps |
+| Comparison Matrix | yes | 4 dimensions | matrix with competitors as columns, dimensions as rows, strong/adequate/weak ratings |
+| Competitor Profiles | yes | 3 profiles | per-competitor cards with strengths, weaknesses, notable patterns, and evidence |
+| Opportunity Map | yes | 1 per category | table-stakes, differentiation opportunities, and anti-patterns with user-problem explanations |
+| Design Recommendations | yes | 1 recommendation | priority-ranked recommendations (must-do / should-do / could-do) grounded in analysis gaps |
 
 ## Quality Bar
 
@@ -109,14 +109,14 @@ Revise before finalizing if any rule fails.
 
 | ID | Section | Rule | Severity |
 |----|---------|------|----------|
-| QB-01 | Comparison Matrix | Every rating (strong / adequate / weak) has a 1-2 sentence evidence justification | blocker |
-| QB-02 | Competitor Profiles | Analysis evaluates experiential quality, not just feature presence/absence ("has dark mode: yes/no") | blocker |
+| QB-01 | Competitor Profiles | Every rating (strong / adequate / weak) has a 1-2 sentence evidence justification | blocker |
+| QB-02 | Comparison Matrix | Analysis evaluates experiential quality, not just feature presence/absence | blocker |
 | QB-03 | Opportunity Map | Distinguishes between table-stakes (must-have), differentiation (where to win), and anti-patterns (what to avoid) | blocker |
-| QB-04 | Competitor Profiles | At least 3 competitors analyzed, or explicit justification for a smaller set | blocker |
-| QB-05 | Opportunity Map | Anti-patterns explain the specific user problem they create, not just "avoid this" | warning |
-| QB-06 | Design Recommendations | Recommendations are grounded in a specific gap found in the analysis, not generic ("improve onboarding") | blocker |
-| QB-07 | Comparison Matrix | At least 4 evaluation dimensions are used | blocker |
-| QB-08 | Design Recommendations | Every recommendation has a priority rating (must-do / should-do / could-do) | warning |
+| QB-04 | Competitor Profiles | At least 3 competitors are analyzed, or explicit justification is given for a smaller set | warning |
+| QB-05 | Opportunity Map | Anti-patterns explain the specific user problem they create, not just "avoid this" | blocker |
+| QB-06 | Design Recommendations | Recommendations are grounded in specific gaps found in the analysis, not generic advice | blocker |
+| QB-07 | Comparison Matrix | At least 4 evaluation dimensions are used | warning |
+| QB-08 | Design Recommendations | Recommendations include priority ratings (must-do / should-do / could-do) | warning |
 
 ## Reference Navigation
 

@@ -101,7 +101,7 @@ Return sections in this order. Sections marked required must always appear.
 | Audit Scope | yes | - | key-value fields: screens/components audited, conformance target, audit method, AT considerations |
 | Compliance Summary | yes | - | pass/fail/partial/NA counts by WCAG principle |
 | Findings | yes | 1 finding | finding cards with WCAG criterion, severity, element, current vs. expected behavior, remediation |
-| Remediation Priority List | yes | 1 item | prioritized list: must-fix, should-fix, nice-to-fix with effort estimates |
+| Remediation Priority List | yes | 1 item | priority-ranked list: must-fix, should-fix, nice-to-fix with effort estimates |
 | Assistive Technology Notes | yes | 3 AT types | notes for screen reader, keyboard, and at least one additional AT |
 | Dev Remediation Handoff | no | - | implementation-ready remediation details for engineering |
 
@@ -112,8 +112,8 @@ Revise before finalizing if any rule fails.
 | ID | Section | Rule | Severity |
 |----|---------|------|----------|
 | QB-01 | Findings | Every finding includes its WCAG criterion reference number (e.g., "1.4.3 Contrast (Minimum)") | blocker |
-| QB-02 | Findings | Remediation guidance specifies the exact fix, not "make it accessible" or "fix the contrast" (e.g., "increase text color from #999 to #767676 to meet 4.5:1 ratio against #FFFFFF background") | blocker |
-| QB-03 | Findings | Severity ratings are consistent — a missing form label (blocks screen reader users entirely) must be rated higher than a low-contrast decorative element | blocker |
+| QB-02 | Findings | Remediation guidance specifies the exact fix, not generic advice like "make it accessible" or "fix the contrast" | blocker |
+| QB-03 | Findings | Severity ratings are consistent — a missing form label (blocks screen reader users) must be rated higher than a low-contrast decorative element | blocker |
 | QB-04 | Compliance Summary | Pass/fail counts match the sum of individual findings | blocker |
 | QB-05 | Assistive Technology Notes | Every audit addresses screen reader, keyboard, and at least one additional AT (voice control, magnification, or switch access) | blocker |
 | QB-06 | Audit Scope | Conformance level target (A, AA, or AAA) is stated | blocker |

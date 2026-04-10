@@ -120,12 +120,12 @@ Return sections in this order. Sections marked required must always appear.
 
 | Section | Required | Min Items | Format |
 |---------|----------|-----------|--------|
-| Research Overview | yes | - | key-value fields: research topic, business decision, scope (generative/evaluative), methods, timeline |
-| Research Questions & Assumptions | yes | 3 questions | numbered research questions + assumptions to validate |
+| Research Overview | yes | - | key-value fields: research title, business decision, scope (generative/evaluative), methods, timeline |
+| Research Questions & Assumptions | yes | 3 questions | numbered research questions with known/unknown assumptions |
 | Methodology | yes | 1 method | method name, justification, qualitative/quantitative/mixed, limitations |
 | Research Instrument | yes | 1 instrument | discussion guide, survey, or concept test with themed question groups |
 | Recruitment Plan | yes | 3 criteria | participant criteria (include/exclude), sample size with justification, screener |
-| Logistics & Timeline | yes | - | phased timeline with roles, tools, consent, and risk mitigation |
+| Logistics & Timeline | yes | - | phased timeline with roles, tools, consent, and risk mitigations |
 
 ## Quality Bar
 
@@ -139,7 +139,7 @@ Revise before finalizing if any rule fails.
 | QB-04 | Research Instrument | Discussion guide starts with warm-up questions and ends with cool-down questions | blocker |
 | QB-05 | Research Instrument | Survey has no more than 30 questions without justification for length | warning |
 | QB-06 | Recruitment Plan | Recruitment screener has at least 3 qualifying criteria and at least 1 disqualifying criterion | blocker |
-| QB-07 | Recruitment Plan | Sample size is stated with justification (e.g., "5 participants per segment for qualitative saturation" or "384 responses for +/-5% margin of error") | blocker |
+| QB-07 | Recruitment Plan | Sample size is stated with justification (e.g., "5 participants per segment for qualitative saturation" or "384 responses for ±5% margin of error") | blocker |
 | QB-08 | Logistics & Timeline | Timeline includes recruitment, sessions, analysis, and reporting phases with estimated durations | blocker |
 | QB-09 | Logistics & Timeline | Consent and data handling are addressed | warning |
 | QB-10 | Research Overview | Plan names the specific business decision the research will inform | blocker |
@@ -166,4 +166,4 @@ Intents: [plan_research, write_discussion_guide, design_survey, scope_study, cre
 - "Create a persona from this research." -> `$persona-creator`
 
 ### Ambiguous
-- "I need to do some research." -> Clarify: what decisions will the research inform and what is already known?
+- "I need to do some research." -> Clarify: what decisions the research will inform and what is already known?

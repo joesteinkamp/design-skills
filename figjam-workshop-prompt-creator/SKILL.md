@@ -64,7 +64,7 @@ Default to the AI-Native workshop baseline in `references/ai-native-workshop-ins
   - Use the AI-Native baseline from `references/ai-native-workshop-instructions.md` when requested or implied.
   - Otherwise adapt the same structure (context -> reaction -> solutions/signals -> commitments).
   - Keep the sequence problem-first and action-oriented.
-- **Produces:** Selected pattern and exercise sequence
+- **Produces:** Selected pattern for prompt generation
 - **References:** `references/ai-native-workshop-instructions.md`
 
 ### Step 3: Generate a three-part prompt pack
@@ -130,10 +130,10 @@ Return sections in this order. Sections marked required must always appear.
 | Section | Required | Min Items | Format |
 |---------|----------|-----------|--------|
 | Workshop Profile | yes | - | key-value fields: audience, duration, team size, goal, constraints |
-| Assumptions | yes | 0 | labeled assumption list with pragmatic defaults |
-| Prompt A - FigJam Board Builder | yes | 1 prompt | copy-ready prompt with board structure, sections, and sticky-note zones |
+| Assumptions | yes | 0 | labeled assumptions with rationale |
+| Prompt A - FigJam Board Builder | yes | 1 prompt | copy-ready prompt with board structure, sections, and sticky-note areas |
 | Prompt B - Facilitator Script | yes | 1 prompt | copy-ready prompt with agenda, time boxes, participant instructions |
-| Prompt C - Synthesis + Action Plan | yes | 1 prompt | copy-ready prompt with synthesis steps, owners, and next steps format |
+| Prompt C - Synthesis + Action Plan | yes | 1 prompt | copy-ready prompt with synthesis framework, owners, and next steps |
 
 ## Quality Bar
 
