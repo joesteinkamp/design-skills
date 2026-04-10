@@ -1,5 +1,26 @@
 # Spectrum Card Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Product/feature | yes | text | specific product or feature name |
+> | Design challenge | yes | text | describes the design problem |
+> | Core user needs | yes | list | min 1 need |
+> | Key constraints | yes | list | min 1 constraint |
+> | Upstream inputs | no | text | references to personas, journeys, inspiration if available |
+> | Spectrum Summary | yes | text | ASCII visual of all spectrums with recommended positions |
+> | Spectrum Cards | yes | list | min 2 spectrum cards |
+> | Left pole defined | yes | text | contextual definition of the left pole |
+> | Right pole defined | yes | text | contextual definition of the right pole |
+> | Tradeoff table | yes | table | rows: You gain, You lose, Real-world example, User factors, Business factors |
+> | Recommended position | yes | enum | left / left-center / center / right-center / right |
+> | Rationale | yes | text | grounded in user needs and business goals |
+> | Context shifts | yes | text | describes persona/scenario variations |
+> | Team decision needed | yes | enum | yes / no |
+> | Derived Design Principles | yes | list | min 2 principles; each has Derived from, Meaningful opposite, Applies to |
+> | Open Tensions | no | list | spectrums needing team discussion with stakes explained |
+
 Use this as the default response structure for `design-spectrums-creator`.
 
 ## Design Context

@@ -1,5 +1,29 @@
 # Design Spec Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Feature/project name | yes | text | concise name |
+> | Decision stage | yes | enum | proposal / refinement / build-ready |
+> | Problem statement | yes | text | describes user problem and why it matters |
+> | Target personas | yes | list | min 1 named persona |
+> | Journey context | yes | text | where this fits in the user journey |
+> | Business constraints | yes | list | min 1 constraint |
+> | Dependencies | no | list | list of dependencies if any |
+> | Problem Statement (Scope) | yes | text | concise description of user problem being solved |
+> | Success Metrics | yes | list | min 2 metrics |
+> | In Scope | yes | list | min 2 items |
+> | Out of Scope | yes | list | min 1 item |
+> | User Stories | yes | list | min 1 story; As a/I want to/so that format |
+> | Acceptance criteria | yes | list | min 2 per story; Given/When/Then format |
+> | Accessibility requirements | yes | text | per user story |
+> | Responsive notes | no | text | per user story |
+> | Interaction Specs | yes | key-value | uses interaction-spec-template per screen/component |
+> | Content Requirements | no | list | each has Purpose, Tone, Character limits, Variants |
+> | Open Questions | no | list | each has Context, Owner, Deadline |
+> | Dev Handoff Summary | no | key-value | uses dev-handoff-schema when handing off |
+
 Use this as the default response structure for `design-spec-writer`.
 
 ## Design Context
