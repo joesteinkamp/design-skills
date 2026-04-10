@@ -1,5 +1,23 @@
 # Journey Handoff Schema
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Persona | yes | text | must reference a named persona |
+> | Scenario | yes | text | end-to-end situation mapped |
+> | Journey type | yes | text | matches source journey map type |
+> | Key phases | yes | list | min 4 phase names |
+> | Critical Pain Points | yes | list | min 1; each needs Phase, Severity, Description |
+> | Phase (pain point) | yes | text | must reference a named phase |
+> | Severity (pain point) | yes | text | must match source severity rating |
+> | Description (pain point) | yes | text | concise problem statement |
+> | Opportunities | yes | list | min 1; each needs Type, Impact, Related pain point |
+> | Type (opportunity) | yes | text | opportunity category |
+> | Impact (opportunity) | yes | text | expected effect |
+> | Related pain point | yes | text | must reference a listed pain point |
+> | Emotional Low Points | no | list | each needs Phase, Trigger, Current experience |
+
 Use this schema when passing journey map output to downstream skills like `$design-spec-writer`, `$design-critique`, or `$ab-test-planner`.
 
 ## Required Handoff Block

@@ -1,5 +1,20 @@
 # Persona Handoff Schema
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Name | yes | text | descriptive, memorable persona name |
+> | Role | yes | text | job title or archetype |
+> | Primary goal | yes | text | one clear goal statement |
+> | Key frustration | yes | text | top frustration |
+> | Context | yes | text | work environment, tools, team structure |
+> | Evidence quality | yes | enum | research-backed / partially-evidenced / assumed |
+> | Behavioral Dimensions | yes | list | min 3 items; must be observable, not demographic |
+> | Decision Triggers | yes | list | min 2 triggers |
+> | Mental Models | yes | list | min 2 models |
+> | Tools & Touchpoints | yes | list | min 2 items |
+
 Use this schema when passing persona output to downstream skills like `$journey-mapper`, `$design-spec-writer`, or `$design-critique`.
 
 ## Required Handoff Block

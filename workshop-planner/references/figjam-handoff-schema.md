@@ -1,5 +1,32 @@
 # FigJam Handoff Schema
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Topic | yes | text | clear workshop subject |
+> | Audience | yes | text | who will participate |
+> | Duration | yes | text | time value |
+> | Team size | yes | number | positive integer |
+> | Workshop objective | yes | text | specific, measurable outcome |
+> | Key constraints | no | list | known blockers or limitations |
+> | Assumptions | yes | list | min 3 items |
+> | Agenda blocks | yes | list | min 3; each needs Title, Time box, Purpose |
+> | Time box | yes | text | duration per agenda block |
+> | Exercises | yes | list | min 1; each needs Objective, Participant prompt, Duration, Board zones, Expected outputs |
+> | Participant prompt | yes | text | copy-ready facilitator prompt |
+> | Board zones | yes | list | named zones for FigJam board per exercise |
+> | Expected outputs | yes | list | what each exercise produces |
+> | Discussion Prompts | yes | list | min 3; must include at least one ownership prompt |
+> | Decisions | yes | list | synthesis requirement; decisions made |
+> | Risks/Blockers | yes | list | synthesis requirement |
+> | Commitments | yes | list | synthesis requirement |
+> | Owners | yes | list | synthesis requirement; named owners |
+> | Immediate Next Steps | yes | list | next 2 weeks |
+> | Future Next Steps | yes | list | 30/60/90 days |
+> | Success Signals | yes | list | observable behaviors |
+> | Output Rules | yes | list | copy/paste-ready, specific, facilitator-friendly, explicit ownership and timing |
+
 Use this schema exactly when handing output to `$figjam-workshop-prompt-creator`.
 
 ## Required Handoff Block
