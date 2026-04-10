@@ -1,5 +1,25 @@
 # Competitive Analysis Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Focal product/feature | yes | text | must name a specific product or feature |
+> | Analysis goal | yes | text | actionable goal statement |
+> | Competitors analyzed | yes | list | min 2 competitors |
+> | Evaluation dimensions | yes | list | min 3 dimensions |
+> | Date of analysis | yes | text | valid date |
+> | Comparison Matrix | yes | table | one row per dimension; rating uses Strong/Adequate/Weak/N-A |
+> | Competitor Profiles | yes | key-value | one per competitor, uses competitor-profile-template |
+> | Table Stakes | yes | list | min 2 items |
+> | Differentiation Opportunities | yes | list | min 2 items; each has Gap in market, Design approach, and Impact |
+> | Impact | yes | enum | high / medium / low |
+> | Anti-Patterns to Avoid | yes | list | min 1 item; each has Seen in and Why it fails |
+> | Design Recommendations | yes | list | min 2 recommendations |
+> | Evidence from analysis | yes | text | must reference specific finding from matrix or profiles |
+> | Priority | yes | enum | must-do / should-do / could-do |
+> | Related opportunity | yes | text | must reference an opportunity listed above |
+
 Use this as the default response structure for `competitive-analyzer`.
 
 ## Analysis Scope

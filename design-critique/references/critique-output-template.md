@@ -1,5 +1,29 @@
 # Critique Output Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Design being critiqued | yes | text | must identify specific design or screen |
+> | Design goals | yes | list | min 1 goal |
+> | Target persona | yes | text | named persona or user segment |
+> | Design stage | yes | enum | concept / mid-fi / hi-fi / pre-ship |
+> | Critique focus | yes | enum | full review / specific lenses |
+> | Executive Summary | yes | text | 2-3 sentences covering quality, strengths, and critical issues |
+> | Findings | yes | list | min 3 findings |
+> | Finding Type | yes | enum | praise / concern / blocker |
+> | Severity | yes | enum | critical / major / minor / nit |
+> | Category | yes | enum | usability / visual / content / consistency / accessibility |
+> | Lens | yes | text | must reference a rubric evaluation lens |
+> | Description | yes | text | specific and observable |
+> | Evidence | yes | text | must reference specific element in the design |
+> | Recommendation | yes | text | actionable suggestion |
+> | Principle/heuristic reference | yes | text | named principle or heuristic |
+> | What Works Well | yes | list | min 1 strength with Why it works and Principle it demonstrates |
+> | Priority Actions | yes | list | min 2 actions, ranked most to least critical |
+> | Effort estimate | yes | enum | small / medium / large |
+> | Open Questions for Designer | no | list | each has Context and Why it matters |
+
 Use this as the default response structure for `design-critique`.
 
 ## Critique Context
