@@ -1,6 +1,39 @@
 ---
 name: competitive-analyzer
 description: "Produce structured competitive and comparative analyses of products, features, or design patterns. Use when requests involve competitive analysis, competitor benchmarking, market comparison, or identifying design differentiation opportunities."
+
+# Discovery & Auto-Selection
+category: evaluation
+tags: [competitive-analysis, benchmarking, market-comparison, differentiation]
+complexity: moderate
+output_length: medium
+
+# Skill Graph
+upstream_skills: []
+downstream_skills: []
+
+# Input Contract
+inputs:
+  - name: focal_product
+    required: true
+    type: text
+    description: "Product or feature to analyze competitively"
+  - name: competitor_set
+    required: false
+    type: text
+    description: "List of competitors to include in analysis"
+
+# Output Contract
+outputs:
+  - name: competitive_analysis
+    type: competitive_analysis
+    template: references/competitive-analysis-template.md
+
+# Batch Execution
+batch:
+  enabled: true
+  input_key: focal_product
+  parallelizable: true
 ---
 
 # Competitive Analyzer
@@ -13,54 +46,77 @@ The output should be actionable for designers: not just what competitors do, but
 
 ## Workflow
 
-1. Define scope.
-- Identify the focal product or feature.
-- List competitors to analyze (3-5 recommended).
-- Select evaluation dimensions: UX quality, feature coverage, onboarding, information architecture, accessibility, pricing, visual design, content strategy.
-- Weight dimensions by relevance to the analysis goal.
+### Step 1: Define scope
+- **Reads:** focal_product, competitor_set (if provided)
+- **Actions:**
+  - Identify the focal product or feature.
+  - List competitors to analyze (3-5 recommended).
+  - Select evaluation dimensions: UX quality, feature coverage, onboarding, information architecture, accessibility, pricing, visual design, content strategy.
+  - Weight dimensions by relevance to the analysis goal.
+- **Produces:** Populated `Analysis Scope` section
 
-2. Build evaluation framework.
-- Define rating scale per dimension (strong/adequate/weak).
-- Select criteria that produce meaningful differentiation, not checkbox comparisons.
-- Include both functional and experiential dimensions.
+### Step 2: Build evaluation framework
+- **Reads:** Step 1 scope
+- **Actions:**
+  - Define rating scale per dimension (strong/adequate/weak).
+  - Select criteria that produce meaningful differentiation, not checkbox comparisons.
+  - Include both functional and experiential dimensions.
+- **Produces:** Evaluation framework for use in Step 3
 
-3. Analyze competitors.
-- Profile each competitor using `references/competitor-profile-template.md`.
-- Document strengths, weaknesses, and notable patterns.
-- Rate each competitor on every dimension.
-- Note evidence for each rating.
+### Step 3: Analyze competitors
+- **Reads:** Step 1 scope, Step 2 framework
+- **Actions:**
+  - Profile each competitor using `references/competitor-profile-template.md`.
+  - Document strengths, weaknesses, and notable patterns.
+  - Rate each competitor on every dimension.
+  - Note evidence for each rating.
+- **Produces:** Populated `Competitor Profiles` section
+- **References:** `references/competitor-profile-template.md`
 
-4. Synthesize findings.
-- Build comparison matrix across all competitors and dimensions.
-- Identify table-stakes features (everyone has them, you must too).
-- Identify differentiation opportunities (gaps no one fills well).
-- Flag anti-patterns seen across competitors.
+### Step 4: Synthesize findings
+- **Reads:** Step 3 competitor profiles
+- **Actions:**
+  - Build comparison matrix across all competitors and dimensions.
+  - Identify table-stakes features (everyone has them, you must too).
+  - Identify differentiation opportunities (gaps no one fills well).
+  - Flag anti-patterns seen across competitors.
+- **Produces:** Populated `Comparison Matrix` and `Opportunity Map` sections
 
-5. Format output.
-- Use `references/competitive-analysis-template.md` for the response structure.
-- Lead with the comparison matrix for quick scanning.
-- End with prioritized design recommendations.
+### Step 5: Format output
+- **Reads:** All previous step outputs
+- **Actions:**
+  - Use `references/competitive-analysis-template.md` for the response structure.
+  - Lead with the comparison matrix for quick scanning.
+  - End with prioritized design recommendations.
+- **Produces:** Complete analysis with all required sections including `Design Recommendations`
+- **References:** `references/competitive-analysis-template.md`
 
 ## Output Contract
 
-Always return sections in this order:
-- `Analysis Scope`
-- `Comparison Matrix`
-- `Competitor Profiles`
-- `Opportunity Map`
-- `Design Recommendations`
+Return sections in this order. Sections marked required must always appear.
+
+| Section | Required | Min Items | Format |
+|---------|----------|-----------|--------|
+| Analysis Scope | yes | - | key-value fields: focal product, competitors, evaluation dimensions, dimension weights |
+| Comparison Matrix | yes | 4 dimensions | matrix of competitors x dimensions with strong/adequate/weak ratings and evidence |
+| Competitor Profiles | yes | 3 profiles | per-competitor cards with strengths, weaknesses, and notable patterns |
+| Opportunity Map | yes | 1 item per category | table-stakes, differentiation opportunities, and anti-patterns |
+| Design Recommendations | yes | 1 recommendation | prioritized recommendations (must-do / should-do / could-do) grounded in analysis gaps |
 
 ## Quality Bar
 
-Revise before finalizing if any of these are true:
-- Any rating (strong / adequate / weak) lacks a 1-2 sentence evidence justification.
-- Analysis evaluates only feature presence/absence ("has dark mode: yes/no") without assessing experiential quality.
-- Opportunity map does not distinguish between table-stakes (must-have), differentiation (where to win), and anti-patterns (what to avoid).
-- Fewer than 3 competitors are analyzed without explicit justification for the smaller set.
-- Anti-patterns section says "avoid this" without explaining the specific user problem it creates.
-- Recommendations are generic ("improve onboarding") instead of grounded in a specific gap found in the analysis ("no competitor offers inline progress saving during onboarding — implement auto-save to differentiate").
-- Comparison matrix has fewer than 4 evaluation dimensions.
-- Design recommendations lack priority ratings (must-do / should-do / could-do).
+Revise before finalizing if any rule fails.
+
+| ID | Section | Rule | Severity |
+|----|---------|------|----------|
+| QB-01 | Comparison Matrix | Every rating (strong / adequate / weak) has a 1-2 sentence evidence justification | blocker |
+| QB-02 | Competitor Profiles | Analysis evaluates experiential quality, not just feature presence/absence ("has dark mode: yes/no") | blocker |
+| QB-03 | Opportunity Map | Distinguishes between table-stakes (must-have), differentiation (where to win), and anti-patterns (what to avoid) | blocker |
+| QB-04 | Competitor Profiles | At least 3 competitors analyzed, or explicit justification for a smaller set | blocker |
+| QB-05 | Opportunity Map | Anti-patterns explain the specific user problem they create, not just "avoid this" | warning |
+| QB-06 | Design Recommendations | Recommendations are grounded in a specific gap found in the analysis, not generic ("improve onboarding") | blocker |
+| QB-07 | Comparison Matrix | At least 4 evaluation dimensions are used | blocker |
+| QB-08 | Design Recommendations | Every recommendation has a priority rating (must-do / should-do / could-do) | warning |
 
 ## Reference Navigation
 
@@ -70,17 +126,19 @@ Read only what is needed:
 
 ## Trigger Examples
 
-Positive:
+### Positive
+Intents: [analyze_competitors, benchmark_product, compare_features, identify_differentiation, map_market]
+
 - "Compare our onboarding flow against Figma, Miro, and Canva."
 - "Do a competitive analysis of checkout experiences in e-commerce."
 - "What design patterns are our competitors using for their dashboards?"
 
-Negative:
-- "Find inspiration for our onboarding redesign." (use `$inspiration-browser` — creative inspiration, not structured competitor comparison)
-- "Show me how other products handle dashboards." (use `$inspiration-browser` — design pattern examples, not competitive positioning)
-- "Write a design spec for our dashboard." (use `$design-spec-writer`)
-- "Audit this page for accessibility." (use `$accessibility-auditor`)
+### Negative
+- "Find inspiration for our onboarding redesign." -> `$inspiration-browser`
+- "Show me how other products handle dashboards." -> `$inspiration-browser`
+- "Write a design spec for our dashboard." -> `$design-spec-writer`
+- "Audit this page for accessibility." -> `$accessibility-auditor`
 
-Ambiguous:
+### Ambiguous
 - "How does our product compare?" (clarify which feature/area to focus on and which competitors to include)
 - "What are other products doing?" (clarify: do you want a structured competitive analysis with positioning, or creative design inspiration and pattern examples?)

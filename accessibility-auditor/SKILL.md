@@ -1,6 +1,40 @@
 ---
 name: accessibility-auditor
 description: "Audit designs and specs for WCAG compliance, producing prioritized issues with remediation guidance. Use when requests involve accessibility audits, WCAG compliance checks, a11y reviews, or evaluating designs for assistive technology compatibility."
+
+# Discovery & Auto-Selection
+category: evaluation
+tags: [accessibility, wcag, a11y, compliance, assistive-technology, remediation]
+complexity: moderate
+output_length: long
+
+# Skill Graph
+upstream_skills: [design-spec-writer]
+downstream_skills: [dev-handoff-writer]
+
+# Input Contract
+inputs:
+  - name: design_screens
+    required: true
+    type: text
+    description: "Screen descriptions, design specs, component inventories, or flow descriptions to audit"
+  - name: design_spec
+    required: false
+    type: design_spec
+    source_skill: design-spec-writer
+    description: "Design spec with interaction details and component states"
+
+# Output Contract
+outputs:
+  - name: accessibility_audit
+    type: accessibility_findings
+    template: references/accessibility-audit-template.md
+
+# Batch Execution
+batch:
+  enabled: true
+  input_key: design_screens
+  parallelizable: true
 ---
 
 # Accessibility Auditor
@@ -13,54 +47,78 @@ The output should be actionable for both designers and developers: issues are se
 
 ## Workflow
 
-1. Define scope.
-- Identify what is being audited (screens, components, flows).
-- Set conformance target: WCAG 2.2 Level A, AA, or AAA.
-- Note assistive technology considerations (screen reader, keyboard, voice control, magnification).
-- Determine audit method: design review, code review, manual testing, or automated scan.
+### Step 1: Define scope
+- **Reads:** design_screens, design_spec (if provided)
+- **Actions:**
+  - Identify what is being audited (screens, components, flows).
+  - Set conformance target: WCAG 2.2 Level A, AA, or AAA.
+  - Note assistive technology considerations (screen reader, keyboard, voice control, magnification).
+  - Determine audit method: design review, code review, manual testing, or automated scan.
+- **Produces:** Populated `Audit Scope` section
 
-2. Evaluate against WCAG criteria.
-- Use `references/wcag-checklist.md` to systematically evaluate applicable criteria.
-- Organize evaluation by WCAG principle: perceivable, operable, understandable, robust.
-- Document pass, fail, partial, and not-applicable for each criterion.
-- Note the specific element and behavior for each finding.
+### Step 2: Evaluate against WCAG criteria
+- **Reads:** Step 1 scope, design_screens
+- **Actions:**
+  - Use `references/wcag-checklist.md` to systematically evaluate applicable criteria.
+  - Organize evaluation by WCAG principle: perceivable, operable, understandable, robust.
+  - Document pass, fail, partial, and not-applicable for each criterion.
+  - Note the specific element and behavior for each finding.
+- **Produces:** Populated `Compliance Summary` section
+- **References:** `references/wcag-checklist.md`
 
-3. Document findings.
-- Record WCAG criterion, severity, affected element, current vs. expected behavior.
-- Provide specific remediation guidance using `references/remediation-patterns.md` for common fixes.
-- Estimate effort for each remediation.
+### Step 3: Document findings
+- **Reads:** Step 2 evaluation results
+- **Actions:**
+  - Record WCAG criterion, severity, affected element, current vs. expected behavior.
+  - Provide specific remediation guidance using `references/remediation-patterns.md` for common fixes.
+  - Estimate effort for each remediation.
+- **Produces:** Populated `Findings` section
+- **References:** `references/remediation-patterns.md`
 
-4. Prioritize.
-- Must-fix: conformance failures that block access.
-- Should-fix: best practices that significantly improve the experience.
-- Nice-to-fix: enhancements that polish the accessible experience.
+### Step 4: Prioritize
+- **Reads:** Step 3 findings
+- **Actions:**
+  - Must-fix: conformance failures that block access.
+  - Should-fix: best practices that significantly improve the experience.
+  - Nice-to-fix: enhancements that polish the accessible experience.
+- **Produces:** Populated `Remediation Priority List` section
 
-5. Format output.
-- Use `references/accessibility-audit-template.md` for the response structure.
-- Include compliance summary with pass/fail counts.
-- Add assistive technology notes for screen reader, keyboard, voice, and magnification users.
+### Step 5: Format output
+- **Reads:** All previous step outputs
+- **Actions:**
+  - Use `references/accessibility-audit-template.md` for the response structure.
+  - Include compliance summary with pass/fail counts.
+  - Add assistive technology notes for screen reader, keyboard, voice, and magnification users.
+- **Produces:** Complete audit with all required sections including `Assistive Technology Notes` and optional `Dev Remediation Handoff`
+- **References:** `references/accessibility-audit-template.md`
 
 ## Output Contract
 
-Always return sections in this order:
-- `Audit Scope`
-- `Compliance Summary`
-- `Findings`
-- `Remediation Priority List`
-- `Assistive Technology Notes`
-- `Dev Remediation Handoff` (optional, include when engineering implementation is next)
+Return sections in this order. Sections marked required must always appear.
+
+| Section | Required | Min Items | Format |
+|---------|----------|-----------|--------|
+| Audit Scope | yes | - | key-value fields: screens/components audited, conformance target, audit method, AT considerations |
+| Compliance Summary | yes | - | pass/fail/partial/NA counts by WCAG principle |
+| Findings | yes | 1 finding | finding cards with WCAG criterion, severity, element, current vs. expected behavior, remediation |
+| Remediation Priority List | yes | 1 item | prioritized list: must-fix, should-fix, nice-to-fix with effort estimates |
+| Assistive Technology Notes | yes | 3 AT types | notes for screen reader, keyboard, and at least one additional AT |
+| Dev Remediation Handoff | no | - | implementation-ready remediation details for engineering |
 
 ## Quality Bar
 
-Revise before finalizing if any of these are true:
-- Any finding is missing its WCAG criterion reference number (e.g., "1.4.3 Contrast (Minimum)").
-- Remediation guidance says "make it accessible" or "fix the contrast" instead of specifying the exact fix ("increase text color from #999 to #767676 to meet 4.5:1 ratio against #FFFFFF background").
-- Severity ratings are inconsistent — a missing form label (blocks screen reader users entirely) must be rated higher than a low-contrast decorative element.
-- Compliance summary pass/fail counts do not match the sum of individual findings.
-- Assistive technology notes are absent — every audit must address screen reader, keyboard, and at least one additional AT (voice control, magnification, or switch access).
-- Conformance level target (A, AA, or AAA) is not stated in the audit scope.
-- Any must-fix finding lacks an effort estimate (small / medium / large).
-- Remediation patterns reference is not used — common fixes should cite `references/remediation-patterns.md` for consistency.
+Revise before finalizing if any rule fails.
+
+| ID | Section | Rule | Severity |
+|----|---------|------|----------|
+| QB-01 | Findings | Every finding includes its WCAG criterion reference number (e.g., "1.4.3 Contrast (Minimum)") | blocker |
+| QB-02 | Findings | Remediation guidance specifies the exact fix, not "make it accessible" or "fix the contrast" (e.g., "increase text color from #999 to #767676 to meet 4.5:1 ratio against #FFFFFF background") | blocker |
+| QB-03 | Findings | Severity ratings are consistent — a missing form label (blocks screen reader users entirely) must be rated higher than a low-contrast decorative element | blocker |
+| QB-04 | Compliance Summary | Pass/fail counts match the sum of individual findings | blocker |
+| QB-05 | Assistive Technology Notes | Every audit addresses screen reader, keyboard, and at least one additional AT (voice control, magnification, or switch access) | blocker |
+| QB-06 | Audit Scope | Conformance level target (A, AA, or AAA) is stated | blocker |
+| QB-07 | Remediation Priority List | Every must-fix finding includes an effort estimate (small / medium / large) | warning |
+| QB-08 | Findings | Common fixes cite `references/remediation-patterns.md` for consistency | warning |
 
 ## Reference Navigation
 
@@ -71,17 +129,19 @@ Read only what is needed:
 
 ## Trigger Examples
 
-Positive:
+### Positive
+Intents: [audit_accessibility, check_wcag, review_a11y, evaluate_assistive_technology, assess_compliance]
+
 - "Audit this design for WCAG AA compliance."
 - "Check these components for accessibility issues."
 - "What accessibility problems does this flow have?"
 
-Negative:
-- "Evaluate this dashboard against Nielsen's heuristics." (use `$heuristic-evaluator` — usability heuristics, not WCAG compliance)
-- "Give me feedback on this design." (use `$design-critique` — open-ended critique, not accessibility audit)
-- "Write a design spec for the settings page." (use `$design-spec-writer`)
-- "Do a competitive analysis of checkout flows." (use `$competitive-analyzer`)
+### Negative
+- "Evaluate this dashboard against Nielsen's heuristics." -> `$heuristic-evaluator`
+- "Give me feedback on this design." -> `$design-critique`
+- "Write a design spec for the settings page." -> `$design-spec-writer`
+- "Do a competitive analysis of checkout flows." -> `$competitive-analyzer`
 
-Ambiguous:
+### Ambiguous
 - "Is this design accessible?" (clarify conformance level target and which screens/components to audit)
 - "Review this design for usability." (clarify: do you want an accessibility audit, heuristic evaluation, or broad design critique?)
