@@ -1,5 +1,34 @@
 # Usability Test Plan Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Study title | yes | text | concise descriptive title |
+> | Feature/area being tested | yes | text | specific scope |
+> | Test type | yes | enum | moderated / unmoderated |
+> | Format | yes | enum | remote / in-person |
+> | Prototype fidelity | yes | enum | low / medium / high / production |
+> | Estimated session duration | yes | text | time value |
+> | Test owner | yes | text | named person or role |
+> | Status | yes | enum | draft / recruiting / in-progress / complete |
+> | Research Questions | yes | list | min 3, max 5 |
+> | Target segments | yes | list | min 1 segment |
+> | Participant count | yes | number | must include justification |
+> | Screening Questionnaire | yes | table | columns: #, Question, Qualifying Answer, Disqualifying Answer; min 3 rows |
+> | Recruitment source | yes | text | channel name |
+> | Incentive | yes | text | amount and type |
+> | Task Scenarios | yes | list | min 3 tasks; each needs Scenario, User goal, Success criteria, Measures |
+> | Success criteria | yes | list | observable and unambiguous per task |
+> | Measures | yes | list | from: completion / time / errors / path / satisfaction |
+> | Maps to | yes | text | must reference an RQ# per task |
+> | Introduction script | yes | text | includes consent, think-aloud protocol |
+> | Pre-Task Questions | yes | list | min 2 questions |
+> | Post-Session Questions | yes | list | min 3 questions; must include SUS or similar |
+> | Analysis Method | yes | key-value | approach + severity scale (critical/high/medium/low) |
+> | Success Thresholds | yes | table | columns: Task, Completion Target, Time Target, Error Threshold |
+> | Findings-to-Questions Map | yes | table | columns: Research Question, Tasks, Key Findings, Severity |
+
 Use this as the default response structure for `usability-test-planner`.
 
 ## Test Overview

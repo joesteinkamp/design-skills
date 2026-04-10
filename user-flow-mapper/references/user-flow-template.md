@@ -1,5 +1,32 @@
 # User Flow Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Flow name | yes | text | concise descriptive name |
+> | User goal | yes | text | what the user is trying to accomplish |
+> | Flow type | yes | enum | task flow / user flow / wire flow |
+> | Persona/user type | yes | text | must reference a named persona or segment |
+> | Entry point | yes | text | where the user starts |
+> | Success state | yes | text | clear completion criteria |
+> | Prerequisite conditions | no | list | conditions that must be true before flow starts |
+> | Happy Path steps | yes | list | min 3 steps; each needs Screen/state, User action, System response, Transition, Next step |
+> | Transition | yes | enum | navigate / modal / inline / redirect (per step) |
+> | Success confirmation | yes | text | final step must confirm completion |
+> | Decision Points | no | list | each needs Location, Condition, min 2 branches |
+> | Conditional Logic | no | table | columns: Condition, Source, Result, Destination |
+> | Error States | yes | list | min 1; each needs Trigger, Error display, Error message, Recovery path |
+> | Error display | yes | enum | inline / toast / modal / page (per error) |
+> | Empty State | yes | key-value | Condition, Display, Action available |
+> | First-Time User | no | key-value | Condition, Differences, Onboarding elements |
+> | Permission/Role Variations | no | key-value | Role, Differences per role |
+> | Boundary Conditions | no | list | e.g., max items, character limits, timeout |
+> | Loading & Transitions | no | table | columns: Step, Loading behavior, Duration, Fallback |
+> | Technical Dependencies | no | table | columns: Step, API/Service, Failure impact |
+> | Path Count | yes | key-value | Happy path, Alternate paths, Error recovery paths, Total |
+> | Coverage Checklist | yes | list | all 7 checklist items must be addressed |
+
 Use this as the default response structure for `user-flow-mapper`.
 
 ## Flow Overview

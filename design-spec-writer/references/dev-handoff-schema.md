@@ -1,5 +1,22 @@
 # Dev Handoff Schema
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Feature name | yes | text | concise feature identifier |
+> | Problem statement | yes | text | clear problem being solved |
+> | Target personas | yes | list | min 1 named persona |
+> | Decision stage | yes | text | current stage in decision process |
+> | User Stories | yes | list | min 2 stories; each needs Description, Acceptance criteria, Priority |
+> | Acceptance criteria | yes | list | must be testable per story |
+> | Priority (story) | yes | text | relative priority per story |
+> | Interaction Summary | yes | list | min 1 screen/component; each needs States, Key interactions, Edge cases |
+> | States | yes | list | from: default, empty, loading, error, disabled (per component) |
+> | Accessibility Requirements | yes | list | min 2 requirements |
+> | Content Requirements | no | list | each needs Variants and Character limits |
+> | Open Questions | no | list | each needs Owner and Impact on implementation |
+
 Use this schema when passing design spec output to `$dev-handoff-writer`.
 
 ## Required Handoff Block

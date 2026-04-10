@@ -1,5 +1,50 @@
 # A/B Test Plan Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Test name | yes | text | concise descriptive name |
+> | Feature/area | yes | text | must identify product area |
+> | Business context | yes | text | min 1 sentence explaining business motivation |
+> | Design decision being tested | yes | text | must state the specific design choice |
+> | Test owner | yes | text | named individual or team |
+> | Status | yes | enum | draft / approved / running / complete |
+> | Hypothesis Statement | yes | text | must follow If/then/by/because format |
+> | Null hypothesis | yes | text | must state no-difference assumption |
+> | Falsifiable | yes | enum | yes / no — must be yes |
+> | Control (A) Description | yes | text | describe baseline experience |
+> | Control Screenshot/spec reference | no | text | link or reference |
+> | Control Key characteristics | yes | list | min 1 item |
+> | Treatment (B) Description | yes | text | describe treatment experience |
+> | Treatment Screenshot/spec reference | no | text | link or reference |
+> | Treatment Key characteristics | yes | list | min 1 item |
+> | Treatment Exact differences from control | yes | list | min 1 item, must contrast with control |
+> | Treatment (C) | no | key-value | optional additional variant |
+> | Confounding Variables | yes | list | min 1 variable with risk and mitigation |
+> | Primary Metric | yes | text | exactly one metric |
+> | Primary Measurement method | yes | text | describe instrumentation |
+> | Current baseline | yes | number | numeric with unit |
+> | Minimum detectable effect (MDE) | yes | number | percentage or absolute value |
+> | Direction | yes | enum | increase / decrease |
+> | Secondary Metrics | yes | list | 2-3 metrics with measurement method and direction |
+> | Guardrail Metrics | yes | list | min 1 must-not-degrade metric with threshold |
+> | Sample size per variant | yes | number | calculated from MDE and power |
+> | Estimated duration | yes | text | time period |
+> | Traffic allocation | yes | text | percentage per variant, must sum to 100% |
+> | Audience | yes | enum | all users / segment |
+> | Targeting criteria | no | text | required if audience is segment |
+> | Rollout plan | yes | enum | immediate / gradual |
+> | Kill criteria | yes | text | conditions to stop test early |
+> | Technical dependencies | no | list | systems or teams needed |
+> | QA requirements | no | list | testing requirements |
+> | Statistical method | yes | enum | frequentist / Bayesian |
+> | Significance level | yes | number | typically 0.05 |
+> | Power | yes | number | typically 0.80 |
+> | Analysis timing | yes | text | when to read results |
+> | Segmentation plan | no | list | subgroups to analyze |
+> | Decision framework | yes | key-value | must cover all four outcome scenarios |
+
 Use this as the default response structure for `ab-test-planner`.
 
 ## Test Overview

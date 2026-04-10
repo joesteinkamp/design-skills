@@ -1,5 +1,34 @@
 # Research Synthesis Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Study title | yes | text | concise descriptive title |
+> | Research type | yes | enum | generative / evaluative / survey / diary / mixed |
+> | Research questions | yes | list | min 1 question |
+> | Participant count | yes | number | positive integer |
+> | Participant segments | yes | list | min 1 segment |
+> | Date range | yes | text | start and end dates |
+> | Methods used | yes | list | min 1 method |
+> | Key limitations | yes | list | min 1 limitation |
+> | Theme name | yes | text | one per theme; min 3 themes |
+> | Description (theme) | yes | text | per theme |
+> | Frequency | yes | text | how many participants/sources per theme |
+> | Severity (theme) | yes | enum | critical / high / moderate / low |
+> | Segments affected | yes | list | min 1 per theme |
+> | Supporting evidence | yes | list | min 3 quotes/observations per theme |
+> | Insight name | yes | text | min 2 insights |
+> | Summary (insight) | yes | text | per insight |
+> | Impact | yes | enum | high / medium / low |
+> | Confidence | yes | enum | high / medium / low |
+> | Supporting themes | yes | list | min 1 theme reference per insight |
+> | Recommendation | yes | text | min 1 recommendation |
+> | Priority (recommendation) | yes | enum | must-do / should-do / could-do |
+> | Design action | yes | text | specific next step per recommendation |
+> | Downstream skill target | no | text | reference a valid skill name |
+> | Research Gaps & Next Steps | no | list | each gap needs: what we don't know, suggested method, priority |
+
 Use this as the default response structure for `research-synthesizer`.
 
 ## Research Overview

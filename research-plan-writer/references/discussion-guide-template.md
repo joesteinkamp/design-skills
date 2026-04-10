@@ -1,5 +1,21 @@
 # Discussion Guide Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Introduction | yes | text | must cover purpose, session length, format, recording, consent, ground rules |
+> | Warm-Up | yes | list | min 2 open-ended rapport-building questions |
+> | Core Questions | yes | list | 3-4 themes; 2-3 primary questions per theme; each with 2-3 probes |
+> | Cool-Down | yes | list | must include open-ended catch-all and meta question |
+> | Probe Types | no | table | columns: Type, Purpose, Example |
+> | Opening Script | yes | text | verbatim-ready introduction script |
+> | Warm-Up Questions | yes | list | min 2 copy-ready questions |
+> | Core Question Starters | yes | list | min 3 copy-ready question stems |
+> | Probing Techniques | yes | list | min 3 named techniques with examples |
+> | Screener Question Examples | no | list | include qualifying/disqualifying criteria |
+> | Discussion Guide Quality Checklist | yes | list | all checklist items must be addressed |
+
 Reference for writing effective semi-structured interview and discussion guides.
 
 ## Guide Structure

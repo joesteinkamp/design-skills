@@ -1,5 +1,34 @@
 # Journey Map Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Persona | yes | text | must reference a named persona or segment |
+> | Scenario | yes | text | one sentence describing the end-to-end situation |
+> | Journey type | yes | enum | current-state / future-state / service-blueprint |
+> | Start point | yes | text | specific triggering event or entry condition |
+> | End point | yes | text | specific outcome or exit condition |
+> | Total duration | yes | text | time range or estimate |
+> | Channels/touchpoints covered | yes | list | min 1 item |
+> | Phase Name | yes | text | 4-7 phases required |
+> | Goal (per phase) | yes | text | one sentence per phase |
+> | Duration (per phase) | yes | text | time range or estimate |
+> | Touchpoints (per phase) | yes | list | min 1 item per phase |
+> | Channels (per phase) | yes | list | min 1 item per phase |
+> | Actions | yes | list | min 2 items per phase |
+> | Thoughts | yes | list | min 2 items per phase; first-person voice |
+> | Emotion | yes | enum | positive / neutral / negative |
+> | Intensity | yes | enum | high / medium / low |
+> | Pain Points | no | list | each must include Severity (critical/high/moderate/low) and Description |
+> | Moments of Delight | no | list | brief description per item |
+> | Emotional Arc | yes | text | must cover all phases; note highs, lows, and transitions |
+> | Opportunity | no | list | each must include Related pain point, Phase, Type, Impact, and Effort |
+> | Type (opportunity) | yes | enum | quick-win / strategic / systemic |
+> | Impact | yes | enum | high / medium / low |
+> | Effort | yes | enum | high / medium / low |
+> | Key Insights | yes | list | min 3 items |
+
 Use this as the default response structure for `journey-mapper`.
 
 ## Journey Overview

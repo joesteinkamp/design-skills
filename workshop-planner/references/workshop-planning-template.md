@@ -1,5 +1,30 @@
 # Workshop Planning Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Topic | yes | text | clear workshop subject |
+> | Workshop objective | yes | text | specific, measurable outcome |
+> | Decision scope | yes | text | what decisions the workshop will address |
+> | Audience | yes | text | who will participate |
+> | Team size | yes | number | positive integer |
+> | Duration | yes | text | time value |
+> | Constraints | no | list | known blockers or limitations |
+> | Success criteria | yes | list | min 1 observable success signal |
+> | Total duration | yes | text | must match sum of segments |
+> | Segments | yes | list | min 3 segments; each needs Name, Time box, Goal, Facilitator moves |
+> | Time box | yes | text | duration per segment |
+> | Exercise name | yes | text | one per exercise |
+> | Objective (exercise) | yes | text | per exercise |
+> | Duration (exercise) | yes | text | per exercise |
+> | Participant prompt | yes | text | copy-ready prompt per exercise |
+> | Activity instructions | yes | list | step-by-step per exercise |
+> | Expected output (exercise) | yes | text | what the exercise produces |
+> | Board capture area | yes | text | label for FigJam zone per exercise |
+> | Facilitation Risks | yes | list | min 1; each needs Risk, Why it matters, Intervention |
+> | Expected Artifacts | yes | list | min 2 named artifacts |
+
 Use this as the default response structure for `workshop-planner`.
 
 ## Workshop Brief

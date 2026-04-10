@@ -1,5 +1,38 @@
 # Stakeholder Presentation Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Title | yes | text | concise presentation title |
+> | Presenter | yes | text | named person or role |
+> | Date | yes | text | valid date |
+> | Audience | yes | text | named stakeholder group |
+> | Audience priorities | yes | list | what they care about: revenue, timeline, risk, user satisfaction, etc. |
+> | Goal | yes | enum | inform / align / get approval / request resources |
+> | Key decision(s) needed | yes | text | specific decisions to be made |
+> | Time allocated | yes | text | duration value |
+> | Format | yes | enum | live / async / recorded |
+> | Prior context | yes | text | what the audience already knows |
+> | Opening hook | yes | text | Act 1 opener |
+> | Problem statement | yes | text | clear problem framing |
+> | User impact | yes | text | must include evidence |
+> | Business impact | yes | text | must include metrics or risk |
+> | Why now | yes | text | urgency rationale |
+> | Research summary | yes | list | 2-3 bullet points of key findings |
+> | User evidence | yes | text | quote or data point |
+> | Design direction | yes | text | recommended approach |
+> | Key design decisions | yes | list | 3-5 decisions with rationale |
+> | Alternatives considered | yes | list | min 2 alternatives with reason for deprioritizing |
+> | Decision requested | yes | text | specific ask |
+> | Slide-by-Slide Outline | yes | table | columns: Slide #, Title, Content, Speaker Notes, Duration; min 5 slides |
+> | Evidence & Supporting Data | yes | key-value | per decision: data point, user quote, research finding, source |
+> | Objection Handling | yes | table | columns: Likely Objection, Audience Concern, Response, Supporting Evidence; min 2 rows |
+> | Acknowledged Trade-Offs | yes | list | each with: what we gain, what we give up, why it's worth it |
+> | Decision Points | yes | table | columns: #, Decision, Options, Recommendation, Deadline |
+> | If Approved | yes | key-value | immediate next step, owner, timeline, dependencies |
+> | If Deferred | yes | key-value | impact of delay, what we need to unblock, revised timeline |
+
 Use this as the default response structure for `stakeholder-presentation-writer`.
 
 ## Presentation Brief

@@ -1,5 +1,25 @@
 # Persona Card Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Persona Summary Table | yes | table | one row per persona; columns: Name, Role, Primary Goal, Key Frustration, Evidence Quality |
+> | Persona Name | yes | text | memorable, descriptive name |
+> | Role | yes | text | job title or situational role |
+> | Age range | no | text | range, not exact age |
+> | Context | yes | text | work environment, tools, team structure |
+> | Evidence quality | yes | enum | research-backed / partially-evidenced / assumed |
+> | Primary goal | yes | text | one clear goal statement |
+> | Secondary goals | no | list | min 1 item if provided |
+> | Frustrations | yes | list | min 3 items |
+> | Behaviors | yes | list | min 3 items; observable, not demographic |
+> | Mental Models | yes | key-value | must include: how they think about the problem, assumptions, decision triggers |
+> | Day-in-the-Life Scenario | yes | text | 3-5 sentences; narrative form |
+> | Tools & Touchpoints | yes | list | min 2 items |
+> | Anti-Personas | no | list | each must include Name, Why out of scope, Risk if designed for them |
+> | Assumptions Log | no | list | each must include Source (research/stakeholder input/inferred), Confidence, Validation needed |
+
 Use this as the default response structure for `persona-creator`.
 
 ## Persona Summary Table

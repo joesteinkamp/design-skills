@@ -1,5 +1,16 @@
 # Task Scenario Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Context Setting | yes | text | realistic situation; no internal jargon; not step-by-step instructions |
+> | User Goal | yes | text | states what to achieve, not how; no solution path revealed |
+> | Success Criteria | yes | list | must include: Completion, Correctness, Confidence; all observable |
+> | Measurables | yes | key-value | Completion rate, Time on task, Error count, Path efficiency, Satisfaction (1-7 scale) |
+> | Writing Checklist | yes | list | all 7 checklist items must be addressed |
+> | Task Order | yes | number | follows ordering principles: simple first, hardest in middle, exploratory last |
+
 Reference guide for writing effective usability test task scenarios.
 
 ## Task Scenario Structure

@@ -1,5 +1,39 @@
 # Accessibility Audit Template
 
+> **Field Definitions** — use for output validation.
+>
+> | Field | Required | Type | Validation |
+> |-------|----------|------|------------|
+> | Target | yes | text | screens, components, or flows audited |
+> | Conformance level | yes | enum | A / AA / AAA |
+> | Assistive technology considerations | yes | text | list relevant AT |
+> | Audit method | yes | enum | design review / code review / manual testing / automated |
+> | Date | yes | text | valid date |
+> | Total criteria evaluated | yes | number | positive integer |
+> | Pass | yes | number | positive integer |
+> | Fail | yes | number | positive integer |
+> | Not applicable | yes | number | non-negative integer |
+> | Conformance level achieved | yes | enum | A / AA / AAA / none |
+> | By Principle | yes | table | rows for Perceivable, Operable, Understandable, Robust with Pass/Fail/N/A counts |
+> | Finding | yes | list | min 1 finding |
+> | Finding > WCAG Criterion | yes | text | must reference specific WCAG criterion number |
+> | Finding > Level | yes | enum | A / AA / AAA |
+> | Finding > Status | yes | enum | fail / pass / partial |
+> | Finding > Severity | yes | enum | critical / major / minor |
+> | Finding > Affected element | yes | text | specific UI element or component |
+> | Finding > Current behavior | yes | text | describe what happens now |
+> | Finding > Expected behavior | yes | text | describe correct behavior |
+> | Finding > Remediation | yes | text | actionable fix steps |
+> | Finding > Effort | yes | enum | small / medium / large |
+> | Must-Fix | yes | list | all conformance failures, min 0 items |
+> | Should-Fix | no | list | best practice improvements |
+> | Nice-to-Fix | no | list | enhancements |
+> | Screen reader considerations | yes | text | min 1 sentence |
+> | Keyboard navigation notes | yes | text | min 1 sentence |
+> | Voice control considerations | no | text | if applicable |
+> | Magnification considerations | no | text | if applicable |
+> | Dev Remediation Handoff | yes | text | grouped by component or screen |
+
 Use this as the default response structure for `accessibility-auditor`.
 
 ## Audit Scope
