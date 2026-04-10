@@ -98,13 +98,13 @@ Return sections in this order. Sections marked required must always appear.
 
 | Section | Required | Min Items | Format |
 |---------|----------|-----------|--------|
-| Handoff Overview | yes | - | key-value fields: feature name, engineering audience, design system, dependencies |
+| Handoff Overview | yes | - | key-value fields: feature name, engineering audience, design system references, dependencies |
 | Component Inventory | yes | 1 component | component cards with name, design system token, variants, properties |
 | Interaction Specs | yes | 1 component | state table per component (default, hover, focus, active, disabled, error, loading, empty) with transitions |
-| Responsive Behavior | yes | 3 breakpoints | layout spec per breakpoint (desktop >= 1024px, tablet 768-1023px, mobile < 768px) |
-| Content & Edge Cases | yes | 3 entries | edge case entries for data-driven components (zero, one, max, long text, missing, offline) |
+| Responsive Behavior | yes | 3 breakpoints | layout spec per breakpoint (desktop >=1024px, tablet 768-1023px, mobile <768px) |
+| Content & Edge Cases | yes | 3 entries | edge case entries: zero items, one item, max items, long text, missing data, offline |
 | Accessibility Requirements | yes | 1 component | keyboard interaction pattern and ARIA roles per interactive component |
-| Implementation Checklist | yes | 1 item | specific checklist items referencing components or interactions from this handoff |
+| Implementation Checklist | yes | 1 item | checklist items referencing specific components or interactions from this handoff |
 
 ## Quality Bar
 
@@ -113,7 +113,7 @@ Revise before finalizing if any rule fails.
 | ID | Section | Rule | Severity |
 |----|---------|------|----------|
 | QB-01 | Component Inventory | Any component is missing at least 5 of these states: default, hover, focus, active, disabled, error, loading, empty | blocker |
-| QB-02 | Responsive Behavior | Responsive behavior does not specify layout at all 3 breakpoints (desktop >= 1024px, tablet 768-1023px, mobile < 768px) | blocker |
+| QB-02 | Responsive Behavior | Responsive behavior does not specify layout at all 3 breakpoints (desktop >=1024px, tablet 768-1023px, mobile <768px) | blocker |
 | QB-03 | Interaction Specs | Any transition is missing from-state, to-state, duration, and easing values | blocker |
 | QB-04 | Content & Edge Cases | Edge cases section has fewer than 3 entries for a data-driven component (zero items, one item, max items, long text, missing data) | warning |
 | QB-05 | Accessibility Requirements | Accessibility requirements do not include keyboard interaction pattern and ARIA roles for interactive components | blocker |

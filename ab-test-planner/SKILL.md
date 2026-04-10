@@ -106,10 +106,10 @@ Return sections in this order. Sections marked required must always appear.
 
 | Section | Required | Min Items | Format |
 |---------|----------|-----------|--------|
-| Test Overview | yes | - | key-value fields: design decision, user problem, business context, test approach |
+| Test Overview | yes | - | key-value fields: design decision, user problem, business context, test type |
 | Hypothesis | yes | 1 | "If [change], then [metric] will [direction] because [rationale]" format |
 | Variants | yes | 2 | control + treatment(s) with exact differences documented |
-| Metrics | yes | 1 primary | primary metric + 2-3 secondary + guardrail metrics with baselines |
+| Metrics | yes | 1 primary | primary metric, 2-3 secondary metrics, guardrail metrics with baselines |
 | Execution Plan | yes | - | sample size, duration, audience, traffic allocation, kill criteria |
 | Analysis Framework | yes | - | decision framework covering all 4 outcomes: significant positive, significant negative, neutral, inconclusive |
 
@@ -119,11 +119,11 @@ Revise before finalizing if any rule fails.
 
 | ID | Section | Rule | Severity |
 |----|---------|------|----------|
-| QB-01 | Hypothesis | Follows the "If [change], then [metric] will [direction] by [magnitude] because [rationale]" format | blocker |
+| QB-01 | Hypothesis | Follows "If [change], then [metric] will [direction] by [magnitude] because [rationale]" format | blocker |
 | QB-02 | Hypothesis | Includes a behavioral rationale — "because users will [behavior]" not "because it's better" | blocker |
 | QB-03 | Metrics | No more than one primary metric is defined — pick one; others are secondary | blocker |
 | QB-04 | Metrics | Guardrail metrics are present — every test must define at least one metric that must not degrade | blocker |
-| QB-05 | Variants | Variants differ by only one variable, making attribution possible (not changing both layout AND copy simultaneously) | blocker |
+| QB-05 | Variants | Variants differ by only one variable, making attribution possible | blocker |
 | QB-06 | Metrics | Minimum detectable effect (MDE) is specified for the primary metric | blocker |
 | QB-07 | Execution Plan | Sample size or test duration is addressed, even as an estimate | blocker |
 | QB-08 | Analysis Framework | Decision framework covers all 4 outcomes: significant positive, significant negative, neutral, and inconclusive | blocker |
