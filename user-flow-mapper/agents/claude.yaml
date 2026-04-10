@@ -1,0 +1,6 @@
+interface:
+  display_name: "User Flow Mapper"
+  short_description: "Map screen-level user flows with decision points and error paths"
+  default_prompt: "Use $user-flow-mapper to document user flows with happy paths, decision points, error states, and edge cases."
+  model: sonnet
+  context_strategy: skill_and_templates

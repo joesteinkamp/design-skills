@@ -1,0 +1,8 @@
+interface:
+  display_name: "FigJam Workshop Prompt Creator"
+  short_description: "Generate structured FigJam workshop prompts"
+  invocation: "${figjam-workshop-prompt-creator}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/ai-native-workshop-instructions.md"
+    - "../references/prompt-pack-template.md"

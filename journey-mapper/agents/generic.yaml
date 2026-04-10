@@ -1,0 +1,8 @@
+interface:
+  display_name: "Journey Mapper"
+  short_description: "Map user journeys with pain points, emotions, and opportunities"
+  invocation: "${journey-mapper}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/journey-handoff-schema.md"
+    - "../references/journey-map-template.md"

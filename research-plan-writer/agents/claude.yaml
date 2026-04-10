@@ -1,0 +1,6 @@
+interface:
+  display_name: "Research Plan Writer"
+  short_description: "Write research plans with methodology, discussion guides, and recruitment criteria"
+  default_prompt: "Use $research-plan-writer to create a research plan with objectives, methodology, discussion guide, and recruitment criteria."
+  model: sonnet
+  context_strategy: skill_and_templates

@@ -1,0 +1,8 @@
+interface:
+  display_name: "Workshop Planner"
+  short_description: "Plan workshops and produce FigJam handoff briefs"
+  invocation: "${workshop-planner}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/figjam-handoff-schema.md"
+    - "../references/workshop-planning-template.md"

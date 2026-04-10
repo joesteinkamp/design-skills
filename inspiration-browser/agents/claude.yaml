@@ -1,0 +1,6 @@
+interface:
+  display_name: "Inspiration Browser"
+  short_description: "Find and curate design inspiration from across the web"
+  default_prompt: "Use $inspiration-browser to research and curate design inspiration for a specific design challenge."
+  model: sonnet
+  context_strategy: skill_and_templates

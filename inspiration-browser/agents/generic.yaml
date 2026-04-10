@@ -1,0 +1,7 @@
+interface:
+  display_name: "Inspiration Browser"
+  short_description: "Find and curate design inspiration from across the web"
+  invocation: "${inspiration-browser}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/inspiration-board-template.md"

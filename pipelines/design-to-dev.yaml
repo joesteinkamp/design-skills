@@ -1,0 +1,42 @@
+name: design-to-dev
+description: "Pipeline from design specification through accessibility audit and developer handoff. Use when a design spec is ready and needs to be prepared for engineering."
+
+steps:
+  - skill: design-spec-writer
+    input_key: feature_description
+    output_key: design_spec
+    notes: "Skip if design spec already exists."
+
+  - skill: accessibility-auditor
+    input_from: design-spec-writer.design_spec
+    output_key: accessibility_findings
+    depends_on: [design-spec-writer]
+
+  - skill: design-success-metrics-writer
+    input_from: design-spec-writer.design_spec
+    output_key: metrics_framework
+    depends_on: [design-spec-writer]
+
+  - skill: dev-handoff-writer
+    input_from:
+      - design-spec-writer.design_spec
+      - accessibility-auditor.accessibility_findings
+    output_key: dev_handoff
+    depends_on: [accessibility-auditor]
+
+parallel_groups:
+  - name: post-spec-evaluation
+    steps: [accessibility-auditor, design-success-metrics-writer]
+    notes: "These two can run simultaneously after design-spec-writer completes."
+
+entry_points:
+  - step: design-spec-writer
+    when: "Starting from a feature description that needs a full spec"
+  - step: accessibility-auditor
+    when: "Design spec already exists, needs a11y audit before handoff"
+  - step: dev-handoff-writer
+    when: "Spec and a11y findings already exist, just need handoff docs"
+
+batch:
+  input_key: feature_description
+  parallelizable_steps: [accessibility-auditor, design-success-metrics-writer]

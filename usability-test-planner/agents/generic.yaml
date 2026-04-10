@@ -1,0 +1,8 @@
+interface:
+  display_name: "Usability Test Planner"
+  short_description: "Plan usability tests with task scenarios, screeners, and discussion guides"
+  invocation: "${usability-test-planner}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/task-scenario-template.md"
+    - "../references/usability-test-plan-template.md"

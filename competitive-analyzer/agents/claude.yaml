@@ -1,0 +1,6 @@
+interface:
+  display_name: "Competitive Analyzer"
+  short_description: "Analyze competitors and identify design opportunities"
+  default_prompt: "Use $competitive-analyzer to produce a competitive analysis with comparison matrix, competitor profiles, and design recommendations."
+  model: sonnet
+  context_strategy: skill_and_templates

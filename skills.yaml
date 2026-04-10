@@ -1,0 +1,156 @@
+# skills.yaml - Skill registry for automation orchestration
+# Use this file for skill discovery, auto-selection, graph traversal, and pipeline validation.
+version: "1.0"
+
+skills:
+  - name: ab-test-planner
+    category: evaluation
+    tags: [experimentation, hypothesis, a-b-testing, metrics, statistical-testing]
+    complexity: moderate
+    output_length: medium
+    upstream_skills: [design-spec-writer, journey-mapper]
+    downstream_skills: []
+
+  - name: accessibility-auditor
+    category: evaluation
+    tags: [accessibility, wcag, a11y, compliance, assistive-technology, remediation]
+    complexity: moderate
+    output_length: long
+    upstream_skills: [design-spec-writer]
+    downstream_skills: [dev-handoff-writer]
+
+  - name: competitive-analyzer
+    category: evaluation
+    tags: [competitive-analysis, benchmarking, market-comparison, differentiation]
+    complexity: moderate
+    output_length: medium
+    upstream_skills: []
+    downstream_skills: []
+
+  - name: design-critique
+    category: evaluation
+    tags: [critique, feedback, design-review, severity-ranking]
+    complexity: moderate
+    output_length: medium
+    upstream_skills: [design-spec-writer]
+    downstream_skills: [stakeholder-presentation-writer]
+
+  - name: design-spec-writer
+    category: documentation
+    tags: [specs, user-stories, acceptance-criteria, PRD, feature-spec, interaction-design]
+    complexity: heavy
+    output_length: long
+    upstream_skills: [persona-creator, journey-mapper, research-synthesizer]
+    downstream_skills: [dev-handoff-writer, ab-test-planner, accessibility-auditor, design-critique, heuristic-evaluator, usability-test-planner, user-flow-mapper, design-spectrums-creator, design-success-metrics-writer, inspiration-browser, research-plan-writer]
+
+  - name: design-spectrums-creator
+    category: planning
+    tags: [trade-offs, design-tensions, principles, spectrums, decision-framework]
+    complexity: light
+    output_length: medium
+    upstream_skills: [persona-creator, journey-mapper, inspiration-browser, design-spec-writer]
+    downstream_skills: []
+
+  - name: design-success-metrics-writer
+    category: documentation
+    tags: [metrics, KPIs, success-criteria, measurement, outcomes, instrumentation]
+    complexity: moderate
+    output_length: medium
+    upstream_skills: [design-spec-writer, persona-creator, journey-mapper]
+    downstream_skills: [ab-test-planner, stakeholder-presentation-writer]
+
+  - name: dev-handoff-writer
+    category: documentation
+    tags: [handoff, implementation, components, responsive, developer-docs]
+    complexity: heavy
+    output_length: long
+    upstream_skills: [design-spec-writer, accessibility-auditor]
+    downstream_skills: []
+
+  - name: figjam-workshop-prompt-creator
+    category: facilitation
+    tags: [figjam, workshop-prompts, facilitation, board-design, synthesis]
+    complexity: moderate
+    output_length: long
+    upstream_skills: [workshop-planner]
+    downstream_skills: []
+
+  - name: heuristic-evaluator
+    category: evaluation
+    tags: [heuristics, nielsen, usability, scoring, severity-matrix]
+    complexity: moderate
+    output_length: medium
+    upstream_skills: [design-spec-writer]
+    downstream_skills: []
+
+  - name: inspiration-browser
+    category: research
+    tags: [inspiration, patterns, references, examples, cross-industry, benchmarking]
+    complexity: light
+    output_length: medium
+    upstream_skills: [persona-creator, journey-mapper, design-spec-writer]
+    downstream_skills: [design-spectrums-creator]
+
+  - name: journey-mapper
+    category: documentation
+    tags: [journey-map, experience-map, pain-points, emotional-arc, touchpoints]
+    complexity: heavy
+    output_length: long
+    upstream_skills: [persona-creator, research-synthesizer]
+    downstream_skills: [design-spec-writer, design-spectrums-creator, design-success-metrics-writer, ab-test-planner, usability-test-planner, user-flow-mapper, inspiration-browser, research-plan-writer]
+
+  - name: persona-creator
+    category: planning
+    tags: [personas, archetypes, behavioral-segmentation, user-profiles, evidence-based]
+    complexity: moderate
+    output_length: medium
+    upstream_skills: [research-synthesizer]
+    downstream_skills: [journey-mapper, design-spec-writer, design-spectrums-creator, design-success-metrics-writer, usability-test-planner, inspiration-browser]
+
+  - name: research-plan-writer
+    category: research
+    tags: [research-planning, interviews, surveys, methodology, recruitment, discussion-guide]
+    complexity: moderate
+    output_length: long
+    upstream_skills: [design-spec-writer, journey-mapper]
+    downstream_skills: [research-synthesizer]
+
+  - name: research-synthesizer
+    category: research
+    tags: [synthesis, insights, themes, affinity-mapping, evidence, recommendations]
+    complexity: heavy
+    output_length: long
+    upstream_skills: []
+    downstream_skills: [persona-creator, journey-mapper, design-spec-writer, stakeholder-presentation-writer]
+
+  - name: stakeholder-presentation-writer
+    category: documentation
+    tags: [presentation, stakeholders, narrative, decision-ask, objection-handling]
+    complexity: moderate
+    output_length: long
+    upstream_skills: [design-spec-writer, research-synthesizer, design-critique, design-success-metrics-writer]
+    downstream_skills: []
+
+  - name: usability-test-planner
+    category: evaluation
+    tags: [usability-testing, task-scenarios, moderated-testing, think-aloud, recruitment]
+    complexity: moderate
+    output_length: long
+    upstream_skills: [design-spec-writer, user-flow-mapper, persona-creator]
+    downstream_skills: [research-synthesizer]
+
+  - name: user-flow-mapper
+    category: documentation
+    tags: [user-flows, task-flows, screen-flows, decision-trees, error-paths]
+    complexity: moderate
+    output_length: long
+    upstream_skills: [design-spec-writer, journey-mapper]
+    downstream_skills: [usability-test-planner]
+
+  - name: workshop-planner
+    category: planning
+    tags: [workshops, agenda, exercises, facilitation, time-boxing]
+    complexity: moderate
+    output_length: long
+    upstream_skills: []
+    downstream_skills: [figjam-workshop-prompt-creator]

@@ -1,0 +1,8 @@
+interface:
+  display_name: "Research Synthesizer"
+  short_description: "Synthesize research into structured insights and recommendations"
+  invocation: "${research-synthesizer}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/research-handoff-schema.md"
+    - "../references/research-synthesis-template.md"

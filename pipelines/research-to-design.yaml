@@ -1,0 +1,46 @@
+name: research-to-design
+description: "End-to-end pipeline from research planning through design specification. Use when starting a new feature from scratch with user research."
+
+steps:
+  - skill: research-plan-writer
+    input_key: research_questions
+    output_key: research_plan
+    notes: "Optional — skip if research is already planned or data already collected."
+
+  - skill: research-synthesizer
+    input_key: raw_research_data
+    output_key: research_synthesis
+    depends_on: [research-plan-writer]
+    notes: "Can run independently if raw data is already available."
+
+  - skill: persona-creator
+    input_from: research-synthesizer.research_synthesis
+    output_key: personas
+    depends_on: [research-synthesizer]
+
+  - skill: journey-mapper
+    input_from:
+      - persona-creator.personas
+      - research-synthesizer.research_synthesis
+    output_key: journey_map
+    depends_on: [persona-creator]
+
+  - skill: design-spec-writer
+    input_from:
+      - persona-creator.personas
+      - journey-mapper.journey_map
+      - research-synthesizer.research_synthesis
+    output_key: design_spec
+    depends_on: [journey-mapper]
+
+entry_points:
+  - step: research-plan-writer
+    when: "Starting from research questions with no data collected yet"
+  - step: research-synthesizer
+    when: "Raw research data (transcripts, surveys, notes) already exists"
+  - step: persona-creator
+    when: "Research synthesis already completed, need personas onward"
+
+batch:
+  input_key: research_questions
+  parallelizable_steps: []

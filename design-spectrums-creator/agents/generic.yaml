@@ -1,0 +1,8 @@
+interface:
+  display_name: "Design Spectrums Creator"
+  short_description: "Map opposing design principles and trade-offs as spectrums"
+  invocation: "${design-spectrums-creator}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/common-spectrums.md"
+    - "../references/spectrum-card-template.md"

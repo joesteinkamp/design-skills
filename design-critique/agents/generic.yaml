@@ -1,0 +1,8 @@
+interface:
+  display_name: "Design Critique"
+  short_description: "Produce structured design critiques with severity-ranked feedback"
+  invocation: "${design-critique}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/critique-output-template.md"
+    - "../references/critique-rubric.md"

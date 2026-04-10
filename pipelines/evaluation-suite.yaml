@@ -1,0 +1,36 @@
+name: evaluation-suite
+description: "Run multiple evaluation skills against a design in parallel. Use when a design needs comprehensive review across usability, accessibility, and design quality."
+
+steps:
+  - skill: heuristic-evaluator
+    input_key: design_screens
+    output_key: heuristic_findings
+
+  - skill: accessibility-auditor
+    input_key: design_screens
+    output_key: accessibility_findings
+
+  - skill: design-critique
+    input_key: design_screens
+    output_key: critique_findings
+
+parallel: true
+
+optional_additions:
+  - skill: competitive-analyzer
+    input_key: design_screens
+    output_key: competitive_findings
+    when: "Competitor set is known and benchmarking is desired"
+
+  - skill: usability-test-planner
+    input_from:
+      - heuristic-evaluator.heuristic_findings
+      - accessibility-auditor.accessibility_findings
+    output_key: test_plan
+    when: "Findings warrant live user testing"
+    depends_on: [heuristic-evaluator, accessibility-auditor]
+
+batch:
+  input_key: design_screens
+  parallelizable_steps: [heuristic-evaluator, accessibility-auditor, design-critique]
+  notes: "Each skill runs independently per screen. All 3 skills can run in parallel per screen, and multiple screens can batch in parallel."

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Journey Mapper"
+  short_description: "Map user journeys with pain points, emotions, and opportunities"
+  default_prompt: "Use $journey-mapper to map the end-to-end user experience and identify pain points and design opportunities."
+  model: sonnet
+  context_strategy: skill_and_templates

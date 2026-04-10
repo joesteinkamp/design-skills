@@ -1,0 +1,9 @@
+interface:
+  display_name: "Accessibility Auditor"
+  short_description: "Audit designs for WCAG compliance with remediation guidance"
+  invocation: "${accessibility-auditor}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/accessibility-audit-template.md"
+    - "../references/remediation-patterns.md"
+    - "../references/wcag-checklist.md"

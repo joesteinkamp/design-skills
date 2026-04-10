@@ -1,0 +1,6 @@
+interface:
+  display_name: "Research Synthesizer"
+  short_description: "Synthesize research into structured insights and recommendations"
+  default_prompt: "Use $research-synthesizer to analyze research inputs and produce themed insights with evidence and recommendations."
+  model: sonnet
+  context_strategy: skill_and_templates

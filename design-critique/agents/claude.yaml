@@ -1,0 +1,6 @@
+interface:
+  display_name: "Design Critique"
+  short_description: "Produce structured design critiques with severity-ranked feedback"
+  default_prompt: "Use $design-critique to review a design and produce structured, actionable feedback ranked by severity."
+  model: sonnet
+  context_strategy: skill_and_templates

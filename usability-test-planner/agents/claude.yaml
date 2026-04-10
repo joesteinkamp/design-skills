@@ -1,0 +1,6 @@
+interface:
+  display_name: "Usability Test Planner"
+  short_description: "Plan usability tests with task scenarios, screeners, and discussion guides"
+  default_prompt: "Use $usability-test-planner to create a usability test plan with research questions, recruitment screener, task scenarios, and analysis framework."
+  model: sonnet
+  context_strategy: skill_and_templates

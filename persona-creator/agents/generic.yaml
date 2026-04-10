@@ -1,0 +1,8 @@
+interface:
+  display_name: "Persona Creator"
+  short_description: "Build evidence-based personas from research and behavioral data"
+  invocation: "${persona-creator}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/persona-card-template.md"
+    - "../references/persona-handoff-schema.md"

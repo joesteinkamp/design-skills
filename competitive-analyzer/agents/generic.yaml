@@ -1,0 +1,8 @@
+interface:
+  display_name: "Competitive Analyzer"
+  short_description: "Analyze competitors and identify design opportunities"
+  invocation: "${competitive-analyzer}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/competitive-analysis-template.md"
+    - "../references/competitor-profile-template.md"

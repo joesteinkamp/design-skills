@@ -1,0 +1,8 @@
+interface:
+  display_name: "A/B Test Planner"
+  short_description: "Design rigorous A/B test plans with hypotheses and metrics"
+  invocation: "${ab-test-planner}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/ab-test-plan-template.md"
+    - "../references/hypothesis-framework.md"

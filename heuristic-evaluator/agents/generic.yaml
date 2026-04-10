@@ -1,0 +1,8 @@
+interface:
+  display_name: "Heuristic Evaluator"
+  short_description: "Evaluate interfaces against usability heuristics with scored assessments"
+  invocation: "${heuristic-evaluator}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/heuristic-definitions.md"
+    - "../references/heuristic-eval-template.md"

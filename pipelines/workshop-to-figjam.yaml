@@ -1,0 +1,25 @@
+name: workshop-to-figjam
+description: "Plan a workshop and generate FigJam prompt packs for board building, facilitation, and synthesis. Use when planning and executing a collaborative workshop."
+
+steps:
+  - skill: workshop-planner
+    input_key: workshop_brief
+    output_key: workshop_plan
+    notes: "Produces agenda, exercises, facilitation risks, and a FigJam Creator Handoff block."
+
+  - skill: figjam-workshop-prompt-creator
+    input_from: workshop-planner.workshop_plan
+    output_key: prompt_pack
+    depends_on: [workshop-planner]
+    notes: "Consumes the FigJam Creator Handoff block from workshop-planner output."
+
+entry_points:
+  - step: workshop-planner
+    when: "Starting from a vague workshop request that needs planning first"
+  - step: figjam-workshop-prompt-creator
+    when: "Workshop is already planned, just need FigJam prompts"
+
+batch:
+  input_key: workshop_brief
+  parallelizable_steps: []
+  notes: "Sequential pipeline — each workshop needs its own plan before prompts."

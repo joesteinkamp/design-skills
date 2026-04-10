@@ -1,0 +1,6 @@
+interface:
+  display_name: "Dev Handoff Writer"
+  short_description: "Generate developer-ready handoff documentation from design specs"
+  default_prompt: "Use $dev-handoff-writer to create developer handoff documentation with component specs, states, responsive behavior, and implementation checklist."
+  model: sonnet
+  context_strategy: skill_and_templates

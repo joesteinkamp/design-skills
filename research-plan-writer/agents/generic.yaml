@@ -1,0 +1,8 @@
+interface:
+  display_name: "Research Plan Writer"
+  short_description: "Write research plans with methodology, discussion guides, and recruitment criteria"
+  invocation: "${research-plan-writer}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/discussion-guide-template.md"
+    - "../references/research-plan-template.md"

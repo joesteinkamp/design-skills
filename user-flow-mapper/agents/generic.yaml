@@ -1,0 +1,8 @@
+interface:
+  display_name: "User Flow Mapper"
+  short_description: "Map screen-level user flows with decision points and error paths"
+  invocation: "${user-flow-mapper}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/flow-notation-guide.md"
+    - "../references/user-flow-template.md"
