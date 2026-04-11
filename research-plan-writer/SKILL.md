@@ -40,6 +40,51 @@ batch:
   enabled: true
   input_key: research_questions
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: google_calendar
+    actions: [find_availability, create_event]
+    when: "Scheduling research sessions"
+  - name: typeform
+    actions: [create_screener, create_questionnaire]
+    when: "Building recruitment screener or post-session survey"
+  - name: zoom
+    actions: [create_meeting]
+    when: "Setting up remote moderated sessions"
+  - name: gmail
+    actions: [send_recruitment, send_screener_link]
+    when: "Recruiting participants or sharing plan"
+  - name: gong
+    actions: [configure_recording]
+    when: "Recording sessions for transcription"
+  - name: notion
+    actions: [publish_plan, track_recruitment]
+    when: "Publishing research plan or tracking progress"
+  - name: github
+    actions: [create_issue]
+    when: "Creating research tracking issue"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "What business decision will this research inform?"
+    required: true
+  - step: 1
+    question: "What do you already know vs. need to learn?"
+    required: false
+  - step: 2
+    question: "Constraints?"
+    options: [tight_timeline, limited_budget, no_user_access, no_constraints]
+    default: no_constraints
+  - step: 2
+    question: "Preferred method?"
+    options: [interviews, survey, diary_study, concept_test, let_me_recommend]
+    default: let_me_recommend
+  - step: 4
+    question: "Want me to create the Typeform screener and schedule sessions?"
+    required: false
+    default: false
 ---
 
 # Research Plan Writer
@@ -52,25 +97,48 @@ This is the upstream counterpart to `$research-synthesizer`—it plans the study
 
 The output should be execution-ready: a clear methodology, a complete discussion guide or survey instrument, recruitment criteria, and a timeline a researcher can follow. Output is formatted for use in Dovetail, Google Docs, Notion, or Confluence. When the target tool is specified, adapt the plan structure and linking conventions accordingly.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Google Calendar** | Find researcher + participant availability; create session calendar events with Zoom links | Output a proposed schedule as a table; user books manually |
+| **Typeform** | Build recruitment screener survey; create post-session questionnaire (SUS, CSAT) | Output screener as markdown checklist; user creates form manually |
+| **Zoom** | Create meeting links for remote moderated sessions with recording enabled | Include "set up Zoom meeting" in logistics checklist |
+| **Gmail** | Send recruitment emails with screener link; send calendar invites | Output email draft as text; user sends manually |
+| **Gong** | Configure session recording for automated transcription → feeds `$research-synthesizer` | Include "record session" in logistics checklist; user sets up manually |
+| **Notion** | Publish research plan as Notion page; create recruitment tracker database | Output as markdown; user pastes into Notion |
+| **GitHub / GitLab** | Create research tracking issue with timeline and milestones | Include tracking checklist in plan output |
+
 ## Workflow
 
 ### Step 1: Define research objectives
 - **Reads:** research_questions, design_spec (if provided), journey_context (if provided)
+- **Ask user:** "What business decision will this research inform?" — if not already stated in the input. Default: state the implied decision based on context.
+- **Ask user:** "What do you already know vs. what do you need to learn?" — helps separate assumptions from genuine unknowns.
 - **Actions:**
   - Clarify the business decision the research will inform.
   - Write 3-5 specific research questions (not yes/no questions).
   - Identify what is known vs. unknown (assumptions to validate).
   - Determine scope: generative (discover) vs. evaluative (validate).
+- **If** design_spec provided → extract open questions and unvalidated assumptions as research inputs.
+- **If** journey_context provided → extract pain points rated "critical" or "major" as priority research areas.
 - **Produces:** Populated `Research Overview` and `Research Questions & Assumptions` sections
 
 ### Step 2: Select methodology
 - **Reads:** Step 1 output
+- **Ask user:** "Any constraints I should know about?" — options: tight timeline (<2 weeks), limited budget, no direct user access, no constraints. Default: no constraints.
+- **Ask user:** "Do you have a preferred method, or should I recommend one?" — options: interviews, survey, diary study, concept test, let me recommend. Default: let me recommend.
 - **Actions:**
   - Choose method(s) based on research questions and constraints.
   - Justify the method selection (why this method answers these questions).
   - Common methods: interviews, contextual inquiry, diary study, survey, card sort, concept test, usability test (for usability testing, recommend `$usability-test-planner`).
   - Define whether qualitative, quantitative, or mixed methods.
   - Note limitations of the chosen approach.
+- **If** evaluative research + prototype available → recommend `$usability-test-planner` instead or as complement.
+- **If** tight timeline (<2 weeks) → recommend unmoderated survey or guerrilla testing; flag trade-offs.
+- **If** no direct user access → recommend survey via existing channels, intercept study, or stakeholder interviews as proxy.
 - **Produces:** Populated `Methodology` section
 
 ### Step 3: Design the research instrument
@@ -82,6 +150,7 @@ The output should be execution-ready: a clear methodology, a complete discussion
   - For diary studies: define prompts, frequency, and duration.
   - Group questions by theme; order from broad to specific.
   - Include warm-up and cool-down questions.
+- **Checkpoint:** "Here are the [N] research questions and the discussion guide structure. Does this cover what you need to learn, or should I adjust the focus?"
 - **Produces:** Populated `Research Instrument` section
 - **References:** `references/discussion-guide-template.md`
 
@@ -93,6 +162,11 @@ The output should be execution-ready: a clear methodology, a complete discussion
   - Write a screening questionnaire.
   - Address diversity, accessibility, and representation.
   - Plan incentive structure.
+- **Ask user:** "Want me to create the Typeform screener from these criteria?" — Default: output as markdown.
+- **Tool action — Typeform (if available and user confirms):**
+  - Create screener survey with qualifying questions, disqualifying questions, and contact info capture.
+  - Share screener link in output.
+- **If** Typeform unavailable → output screener as a markdown checklist with question text, response options, and pass/fail logic.
 - **Produces:** Populated `Recruitment Plan` section
 
 ### Step 5: Plan logistics and timeline
@@ -103,14 +177,38 @@ The output should be execution-ready: a clear methodology, a complete discussion
   - List tools and platforms needed.
   - Plan for consent, recording, and data storage.
   - Identify risks and mitigation strategies.
+- **Ask user:** "Want me to find available time slots and book sessions?" — Default: output schedule as a table.
+- **Tool action — Google Calendar (if available and user confirms):**
+  - Find available slots for researcher across the proposed study window.
+  - Create calendar events for each session with Zoom link (if Zoom available).
+  - Include buffer time between sessions (15 min).
+- **Tool action — Zoom (if available):**
+  - Create meeting links for each session with recording enabled.
+  - Include Zoom links in calendar events.
+- **Tool action — Gong (if available):**
+  - Note Gong configuration instructions for session recording.
+  - Flag that transcripts will feed `$research-synthesizer` after study completion.
+- **Tool action — Gmail (if available and user confirms):**
+  - Draft recruitment email with study description, incentive, and screener link.
+  - Draft session confirmation email with Zoom link, consent form, and logistics.
+- **If** no scheduling tools available → output proposed schedule as a table with dates, times, and roles.
 - **Produces:** Populated `Logistics & Timeline` section
 
-### Step 6: Format output
+### Step 6: Format and publish
 - **Reads:** All previous step outputs
 - **Actions:**
-  - Use `references/research-plan-template.md` for the response structure.
+  - Assemble sections using `references/research-plan-template.md`.
   - Use `references/discussion-guide-template.md` for interview/discussion guide formatting.
   - Ensure the plan is actionable by a researcher or research ops team.
+- **Tool action — Notion (if available):**
+  - Publish research plan as a Notion page.
+  - Create recruitment tracker (participant name, screener status, session date, consent status).
+- **Tool action — GitHub/GitLab (if available):**
+  - Create research tracking issue with timeline milestones.
+- **Next steps:** Based on output, suggest:
+  - "When sessions are complete, use `$research-synthesizer` to analyze the data."
+  - "If usability testing is also needed, use `$usability-test-planner` for task-based test planning."
+  - "If you need a post-task questionnaire, I can create one in Typeform."
 - **Produces:** Complete plan with all required sections
 - **References:** `references/research-plan-template.md`, `references/discussion-guide-template.md`
 
