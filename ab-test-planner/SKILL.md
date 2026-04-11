@@ -40,6 +40,37 @@ batch:
   enabled: true
   input_key: design_decision
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: figma
+    actions: [get_screenshot]
+    when: "Capturing variant screenshots for test documentation"
+  - name: google_sheets
+    actions: [create_tracking_sheet]
+    when: "Building test tracking sheet with metrics, sample size, and timeline"
+  - name: linear
+    actions: [create_issue]
+    when: "Creating test implementation ticket"
+  - name: notion
+    actions: [publish_plan]
+    when: "Publishing test plan to Notion"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "What is the current baseline for the primary metric?"
+    required: false
+  - step: 1
+    question: "What is the traffic volume (DAU on this flow)?"
+    required: false
+  - step: 3
+    question: "Primary metric: [X]. Confirm this is what we should optimize for?"
+    required: true
+  - step: 5
+    question: "Create a Linear ticket for implementation?"
+    required: false
+    default: false
 ---
 
 # A/B Test Planner
@@ -50,16 +81,31 @@ Use this skill to design rigorous A/B test plans that validate design decisions 
 
 The output should be experiment-ready: a falsifiable hypothesis, clearly defined variants, measurable metrics, and a decision framework for interpreting results. Output is formatted for use in LaunchDarkly, Optimizely, Statsig, or as a structured experiment brief in Notion or Confluence. When the target platform is specified, adapt the variant definition and metric format accordingly.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Figma** | Capture variant screenshots via get_screenshot for test documentation and stakeholder review | Include "capture screenshots of control and treatment" in setup checklist |
+| **Google Sheets** | Create test tracking sheet with metrics, sample size calculations, timeline, and daily result logging | Output tracking table as markdown; user creates spreadsheet manually |
+| **Linear** | Create test implementation ticket with variant specs, metric instrumentation, and QA requirements | Output ticket content as markdown; user creates ticket manually |
+| **Notion** | Publish test plan as a Notion page with linked metric definitions | Output as markdown; user pastes into Notion |
+
 ## Workflow
 
 ### Step 1: Define the test question
 - **Reads:** design_decision, design_spec (if provided), journey_insights (if provided)
+- **Ask user:** "What is the current baseline for the primary metric?" — if not already known. Helps determine minimum detectable effect.
+- **Ask user:** "What is the traffic volume (DAU on this flow)?" — needed for sample size calculation.
 - **Actions:**
   - Identify the design decision to be tested.
   - Capture user problem and business context.
   - Write a falsifiable hypothesis using `references/hypothesis-framework.md`.
   - Ensure the hypothesis follows the template: "If [change], then [metric] will [direction] because [rationale]."
   - Default to the frequentist two-sample approach as the canonical baseline: one control, one treatment, one primary metric, 95% significance level, 80% power. Deviate only when justified.
+- **If** design_spec provided from `$design-spec-writer` → extract hypotheses from user stories and unvalidated assumptions.
+- **If** Figma URL provided → auto-capture variant screenshots via get_screenshot for documentation.
 - **Produces:** Populated `Test Overview` and `Hypothesis` sections
 - **References:** `references/hypothesis-framework.md`
 
@@ -70,10 +116,16 @@ The output should be experiment-ready: a falsifiable hypothesis, clearly defined
   - Define treatment(s) with exact differences from control.
   - Identify and mitigate confounding variables.
   - Ensure variants differ by the minimum needed to test the hypothesis.
+- **Tool action — Figma (if available and Figma URL provided):**
+  - Capture screenshots of control and treatment designs using get_screenshot.
+  - Include screenshots in variant documentation for stakeholder alignment.
+- **If** Figma unavailable → include "capture screenshots of both variants" in setup checklist.
+- **Checkpoint:** "Here are the control and treatment definitions. Do the variants isolate the variable we want to test?"
 - **Produces:** Populated `Variants` section
 
 ### Step 3: Select metrics
 - **Reads:** Step 1 hypothesis, Step 2 variants
+- **Ask user:** "Primary metric: [X]. Confirm this is what we should optimize for?" — validate the primary metric selection before proceeding.
 - **Actions:**
   - Choose one primary metric that directly measures the hypothesis.
   - Select 2-3 secondary metrics for supporting evidence.
@@ -89,14 +141,30 @@ The output should be experiment-ready: a falsifiable hypothesis, clearly defined
   - Define audience, traffic allocation, and targeting criteria.
   - Set kill criteria for early stopping.
   - Identify technical dependencies and QA requirements.
+- **If** traffic volume known → calculate precise sample size and estimated duration.
+- **If** traffic volume unknown → provide sample size formula with assumptions; flag that duration estimate requires traffic data.
+- **If** no baseline data → flag metrics as "estimated baseline," recommend running instrumentation for 1-2 weeks before launching test.
 - **Produces:** Populated `Execution Plan` section
 
 ### Step 5: Format output
 - **Reads:** All previous step outputs
+- **Ask user:** "Create a Linear ticket for implementation?" — Default: output as markdown.
 - **Actions:**
   - Use `references/ab-test-plan-template.md` for the response structure.
   - Include a decision framework for all possible outcomes.
   - Ensure the plan is actionable by both design and engineering teams.
+- **Tool action — Google Sheets (if available):**
+  - Create test tracking sheet with columns: date, variant, sample size, primary metric value, secondary metrics, notes.
+  - Include sample size calculator tab with MDE, power, and significance inputs.
+- **Tool action — Linear (if available and user confirms):**
+  - Create implementation ticket with: variant specs, metric instrumentation requirements, QA checklist, and launch/kill criteria.
+- **Tool action — Notion (if available):**
+  - Publish test plan as a Notion page with linked metric definitions.
+- **If** no tools available → output complete plan as structured markdown.
+- **Next steps:** Based on output, suggest:
+  - "If you need success metrics beyond this test, use `$design-success-metrics-writer`."
+  - "If the test validates the design, update the spec with `$design-spec-writer`."
+  - "If the test requires a new flow variant, map it with `$user-flow-mapper`."
 - **Produces:** Complete plan with all required sections including `Analysis Framework`
 - **References:** `references/ab-test-plan-template.md`
 

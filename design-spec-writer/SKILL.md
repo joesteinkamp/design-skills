@@ -50,6 +50,44 @@ batch:
   enabled: true
   input_key: feature_description
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: figma
+    actions: [get_design_context, get_screenshot]
+    when: "Extracting interaction specs and capturing screen illustrations"
+  - name: linear
+    actions: [create_ticket]
+    when: "Creating user story tickets with acceptance criteria"
+  - name: notion
+    actions: [publish_spec]
+    when: "Publishing spec as a Notion page"
+  - name: github
+    actions: [create_issue]
+    when: "Creating issues from open questions"
+  - name: productboard
+    actions: [link_feature]
+    when: "Linking spec to a Productboard feature"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "Decision stage: proposal, refinement, or build-ready?"
+    required: true
+    options: [proposal, refinement, build-ready]
+  - step: 1
+    question: "Figma URL?"
+    required: false
+  - step: 1
+    question: "Related Productboard feature?"
+    required: false
+  - step: 2
+    question: "Scope drafted — anything to add to in/out-of-scope?"
+    required: false
+  - step: 5
+    question: "Want me to create Linear tickets for each user story?"
+    required: false
+    default: false
 ---
 
 # Design Spec Writer
@@ -60,24 +98,53 @@ Use this skill to produce design specs that bridge the gap between design intent
 
 The output should be build-ready: every user story has acceptance criteria, every screen has states documented, and every edge case is addressed.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Figma** | Extract component states, responsive behavior, and design tokens via get_design_context; capture screen illustrations via get_screenshot | User describes interactions and states manually; reference design system docs |
+| **Linear** | Create user story tickets with acceptance criteria from the spec | Output user stories as markdown checklist; user creates tickets manually |
+| **Notion** | Publish spec as a Notion page with linked sections | Output as markdown; user pastes into Notion |
+| **GitHub / GitLab** | Create issues from open questions with owners and deadlines | Include open questions as a markdown table in output |
+| **Productboard** | Link spec to the related Productboard feature for traceability | Note the Productboard feature reference in the spec metadata |
+
 ## Workflow
 
 ### Step 1: Capture context
 - **Reads:** feature_description, personas (if provided), journey_context (if provided), research_insights (if provided)
+- **Ask user:** "Decision stage: proposal, refinement, or build-ready?" — determines depth of interaction specs and acceptance criteria.
+- **Ask user:** "Figma URL?" — enables auto-extraction of component states and tokens.
+- **Ask user:** "Related Productboard feature?" — enables linking for traceability.
 - **Actions:**
   - Identify feature, user problem, personas, journey context, and business constraints.
   - Determine decision stage: proposal, refinement, or build-ready.
   - Accept inputs from upstream skills or raw descriptions.
   - If critical context is missing, state assumptions explicitly.
+- **If** Figma URL provided → extract component states, responsive behavior, and design tokens via get_design_context.
+- **Tool action — Figma (if available and URL provided):**
+  - Extract interaction specs, component states, and token references via get_design_context.
+  - Capture screen illustrations via get_screenshot for embedding in the spec.
+- **If** Figma unavailable → user describes interactions and states; reference design system docs.
+- **If** personas from `$persona-creator` → use directly in user stories.
+- **If** no personas available → ask user for target user description; flag that `$persona-creator` can provide structured personas.
+- **If** build-ready → plan for full interaction specs with all states and acceptance criteria.
+- **If** proposal → plan for lighter scope with problem statement, key user stories, and open questions.
 - **Produces:** Populated `Design Context` section
 
 ### Step 2: Define scope
 - **Reads:** Step 1 output
+- **Ask user:** "Scope drafted — anything to add to in/out-of-scope?" — validates scope before proceeding.
 - **Actions:**
   - Write a clear problem statement naming the specific user pain point.
   - Define success metrics that are measurable (not vanity terms).
   - List in-scope and out-of-scope items.
   - Identify dependencies and blockers.
+- **Checkpoint:** "Here is the scope: [problem statement], [in-scope items], [out-of-scope items]. Anything to adjust?"
+- **Tool action — Productboard (if available and feature provided):**
+  - Link spec to the related Productboard feature.
+  - Pull in feature context and customer evidence if available.
 - **Produces:** Populated `Scope` section
 
 ### Step 3: Detail user stories and acceptance criteria
@@ -87,6 +154,8 @@ The output should be build-ready: every user story has acceptance criteria, ever
   - Define testable acceptance criteria using Given/When/Then.
   - Include accessibility requirements per story.
   - Add responsive behavior notes.
+- **If** build-ready → full acceptance criteria with all edge cases per story.
+- **If** proposal → key acceptance criteria; flag areas needing refinement.
 - **Produces:** Populated `User Stories & Acceptance Criteria` section
 
 ### Step 4: Specify interactions
@@ -95,15 +164,32 @@ The output should be build-ready: every user story has acceptance criteria, ever
   - Document all states per component: default, empty, loading, error, disabled.
   - Describe interactions with trigger, behavior, feedback, and result.
   - Identify edge cases and expected behavior.
+- **If** Figma URL provided → cross-reference extracted component states with spec.
+- **If** build-ready → complete interaction specs for all components and states.
+- **If** proposal → document primary flows only; list remaining states as open items.
 - **Produces:** Populated `Interaction Specs` and `Content Requirements` sections
 - **References:** `references/interaction-spec-template.md`
 
-### Step 5: Format output
+### Step 5: Format, publish, and create tickets
 - **Reads:** All previous step outputs
+- **Ask user:** "Want me to create Linear tickets for each user story?" — Default: output as markdown.
 - **Actions:**
   - Assemble sections using the output template.
   - Include `references/dev-handoff-schema.md` block when output feeds `$dev-handoff-writer`.
   - Log open questions with owners and deadlines.
+- **Tool action — Linear (if available and user confirms):**
+  - Create user story tickets with acceptance criteria from the spec.
+  - Tag tickets with priority and link to the spec.
+- **Tool action — GitHub/GitLab (if available):**
+  - Create issues from open questions with owners and deadlines.
+- **Tool action — Notion (if available):**
+  - Publish spec as a Notion page with linked sections and metadata.
+- **If** no ticketing tools available → output user stories and open questions as markdown.
+- **Next steps:** Based on output, suggest:
+  - "Use `$dev-handoff-writer` to generate engineering-ready component specs from this spec."
+  - "Use `$accessibility-auditor` to audit this spec for WCAG compliance."
+  - "Use `$usability-test-planner` to plan usability testing for the key flows."
+  - "If user stories need validation, use `$research-plan-writer` to plan a concept test."
 - **Produces:** Complete spec with all required sections
 - **References:** `references/design-spec-template.md`, `references/dev-handoff-schema.md`
 

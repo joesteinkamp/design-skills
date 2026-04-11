@@ -35,6 +35,42 @@ batch:
   enabled: true
   input_key: design_screens
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: figma
+    actions: [get_design_context, get_screenshot]
+    when: "Extracting colors and fonts for contrast checking; capturing screen screenshots"
+  - name: chrome
+    actions: [run_lighthouse, run_axe]
+    when: "Running automated accessibility scans on live URLs"
+  - name: linear
+    actions: [create_ticket]
+    when: "Creating remediation tickets from must-fix findings"
+  - name: google_sheets
+    actions: [create_spreadsheet, export_data]
+    when: "Exporting findings matrix to a spreadsheet"
+  - name: notion
+    actions: [publish_report]
+    when: "Publishing audit report as a Notion page"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "Which screens to audit?"
+    required: true
+  - step: 1
+    question: "WCAG level: A, AA, or AAA?"
+    required: true
+    options: [A, AA, AAA]
+    default: AA
+  - step: 1
+    question: "Figma URL or live URL?"
+    required: false
+  - step: 3
+    question: "Found [N] issues. Create Linear tickets for must-fix items?"
+    required: false
+    default: false
 ---
 
 # Accessibility Auditor
@@ -45,15 +81,39 @@ Use this skill to audit designs, specs, or implementations for accessibility com
 
 The output should be actionable for both designers and developers: issues are severity-ranked, and every finding includes a specific remediation path. Output is formatted for use alongside axe DevTools, Stark (Figma plugin), WAVE, or Lighthouse. When the target tool is specified, reference its finding format and severity conventions.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Figma** | Extract color pairs and font sizes for contrast ratio computation via get_design_context; capture screen screenshots via get_screenshot | User provides color values and font sizes manually; flag unverifiable items |
+| **Chrome** | Run Lighthouse and axe automated accessibility scans on live URLs | Manual review only; flag that automated scan results are missing |
+| **Linear** | Create remediation tickets from must-fix findings with severity and effort estimates | Output remediation list as markdown; user creates tickets manually |
+| **Google Sheets** | Export findings matrix as a spreadsheet for tracking and reporting | Output findings as a markdown table; user creates spreadsheet manually |
+| **Notion** | Publish audit report as a Notion page for team access | Output as markdown; user pastes into Notion |
+
 ## Workflow
 
 ### Step 1: Define scope
 - **Reads:** design_screens, design_spec (if provided)
+- **Ask user:** "Which screens to audit?" — specify screens, components, or flows to include.
+- **Ask user:** "WCAG level: A, AA, or AAA?" — Default: AA. Sets conformance target.
+- **Ask user:** "Figma URL or live URL?" — determines audit method.
 - **Actions:**
   - Identify what is being audited (screens, components, flows).
   - Set conformance target: WCAG 2.2 Level A, AA, or AAA.
   - Note assistive technology considerations (screen reader, keyboard, voice control, magnification).
   - Determine audit method: design review, code review, manual testing, or automated scan.
+- **If** Figma URL provided → auto-extract color pairs and font sizes for contrast computation via get_design_context.
+- **Tool action — Figma (if available and Figma URL provided):**
+  - Extract color tokens, font sizes, and component properties via get_design_context.
+  - Capture screenshots of screens under audit via get_screenshot.
+- **If** live URL provided → plan Chrome automated scan + manual review.
+- **Tool action — Chrome (if available and live URL provided):**
+  - Run Lighthouse accessibility audit on the live URL.
+  - Run axe-core scan for detailed WCAG criterion-level findings.
+- **If** neither Figma nor live URL → rely on described values and manual review; flag items as unverifiable where color/contrast cannot be confirmed.
 - **Produces:** Populated `Audit Scope` section
 
 ### Step 2: Evaluate against WCAG criteria
@@ -66,12 +126,18 @@ The output should be actionable for both designers and developers: issues are se
 - **Produces:** Populated `Compliance Summary` section
 - **References:** `references/wcag-checklist.md`
 
-### Step 3: Document findings
+### Step 3: Document findings and create tickets
 - **Reads:** Step 2 evaluation results
+- **Ask user:** "Found [N] issues. Create Linear tickets for must-fix items?" — Default: output as markdown.
 - **Actions:**
   - Record WCAG criterion, severity, affected element, current vs. expected behavior.
   - Provide specific remediation guidance using `references/remediation-patterns.md` for common fixes.
   - Estimate effort for each remediation.
+- **Tool action — Linear (if available and user confirms):**
+  - Create remediation tickets for each must-fix finding with WCAG criterion, severity, affected element, and remediation steps.
+  - Include effort estimates in ticket descriptions.
+- **If** Linear unavailable → output remediation list as a prioritized markdown checklist.
+- **Checkpoint:** "Here are the [N] findings organized by severity. Any screens or components I should look at more closely?"
 - **Produces:** Populated `Findings` section
 - **References:** `references/remediation-patterns.md`
 
@@ -83,12 +149,21 @@ The output should be actionable for both designers and developers: issues are se
   - Nice-to-fix: enhancements that polish the accessible experience.
 - **Produces:** Populated `Remediation Priority List` section
 
-### Step 5: Format output
+### Step 5: Format and publish
 - **Reads:** All previous step outputs
 - **Actions:**
   - Use `references/accessibility-audit-template.md` for the response structure.
   - Include compliance summary with pass/fail counts.
   - Add assistive technology notes for screen reader, keyboard, voice, and magnification users.
+- **Tool action — Google Sheets (if available):**
+  - Export findings matrix as a spreadsheet with columns: WCAG criterion, severity, element, current behavior, expected behavior, remediation, effort, status.
+- **Tool action — Notion (if available):**
+  - Publish audit report as a Notion page for team access.
+- **If** no publishing tools available → output as complete markdown.
+- **Next steps:** Based on output, suggest:
+  - "Use `$dev-handoff-writer` to embed ARIA requirements and keyboard patterns into the engineering handoff."
+  - "After remediation, re-run this audit to verify fixes."
+  - "If design changes are needed, update the spec via `$design-spec-writer`."
 - **Produces:** Complete audit with all required sections including `Assistive Technology Notes` and optional `Dev Remediation Handoff`
 - **References:** `references/accessibility-audit-template.md`
 

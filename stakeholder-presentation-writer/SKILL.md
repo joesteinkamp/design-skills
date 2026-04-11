@@ -50,6 +50,44 @@ batch:
   enabled: true
   input_key: presentation_topic
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: google_slides
+    actions: [create_presentation, add_slide, update_slide]
+    when: "Creating the actual presentation deck"
+  - name: figma
+    actions: [get_screenshot]
+    when: "Pulling design visuals for presentation slides"
+  - name: gmail
+    actions: [create_draft, send_email]
+    when: "Drafting and sending pre-read email to stakeholders"
+  - name: slack
+    actions: [send_message, share_link]
+    when: "Sharing deck link for async review"
+  - name: google_calendar
+    actions: [find_availability, get_event]
+    when: "Checking meeting time constraints and attendee availability"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "Who is the audience? (names + roles)"
+    required: true
+  - step: 1
+    question: "What specific decision do you need from them?"
+    required: true
+  - step: 2
+    question: "What is the time constraint?"
+    options: [5_min, 15_min, 30_min, 60_min]
+    default: 30_min
+  - step: 4
+    question: "What objections do you anticipate?"
+    required: false
+  - step: 6
+    question: "Create a Google Slides deck? Send a pre-read email?"
+    required: false
+    default: false
 ---
 
 # Stakeholder Presentation Writer
@@ -60,25 +98,46 @@ Use this skill to structure persuasive design presentations that communicate dec
 
 The output should be presentation-ready: a clear narrative arc, evidence-backed arguments, anticipated objections, and explicit decision asks that drive alignment. Output is formatted for use in Google Slides, Keynote, Figma, or as a structured Notion document. When the target tool is specified, adapt the slide structure and layout guidance accordingly.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Google Slides** | Create the actual presentation deck with slides, speaker notes, and visual placeholders | Output a slide-by-slide outline with title, key message, visual guidance, and speaker notes; user builds deck manually |
+| **Figma** | Pull design screenshots for embedding as visuals in presentation slides | Include Figma URLs and frame references; user takes screenshots manually |
+| **Gmail** | Draft and send a pre-read email to stakeholders with deck link, context summary, and decision ask | Output pre-read email as draft text; user sends manually |
+| **Slack** | Share deck link in relevant channel for async review before the meeting | Include sharing instructions; user posts manually |
+| **Google Calendar** | Check meeting time constraints and attendee availability to right-size the presentation | User states time constraint; skill adapts accordingly |
+
 ## Workflow
 
 ### Step 1: Define the presentation context
 - **Reads:** presentation_topic, design_spec (if provided), research_insights (if provided), critique_findings (if provided), metrics_framework (if provided)
+- **Ask user:** "Who is the audience? (names + roles)" — needed to tailor the narrative, evidence selection, and objection handling.
+- **Ask user:** "What specific decision do you need from them?" — the entire presentation is structured around this ask.
 - **Actions:**
   - Identify the audience: who is in the room, their roles, and what they care about.
   - Determine the presentation goal: inform, align, get approval, or request resources.
   - Clarify the key decision(s) the audience needs to make.
   - Note constraints: time limit, format, and prior context the audience has.
+- **Tool action — Google Calendar (if available):** Check meeting time and attendee list to confirm time constraint and audience composition.
+- **If** research_insights provided → flag that evidence-led narrative is available.
+- **If** no research evidence and no metrics_framework → flag that presentation will rely on design rationale and competitive examples.
 - **Produces:** Populated `Presentation Brief` section
 
 ### Step 2: Craft the narrative arc
 - **Reads:** Step 1 output
+- **Ask user:** "What is the time constraint?" — options: 5 min, 15 min, 30 min, 60 min. Default: 30 min.
 - **Actions:**
   - Open with the problem or opportunity (why this matters now).
   - Set context: user evidence, business metrics, or competitive pressure.
   - Present the design direction with rationale (not just the solution).
   - Show alternatives considered and why they were deprioritized.
   - Close with a clear ask: decision, feedback, or next steps.
+- **If** research evidence available → lead with data narrative (user quotes, metrics, behavioral patterns).
+- **If** no evidence → lead with design rationale + competitive examples to build credibility.
+- **Checkpoint:** "Here's the narrative arc: [problem] → [context] → [direction] → [ask]. Does this framing match how you want to position this?"
 - **Produces:** Populated `Narrative Arc` section
 
 ### Step 3: Build the evidence layer
@@ -88,10 +147,13 @@ The output should be presentation-ready: a clear narrative arc, evidence-backed 
   - Select the strongest 2-3 proof points per decision (don't overwhelm).
   - Include user quotes, metrics, or competitive examples where available.
   - Cite sources: link to research studies, analytics, or upstream skill outputs.
+- **Tool action — Figma (if available):** Pull design screenshots for key screens and states to embed as slide visuals.
+- **If** Figma unavailable → reference Figma URLs with frame names for manual screenshot capture.
 - **Produces:** Populated `Evidence & Supporting Data` section
 
 ### Step 4: Anticipate objections
 - **Reads:** Step 1 audience context, Step 2 narrative
+- **Ask user:** "What objections do you anticipate?" — helps surface concerns the designer already knows about.
 - **Actions:**
   - Identify likely pushback based on audience priorities (cost, timeline, risk, scope).
   - Prepare concise responses for each objection.
@@ -106,14 +168,26 @@ The output should be presentation-ready: a clear narrative arc, evidence-backed 
   - Provide clear options if a decision is needed (with a recommendation).
   - Specify what happens after approval (next steps, timeline, owners).
   - Define what happens if the decision is deferred.
+- **Checkpoint:** "The ask is: [specific decision]. Is this the right level of commitment to request?"
 - **Produces:** Populated `Decision Ask & Next Steps` section
 
-### Step 6: Format output
+### Step 6: Format, publish, and distribute
 - **Reads:** All previous step outputs
+- **Ask user:** "Create a Google Slides deck? Send a pre-read email?" — Default: output as structured outline.
 - **Actions:**
   - Use `references/presentation-template.md` for the response structure.
   - Use `references/slide-framework.md` for slide-by-slide breakdown guidance.
   - Ensure the presentation works within the stated time constraint.
+- **If** Google Slides available and user confirms → create deck with slides, speaker notes, and visual placeholders.
+- **Tool action — Google Slides (if available and user confirms):** Create presentation deck with one slide per outline card, including title, key message, visual placeholder, and speaker notes.
+- **If** Google Slides unavailable → output slide-by-slide outline with all content structured for manual deck creation.
+- **Tool action — Gmail (if available and user confirms):** Draft pre-read email with deck link, 3-sentence context summary, the specific decision ask, and suggested pre-read time.
+- **Tool action — Slack (if available):** Share deck link in relevant channel with a brief summary for async review.
+- **If** Gmail unavailable → output pre-read email as draft text.
+- **Next steps:** Based on output, suggest:
+  - "After the meeting, capture decisions and action items — consider a follow-up summary email."
+  - "If the presentation led to a research request, use `$research-plan-writer` to scope the study."
+  - "If design changes are approved, update the spec with `$design-spec-writer`."
 - **Produces:** Complete presentation with all required sections
 - **References:** `references/presentation-template.md`, `references/slide-framework.md`
 

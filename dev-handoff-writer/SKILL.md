@@ -36,6 +36,38 @@ batch:
   enabled: true
   input_key: design_spec
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: figma
+    actions: [get_design_context, get_screenshot]
+    when: "Extracting design tokens, spacing, typography; capturing screenshots at breakpoints"
+  - name: linear
+    actions: [create_ticket]
+    when: "Creating P0/P1/P2 implementation tickets per component"
+  - name: github
+    actions: [create_branch, create_pull_request]
+    when: "Creating branch and PR template for implementation"
+  - name: notion
+    actions: [publish_doc]
+    when: "Publishing handoff doc as a Notion page"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "Target framework?"
+    required: true
+    options: [react, vue, swift, other]
+  - step: 1
+    question: "Design system?"
+    required: false
+  - step: 1
+    question: "Figma URL for the designs?"
+    required: false
+  - step: 5
+    question: "Want me to create Linear tickets? GitHub issues?"
+    required: false
+    default: false
 ---
 
 # Dev Handoff Writer
@@ -46,15 +78,36 @@ Use this skill to produce developer-ready handoff documentation from design spec
 
 The output should be engineering-ready: component specs with all states, responsive behavior at every breakpoint, edge cases with expected behavior, and a verification checklist. Output is formatted for use in Figma Dev Mode, Storybook, Zeplin, or as structured markdown in Notion or Linear. When the target tool is specified, adapt the component spec format and token references accordingly.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Figma** | Extract design tokens, spacing, and typography via get_design_context; capture screenshots at 3 breakpoints (desktop, tablet, mobile) via get_screenshot | User provides token values manually; reference design system docs |
+| **Linear** | Create P0/P1/P2 implementation tickets per component with acceptance criteria | Output ticket specs as markdown checklist; user creates tickets manually |
+| **GitHub / GitLab** | Create implementation branch and PR template with component checklist | Include branch naming convention and PR template in output |
+| **Notion** | Publish handoff doc as a Notion page with linked component specs | Output as markdown; user pastes into Notion |
+
 ## Workflow
 
 ### Step 1: Gather inputs
 - **Reads:** design_spec, accessibility_findings (if provided)
+- **Ask user:** "Target framework?" — options: React, Vue, Swift, other. Determines component spec format.
+- **Ask user:** "Design system?" — if specified, reference token names instead of raw values.
+- **Ask user:** "Figma URL for the designs?" — enables auto-extraction of tokens and screenshots.
 - **Actions:**
   - Accept design spec handoff from `$design-spec-writer` using the dev-handoff-schema.
   - Incorporate accessibility findings from `$accessibility-auditor` if available.
   - Identify design system references and tokens.
   - Determine engineering audience (frontend, backend, fullstack, mobile).
+- **If** Figma URL provided → auto-extract design tokens, spacing, and typography via get_design_context.
+- **Tool action — Figma (if available and URL provided):**
+  - Extract color tokens, spacing values, typography scales, and component properties via get_design_context.
+  - Capture screenshots at desktop (>=1024px), tablet (768-1023px), and mobile (<768px) via get_screenshot.
+- **If** Figma unavailable → user provides token values; reference design system documentation.
+- **If** design system specified → reference token names (e.g., "spacing-4", "text-primary") not raw values (e.g., "16px", "#333").
+- **If** accessibility findings from `$accessibility-auditor` → embed ARIA requirements and keyboard interaction patterns per component.
 - **Produces:** Populated `Handoff Overview` section
 
 ### Step 2: Document components
@@ -63,6 +116,7 @@ The output should be engineering-ready: component specs with all states, respons
   - Inventory all components in the feature.
   - For each component: name, design system token, variants, properties.
   - Use `references/component-spec-template.md` for detailed component specs when needed.
+- **Checkpoint:** "Component inventory lists [N] components. Any missing or out of scope?"
 - **Produces:** Populated `Component Inventory` section
 - **References:** `references/component-spec-template.md`
 
@@ -83,12 +137,26 @@ The output should be engineering-ready: component specs with all states, respons
   - List data edge cases: zero items, one item, max items, long text, missing data, offline.
 - **Produces:** Populated `Responsive Behavior` and `Content & Edge Cases` sections
 
-### Step 5: Format output
+### Step 5: Format, publish, and create tickets
 - **Reads:** All previous step outputs
+- **Ask user:** "Want me to create Linear tickets? GitHub issues?" — Default: output as markdown.
 - **Actions:**
   - Use `references/dev-handoff-template.md` for the response structure.
   - Include `references/implementation-checklist.md` as the verification checklist.
   - Ensure every component has all states documented.
+- **Tool action — Linear (if available and user confirms):**
+  - Create implementation tickets per component: P0 (core functionality), P1 (states and interactions), P2 (edge cases and polish).
+  - Include acceptance criteria from component specs in each ticket.
+- **Tool action — GitHub (if available and user confirms):**
+  - Create implementation branch with naming convention: `feat/[feature-name]`.
+  - Create PR template with component checklist from the handoff.
+- **Tool action — Notion (if available):**
+  - Publish handoff doc as a Notion page with linked component specs.
+- **If** no ticketing tools available → output ticket specs as a prioritized markdown checklist.
+- **Next steps:** Based on output, suggest:
+  - "If accessibility requirements need deeper review, use `$accessibility-auditor`."
+  - "If the design spec needs updates based on engineering feedback, use `$design-spec-writer`."
+  - "Linear tickets are ready for sprint planning — prioritize P0 items first."
 - **Produces:** Complete handoff with all required sections
 - **References:** `references/dev-handoff-template.md`, `references/implementation-checklist.md`
 

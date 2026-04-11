@@ -45,6 +45,35 @@ batch:
   enabled: true
   input_key: design_challenge
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: web
+    actions: [WebSearch, WebFetch]
+    when: "Searching design sites (Mobbin, Awwwards, Dribbble) and fetching pages for analysis"
+  - name: chrome
+    actions: [browse, navigate]
+    when: "Browsing reference sites for live interaction patterns"
+  - name: figma
+    actions: [generate_diagram]
+    when: "Creating visual inspiration board in FigJam"
+  - name: notion
+    actions: [publish_page, create_gallery]
+    when: "Publishing curated inspiration collection as Notion gallery"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "What aspect of design are you exploring?"
+    options: [interaction, visual, info_density, onboarding, other]
+    required: true
+  - step: 1
+    question: "Any industries or products to include or exclude?"
+    required: false
+  - step: 3
+    question: "Found [N] examples across [M] themes. Create a FigJam inspiration board?"
+    required: false
+    default: false
 ---
 
 # Inspiration Browser
@@ -55,10 +84,23 @@ Use this skill to research and curate relevant design inspiration from across th
 
 This skill actively searches the internet for real-world examples — landing pages, product interfaces, interaction patterns, visual treatments, and cross-industry analogies. The output should spark ideas, not prescribe solutions. Each example should include why it is relevant and what principle it demonstrates. Search sources include Mobbin, Savee, Godly, Awwwards, Dribbble (shipped products only), Product Hunt, Apple Design Awards, Google Material Studies, and industry-specific blogs. Output is formatted for use in Figma, FigJam, Miro, or as a structured Notion gallery. When the target tool is specified, adapt the board layout accordingly.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Web (WebSearch / WebFetch)** | Actively search design sites (Mobbin, Awwwards, Dribbble, Godly, Savee) for real examples; fetch and analyze specific pages for interaction details | Curate from internal knowledge base; flag all examples as unverified and recommend manual verification |
+| **Chrome** | Browse reference sites to observe live interaction patterns, animations, and responsive behavior | Describe expected interactions based on known patterns; flag as unverified |
+| **Figma (FigJam)** | Generate a visual inspiration board in FigJam with screenshots, annotations, and theme groupings | Output as structured markdown or Notion gallery; user builds board manually |
+| **Notion** | Publish curated collection as a Notion gallery page with example cards, tags, and design implications | Output as markdown; user pastes into Notion |
+
 ## Workflow
 
 ### Step 1: Frame the inspiration search
 - **Reads:** design_challenge, personas (if provided), journey_context (if provided), design_spec (if provided)
+- **Ask user:** "What aspect of design are you exploring?" — options: interaction, visual, info density, onboarding, other.
+- **Ask user:** "Any industries or products to include or exclude?" — helps focus the search and avoid irrelevant results.
 - **Actions:**
   - Identify the design challenge, feature, or experience to explore.
   - Extract key attributes: domain, interaction type, emotional tone, user context, constraints.
@@ -75,15 +117,25 @@ This skill actively searches the internet for real-world examples — landing pa
   - **Visual and emotional references:** Search Savee, Dribbble (filter for shipped/real products), and Apple Design Awards for treatments that evoke the desired tone.
   - Prioritize real, shipped products over concept work or awards pieces with no evidence of production use.
   - For each source, note the URL, product name, and the specific screen or interaction worth studying.
+- **If** WebSearch available → actively search and verify examples are live.
+- **Tool action — Web (if available):** Use WebSearch to find examples on Mobbin, Awwwards, Dribbble, Godly, Savee, and Product Hunt; use WebFetch to analyze specific pages for interaction details and screenshots.
+- **Tool action — Chrome (if available):** Browse reference sites to observe live interaction patterns, animations, transitions, and responsive behavior.
+- **If** no web access → curate from knowledge base; flag all examples as unverified and recommend manual verification of URLs.
 - **Produces:** Raw collection of examples
 
 ### Step 3: Curate and categorize findings
 - **Reads:** Step 2 raw examples
+- **Ask user:** "Found [N] examples across [M] themes. Create a FigJam inspiration board?" — Default: output as markdown.
 - **Actions:**
   - Select 8-15 examples that offer meaningfully different approaches.
   - For each example, document: source, what it does well, the design principle it demonstrates, and its relevance to the current challenge.
   - Group examples by theme or design dimension (e.g., "onboarding approaches", "data density handling", "empty state patterns").
   - Include screenshots or detailed descriptions of the specific interaction or screen.
+- **If** FigJam available and user confirms → create visual inspiration board.
+- **Tool action — Figma (if available and user confirms):** Generate a FigJam inspiration board with screenshots, annotations, theme groupings, and design principle labels.
+- **If** FigJam unavailable → output as Notion gallery (if available) or structured markdown.
+- **Tool action — Notion (if available and FigJam unavailable):** Publish curated collection as a Notion gallery page with example cards, source URLs, tags, and design implications.
+- **Checkpoint:** "Here are the [N] curated examples grouped by [M] themes. Are these the right directions, or should I explore different angles?"
 - **Produces:** Populated `Curated Examples` and `Inspiration Themes` sections
 
 ### Step 4: Extract patterns and principles
@@ -108,6 +160,10 @@ This skill actively searches the internet for real-world examples — landing pa
 - **Actions:**
   - Use `references/inspiration-board-template.md` for the response structure.
   - Lead with a quick-scan summary of themes before the detailed examples.
+- **Next steps:** Based on output, suggest:
+  - "To explore design trade-offs between approaches, use `$design-spectrums-creator`."
+  - "To turn inspiration into a concrete design direction, use `$design-spec-writer`."
+  - "If multiple approaches look promising, compare them with `$design-spectrums-creator`."
 - **Produces:** Complete inspiration board with all required sections
 - **References:** `references/inspiration-board-template.md`
 

@@ -50,6 +50,35 @@ batch:
   enabled: true
   input_key: feature_description
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: google_sheets
+    actions: [create_dashboard, set_baselines]
+    when: "Creating metrics tracking dashboard with baselines and targets"
+  - name: linear
+    actions: [create_issue]
+    when: "Creating instrumentation tickets (one per event)"
+  - name: notion
+    actions: [publish_framework]
+    when: "Publishing metrics framework to Notion"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "What does success look like in plain language?"
+    required: true
+  - step: 2
+    question: "Do you have current baseline data for any metrics?"
+    required: false
+  - step: 3
+    question: "What analytics platform are you using?"
+    options: [Amplitude, Mixpanel, GA4, other]
+    required: false
+  - step: 4
+    question: "Create Linear tickets for instrumentation?"
+    required: false
+    default: false
 ---
 
 # Design Success Metrics Writer
@@ -62,46 +91,69 @@ The output should connect user outcomes to measurable signals — not just busin
 
 Output is formatted for use in Amplitude, Mixpanel, Google Analytics, or as a structured metrics brief in Notion, Google Sheets, or Confluence. When the target platform is specified, adapt the metric definitions and event naming conventions accordingly.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Google Sheets** | Create metrics tracking dashboard with baseline values, target values, and measurement cadence columns | Output metrics table as markdown; user creates spreadsheet manually |
+| **Linear** | Create one instrumentation ticket per tracking event with event name, properties, and acceptance criteria | Output instrumentation checklist as markdown; user creates tickets manually |
+| **Notion** | Publish metrics framework as a Notion page with linked metric definitions and measurement plan | Output as markdown; user pastes into Notion |
+
 ## Workflow
 
 ### Step 1: Understand the design intent
 - **Reads:** feature_description, design_spec (if provided), personas (if provided), journey_context (if provided)
+- **Ask user:** "What does success look like in plain language?" — ground the metrics in the team's intuitive understanding before formalizing.
 - **Actions:**
   - Identify the product, feature, or experience being measured.
   - Capture the core user problems being solved.
   - Capture the business objectives the design supports.
   - Accept upstream inputs from `$persona-creator`, `$journey-mapper`, or `$design-spec-writer` if available.
   - If inputs are vague, ask the user to clarify what "success" means for this work.
+- **If** design_spec provided → extract success criteria from user stories and validate coverage against all stories.
 - **Produces:** Populated `Design Context` section
 
 ### Step 2: Map outcomes to user and business goals
 - **Reads:** Step 1 context, personas, journey_context
+- **Ask user:** "Do you have current baseline data for any metrics?" — baselines anchor targets in reality.
 - **Actions:**
   - For each persona or user segment, identify the desired behavioral change.
   - For each business objective, identify the leading and lagging indicators.
   - Distinguish between outcome metrics (did it work?) and output metrics (did we ship it?).
   - Prioritize outcome metrics over output metrics.
+- **If** no baseline data available → flag all targets as "estimated," recommend instrumenting current state for 2-4 weeks before setting targets.
 - **Produces:** Populated `Outcome Goals` section
 
 ### Step 3: Define the metrics framework
 - **Reads:** Step 2 outcome goals
+- **Ask user:** "What analytics platform are you using?" — options: Amplitude, Mixpanel, GA4, other. Determines event naming conventions and implementation guidance.
 - **Actions:**
   - Select 1-2 primary metrics that directly measure design success.
   - Select 2-4 secondary metrics that provide supporting evidence.
   - Define guardrail metrics that must not degrade.
   - For each metric, specify: definition, measurement method, current baseline (if known), target, and timeframe.
   - Use `references/metrics-framework-template.md` for structure.
+- **If** analytics platform specified → use platform-specific event naming conventions (e.g., Amplitude: `noun_verb`, Mixpanel: `Noun Verb`, GA4: `snake_case` events).
+- **If** no analytics platform specified → use generic event naming and note that conventions should be adapted to the team's platform.
+- **Checkpoint:** "Here is the metrics framework with [N] primary and [N] secondary metrics. Does this capture how you'll judge success?"
 - **Produces:** Populated `Metrics Framework` section
 - **References:** `references/metrics-framework-template.md`
 
 ### Step 4: Build a measurement plan
 - **Reads:** Step 3 metrics framework
+- **Ask user:** "Create Linear tickets for instrumentation?" — Default: output as markdown checklist.
 - **Actions:**
   - Specify what instrumentation or tracking is needed.
   - Identify data sources (analytics, surveys, support tickets, etc.).
   - Define measurement cadence (daily, weekly, post-launch review).
   - Set review milestones and decision triggers.
   - Note any metrics that require new instrumentation.
+- **Tool action — Linear (if available and user confirms):**
+  - Create one instrumentation ticket per tracking event.
+  - Each ticket includes: event name, event properties, trigger condition, acceptance criteria, and linked metric.
+- **If** Linear unavailable → output instrumentation checklist as markdown with event names, properties, and trigger conditions.
 - **Produces:** Populated `Measurement Plan` section
 
 ### Step 5: Validate and stress-test
@@ -119,6 +171,17 @@ Output is formatted for use in Amplitude, Mixpanel, Google Analytics, or as a st
 - **Actions:**
   - Use `references/metrics-framework-template.md` for the response structure.
   - Include `references/metrics-handoff-schema.md` when output feeds `$ab-test-planner` or `$stakeholder-presentation-writer`.
+- **Tool action — Google Sheets (if available):**
+  - Create metrics tracking dashboard with columns: metric name, type (primary/secondary/guardrail), definition, baseline, target, current value, measurement cadence.
+  - Include a baselines tab for historical data entry.
+- **Tool action — Notion (if available):**
+  - Publish metrics framework as a Notion page.
+  - Create linked database of metric definitions with measurement plan.
+- **If** no tools available → output as structured markdown with all sections.
+- **Next steps:** Based on output, suggest:
+  - "Design an A/B test around these metrics using `$ab-test-planner`."
+  - "Present this metrics framework to stakeholders using `$stakeholder-presentation-writer`."
+  - "If baselines are unknown, instrument the current experience first, then revisit targets in 2-4 weeks."
 - **Produces:** Complete framework with all required sections and optional `Downstream Handoff`
 - **References:** `references/metrics-framework-template.md`, `references/metrics-handoff-schema.md`
 

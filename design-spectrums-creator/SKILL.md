@@ -50,6 +50,31 @@ batch:
   enabled: true
   input_key: design_brief
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: figma
+    actions: [generate_diagram, create_figjam_board]
+    when: "Creating spectrum visualization in FigJam for team voting"
+  - name: notion
+    actions: [publish_decisions]
+    when: "Publishing spectrum decisions with rationale to Notion"
+  - name: slack
+    actions: [send_message]
+    when: "Sharing spectrums for async feedback or voting"
+
+# User Input Gates
+user_inputs:
+  - step: 2
+    question: "Identified [N] spectrums. Any tensions to add or remove?"
+    required: true
+  - step: 3
+    question: "Where would you position on [spectrum]?"
+    required: true
+  - step: 4
+    question: "Share on Slack for team input?"
+    required: false
+    default: false
 ---
 
 # Design Spectrums Creator
@@ -60,6 +85,16 @@ Use this skill to surface and map the key design tensions for a given challenge.
 
 Accepts a design brief, feature description, problem statement, or output from upstream skills like `$persona-creator`, `$journey-mapper`, `$inspiration-browser`, or `$design-spec-writer` and produces a set of labeled spectrums with positions, rationale, and design implications. Output is formatted for use in FigJam, Miro, or as structured markdown in Notion. When the target tool is specified, adapt the spectrum visualization format for that tool's canvas or layout.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Figma** | Create spectrum visualization in FigJam with labeled poles, position markers, and voting zones for team alignment | Output spectrums as text-based visualizations with ASCII position markers |
+| **Notion** | Publish spectrum decisions with rationale, position justifications, and derived principles | Output as markdown; user pastes into Notion |
+| **Slack** | Share spectrum cards for async team feedback and voting before finalizing positions | Include "share with team for input" in action items |
+
 ## Workflow
 
 ### Step 1: Understand the design context
@@ -69,10 +104,12 @@ Accepts a design brief, feature description, problem statement, or output from u
   - Capture user needs, business constraints, and technical realities.
   - Accept upstream inputs from `$persona-creator`, `$journey-mapper`, or `$inspiration-browser` if available.
   - Note the team's current assumptions or default positions.
+- **If** no upstream data provided (no personas, journey map, or design spec) → flag all positions as "proposed, not validated" and recommend gathering evidence before committing.
 - **Produces:** Populated `Design Context` section
 
 ### Step 2: Identify relevant spectrums
 - **Reads:** Step 1 context
+- **Ask user:** "Identified [N] spectrums. Any tensions to add or remove?" — present the proposed spectrum list before defining each one.
 - **Actions:**
   - Analyze the design challenge for inherent tensions and trade-offs.
   - Draw from common design spectrums (see `references/common-spectrums.md`) but prioritize challenge-specific tensions.
@@ -84,22 +121,31 @@ Accepts a design brief, feature description, problem statement, or output from u
 
 ### Step 3: Define each spectrum
 - **Reads:** Step 2 spectrum list
+- **Ask user:** "Where would you position on [spectrum]?" — ask per spectrum to capture the user's intuition before presenting recommendations.
 - **Actions:**
   - Name the spectrum with both poles (e.g., "Guided <--> Exploratory").
   - Define what each pole means in the context of this challenge.
   - Provide a real-world product example at each end.
   - Explain the trade-off: what you gain and lose at each pole.
   - Identify the user and business factors that pull toward each pole.
+- **If** workshop context → set up for team voting via FigJam (each participant places a marker).
+- **If** solo context → recommend positions based on evidence, flag for team validation.
 - **Produces:** Populated `Spectrum Cards` section
 
 ### Step 4: Recommend positions
 - **Reads:** Step 3 spectrum definitions, personas, journey_context
+- **Ask user:** "Share on Slack for team input?" — Default: do not share.
 - **Actions:**
   - For each spectrum, recommend a position (not always the middle — strong positions are often better).
   - Justify the position based on user needs, persona attributes, and business goals.
   - Note whether the position should shift for different personas or contexts.
   - Flag spectrums where the team should discuss and decide collectively.
   - Use `references/spectrum-card-template.md` for structure.
+- **Checkpoint:** "Here are the recommended positions for all [N] spectrums. Do any positions feel wrong or need team discussion?"
+- **Tool action — Slack (if available and user confirms):**
+  - Share spectrum cards with positions for async team feedback and voting.
+  - Include a prompt for each spectrum: "Where would you place us on this spectrum? Reply with L/M/R and your reasoning."
+- **If** Slack unavailable → include "share with team for alignment" in action items.
 - **Produces:** Position recommendations within `Spectrum Cards` section
 - **References:** `references/spectrum-card-template.md`
 
@@ -116,6 +162,17 @@ Accepts a design brief, feature description, problem statement, or output from u
 - **Actions:**
   - Use `references/spectrum-card-template.md` for the response structure.
   - Include a visual summary showing all spectrums with recommended positions.
+- **Tool action — Figma (if available):**
+  - Create spectrum visualization in FigJam with labeled poles, position markers, and voting zones.
+  - Use generate_diagram for the visual layout of all spectrums.
+- **Tool action — Notion (if available):**
+  - Publish spectrum decisions with rationale and derived principles as a Notion page.
+  - Link to upstream evidence (personas, journey maps) where available.
+- **If** no tools available → output as structured markdown with text-based spectrum visualizations.
+- **Next steps:** Based on output, suggest:
+  - "Use these principles to guide a design spec with `$design-spec-writer`."
+  - "If positions are unvalidated, gather evidence with `$research-plan-writer`."
+  - "Share with stakeholders using `$stakeholder-presentation-writer`."
 - **Produces:** Complete output with all required sections and optional `Downstream Handoff`
 - **References:** `references/spectrum-card-template.md`
 

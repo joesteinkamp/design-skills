@@ -40,6 +40,32 @@ batch:
   enabled: true
   input_key: feature_or_flow
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: figma
+    actions: [generate_diagram]
+    when: "Generating flow diagram in FigJam"
+  - name: notion
+    actions: [publish_flow]
+    when: "Publishing flow documentation to Notion"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "What is the entry point for this flow?"
+    required: true
+  - step: 1
+    question: "What is the success state (end goal)?"
+    required: true
+  - step: 3
+    question: "Happy path is mapped. Want me to add error and edge-case branches?"
+    required: true
+    default: true
+  - step: 6
+    question: "Create this as a FigJam diagram?"
+    required: false
+    default: false
 ---
 
 # User Flow Mapper
@@ -52,15 +78,28 @@ Unlike journey maps (which capture high-level experience arcs across touchpoints
 
 The output should be implementation-ready: every screen, decision point, and error state is accounted for so that designers and developers have a complete picture of the interaction. Output is formatted for use in FigJam, Miro, Whimsical, or as structured markdown in Notion. When the target tool is specified, adapt the flow notation for that tool's shapes and connectors.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Figma** | Generate flow diagram in FigJam with nodes, decision diamonds, and connectors using generate_diagram | Output flow as structured text notation using `references/flow-notation-guide.md`; user builds diagram manually |
+| **Notion** | Publish flow documentation as a Notion page with linked decision tables | Output as markdown; user pastes into Notion |
+
 ## Workflow
 
 ### Step 1: Define the flow scope
 - **Reads:** feature_or_flow, design_spec (if provided), journey_map (if provided)
+- **Ask user:** "What is the entry point for this flow?" — e.g., "User arrives at [screen] from [source]."
+- **Ask user:** "What is the success state (end goal)?" — e.g., "User sees [confirmation]."
 - **Actions:**
   - Identify the user goal and entry point.
   - Set clear start state and end state (success condition).
   - Determine the persona or user type if behavior varies by role.
   - Identify whether this is a task flow (single path), user flow (multiple paths), or wire flow (with screen representations).
+- **If** journey_map provided from `$journey-mapper` → decompose the relevant journey phase into screen-level steps.
+- **If** design_spec provided from `$design-spec-writer` → extract interaction specifications and user stories as flow inputs.
 - **Produces:** Populated `Flow Overview` section
 
 ### Step 2: Map the happy path
@@ -70,15 +109,18 @@ The output should be implementation-ready: every screen, decision point, and err
   - List each step: screen/state, user action, and system response.
   - Note the transition type between steps (navigation, modal, inline update, redirect).
   - Keep steps at a consistent granularity (one action per step).
+- **Checkpoint:** "Here is the happy path with [N] steps from entry to success. Does this capture the primary flow correctly?"
 - **Produces:** Populated `Happy Path` section
 
 ### Step 3: Map decision points and branches
 - **Reads:** Step 2 happy path
+- **Ask user:** "Happy path is mapped. Want me to add error and edge-case branches?" — Default: yes.
 - **Actions:**
   - Identify every point where the user makes a choice or the system branches.
   - Document each branch with its condition and destination.
   - Map conditional logic (if/then rules, permission gates, feature flags).
   - Note which branches converge back to the main flow.
+- **If** user declines error/edge branches → skip Step 4 and note that error paths are not yet documented.
 - **Produces:** Populated `Decision Points & Branches` section
 
 ### Step 4: Map error and edge cases
@@ -101,10 +143,22 @@ The output should be implementation-ready: every screen, decision point, and err
 
 ### Step 6: Format output
 - **Reads:** All previous step outputs
+- **Ask user:** "Create this as a FigJam diagram?" — Default: output as text notation.
 - **Actions:**
   - Use `references/user-flow-template.md` for the response structure.
   - Use `references/flow-notation-guide.md` for consistent notation.
   - Ensure every path from entry reaches either success or a documented error recovery.
+- **Tool action — Figma (if available and user confirms):**
+  - Generate flow diagram in FigJam using generate_diagram with nodes for screens, diamonds for decisions, and labeled connectors.
+  - Include color coding: green for happy path, red for error states, gray for edge cases.
+- **Tool action — Notion (if available):**
+  - Publish flow documentation as a Notion page.
+  - Include decision tables and error state matrices as linked databases.
+- **If** FigJam unavailable → output flow as structured text notation using `references/flow-notation-guide.md`.
+- **Next steps:** Based on output, suggest:
+  - "Test this flow with users using `$usability-test-planner`."
+  - "If this flow came from a journey map, return to `$journey-mapper` to map the next phase."
+  - "If you need a design spec for screens in this flow, use `$design-spec-writer`."
 - **Produces:** Complete flow document with all required sections
 - **References:** `references/user-flow-template.md`, `references/flow-notation-guide.md`
 

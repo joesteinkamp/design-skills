@@ -35,6 +35,35 @@ batch:
   enabled: true
   input_key: design_artifact
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: figma
+    actions: [get_screenshot, get_design_context]
+    when: "Capturing screenshots and analyzing component-level design details"
+  - name: linear
+    actions: [create_issue]
+    when: "Creating action items from priority findings"
+  - name: slack
+    actions: [send_message, share_link]
+    when: "Sharing critique summary for async discussion"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "What design stage is this?"
+    options: [concept, wireframe, high_fi, pre_ship]
+    required: true
+  - step: 1
+    question: "Figma URL?"
+    required: false
+  - step: 1
+    question: "Any specific areas of concern?"
+    required: false
+  - step: 4
+    question: "Post priority actions to Linear?"
+    required: false
+    default: false
 ---
 
 # Design Critique
@@ -45,15 +74,32 @@ Use this skill to produce structured, actionable design critiques. Accepts desig
 
 The output should be constructive and specific: every concern comes with a recommendation, and strengths are acknowledged alongside issues. Output is formatted for use in Figma comments, Notion, or Loom script. When the target format is specified, adapt the critique structure accordingly.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Figma** | Capture screenshots and use get_design_context for component-level critique with node references, spacing values, and design token inspection | Critique based on provided descriptions or screenshots; note that component-level details may be less precise |
+| **Linear** | Create action items from priority findings (concerns and blockers) with severity, category, recommendation, and effort estimate | Output action items as a prioritized list; user creates tickets manually |
+| **Slack** | Share critique summary in relevant channel for async team discussion and follow-up | Output critique summary as text; user shares manually |
+
 ## Workflow
 
 ### Step 1: Establish context
 - **Reads:** design_artifact, design_spec (if provided)
+- **Ask user:** "What design stage is this?" — options: concept, wireframe, high-fi, pre-ship. Determines critique depth.
+- **Ask user:** "Figma URL?" — if available, enables visual-reference critique.
+- **Ask user:** "Any specific areas of concern?" — focuses the critique on what matters most.
 - **Actions:**
   - Identify what is being critiqued (screen, flow, component, prototype).
   - Clarify design goals and target persona.
-  - Determine design stage: concept, mid-fi, hi-fi, or pre-ship.
+  - Determine design stage: concept, wireframe, hi-fi, or pre-ship.
   - Adjust critique depth to match the stage (concepts get directional feedback, pre-ship gets detailed findings).
+- **If** Figma URL provided → critique with visual references and component-level details.
+- **Tool action — Figma (if Figma URL provided):** Capture screenshots with get_screenshot and pull design context with get_design_context for component-level analysis including spacing, typography, and design token usage.
+- **If** concept stage → provide directional feedback on approach and structure; skip pixel-level and implementation-specific critique.
+- **If** pre-ship stage → provide detailed, implementation-specific critique including edge cases, error states, loading states, and pixel-level polish.
 - **Produces:** Populated `Critique Context` section
 
 ### Step 2: Apply evaluation lenses using the Ladder of Feedback method
@@ -67,6 +113,7 @@ The output should be constructive and specific: every concern comes with a recom
   - Use `references/critique-rubric.md` for the full lens set.
   - Evaluate across: user goals, interaction clarity, visual hierarchy, design system consistency, content quality, edge cases, emotional tone.
   - Note both strengths and weaknesses per lens.
+- **Checkpoint:** "I've evaluated across [N] lenses. Here's a summary of [X] strengths and [Y] concerns. Ready for detailed findings?"
 - **Produces:** Populated `What Works Well` and `Findings` sections
 - **References:** `references/critique-rubric.md`
 
@@ -81,10 +128,15 @@ The output should be constructive and specific: every concern comes with a recom
 
 ### Step 4: Generate recommendations
 - **Reads:** Step 3 classified findings
+- **Ask user:** "Post priority actions to Linear?" — Default: no.
 - **Actions:**
   - Provide a specific, actionable recommendation for each concern and blocker.
   - Reference design principles or heuristics when relevant.
   - Estimate effort for priority actions.
+- **Tool action — Linear (if available and user confirms):** Create action items from priority findings (concerns and blockers) with severity, category, recommendation, effort estimate, and Figma link (if available).
+- **If** Linear unavailable → output action items as a prioritized list for manual ticket creation.
+- **Tool action — Slack (if available):** Share critique summary with key findings and priority actions in the relevant channel for async discussion.
+- **If** Slack unavailable → output critique summary as shareable text.
 - **Produces:** Populated `Priority Actions` section
 
 ### Step 5: Format output
@@ -93,6 +145,10 @@ The output should be constructive and specific: every concern comes with a recom
   - Use `references/critique-output-template.md` for the response structure.
   - Lead with an executive summary before detailed findings.
   - End with open questions that help the designer think further.
+- **Next steps:** Based on output, suggest:
+  - "To present these findings to stakeholders, use `$stakeholder-presentation-writer`."
+  - "To turn priority fixes into design specs, use `$design-spec-writer`."
+  - "For a systematic heuristic evaluation with scores, use `$heuristic-evaluator`."
 - **Produces:** Complete critique with all required sections including `Executive Summary` and `Open Questions for Designer`
 - **References:** `references/critique-output-template.md`
 

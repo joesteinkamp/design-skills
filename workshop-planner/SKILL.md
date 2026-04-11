@@ -35,6 +35,51 @@ batch:
   enabled: true
   input_key: workshop_brief
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: google_calendar
+    actions: [find_availability, create_event]
+    when: "Finding availability and booking workshop sessions"
+  - name: gmail
+    actions: [send_pre_read, send_agenda]
+    when: "Sending pre-read materials and agenda to participants"
+  - name: zoom
+    actions: [create_meeting]
+    when: "Setting up remote or hybrid meeting link"
+  - name: figma
+    actions: [generate_diagram]
+    when: "Generating FigJam board structure for exercises"
+  - name: slack
+    actions: [send_message]
+    when: "Sharing agenda and collecting RSVPs"
+  - name: notion
+    actions: [publish_plan]
+    when: "Publishing workshop plan as a Notion page"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "What decision should come out of this workshop?"
+    required: true
+  - step: 1
+    question: "Remote, hybrid, or in-person?"
+    required: true
+    options: [remote, hybrid, in-person]
+  - step: 1
+    question: "How many participants?"
+    required: true
+  - step: 2
+    question: "Workshop type: alignment, decision, or discovery?"
+    required: true
+    options: [alignment, decision, discovery]
+  - step: 4
+    question: "Any interpersonal dynamics or tensions to plan around?"
+    required: false
+  - step: 5
+    question: "Want me to book the calendar slot and send invites?"
+    required: false
+    default: false
 ---
 
 # Workshop Planner
@@ -45,22 +90,43 @@ Use this skill to convert a vague workshop request into a concrete plan that can
 
 The output should be decision-ready: objective, audience, agenda, exercises, facilitation notes, and clear expected artifacts.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Google Calendar** | Find participant availability and book the workshop session | Output proposed time slots as a table; user books manually |
+| **Gmail** | Send pre-read materials and agenda to participants before the workshop | Output pre-read and agenda as text; user sends manually |
+| **Zoom** | Set up meeting link for remote or hybrid workshops with recording | Include "set up Zoom meeting" in logistics checklist |
+| **Figma** | Generate FigJam board structure via generate_diagram for workshop exercises | Output board layout as markdown; user creates FigJam board manually |
+| **Slack** | Share agenda, logistics, and collect RSVPs from participants | Include "share via Slack" in pre-workshop checklist |
+| **Notion** | Publish workshop plan as a Notion page for team reference | Output as markdown; user pastes into Notion |
+
 ## Workflow
 
 ### Step 1: Define workshop frame
 - **Reads:** workshop_brief
+- **Ask user:** "What decision should come out of this workshop?" — the single most important outcome.
+- **Ask user:** "Remote, hybrid, or in-person?" — determines tooling and facilitation approach.
+- **Ask user:** "How many participants?" — affects exercise design and time-boxing.
 - **Actions:**
   - Capture topic, audience, duration, team size, decision scope, and success criteria.
   - Clarify constraints: time limits, participant seniority, remote/hybrid setup, pre-reads, and dependencies.
   - If missing inputs block planning quality, state assumptions explicitly.
+- **If** remote or hybrid → plan for Zoom setup and digital collaboration tools.
+- **If** in-person → plan for physical materials, room setup, and whiteboard needs.
 - **Produces:** Populated `Workshop Brief` section
 
 ### Step 2: Choose planning pattern
 - **Reads:** Step 1 output
+- **Ask user:** "Workshop type: alignment, decision, or discovery?" — determines the exercise flow pattern.
 - **Actions:**
-  - For alignment and operating-model sessions, prefer: context -> reactions -> solutions/signals -> commitments.
-  - For decision sessions, prefer: context -> options -> tradeoffs -> decision -> owners.
-  - For discovery sessions, prefer: context -> pain points -> opportunities -> prioritization -> next actions.
+  - Select the appropriate planning pattern based on workshop type.
+- **If** alignment → use pattern: context -> reactions -> solutions/signals -> commitments.
+- **If** decision → use pattern: context -> options -> trade-offs -> decision -> owners.
+- **If** discovery → use pattern: context -> pain points -> opportunities -> prioritization -> next actions.
+- **Checkpoint:** "Using the [type] pattern: [pattern summary]. Does this match what you need from this workshop?"
 - **Produces:** Populated `Agenda & Run of Show` section (pattern selection)
 
 ### Step 3: Build agenda and exercise design
@@ -69,22 +135,47 @@ The output should be decision-ready: objective, audience, agenda, exercises, fac
   - Time-box every segment.
   - Define each exercise with objective, participant prompt, activity instructions, and expected outputs.
   - Include discussion prompts that force ownership and short-horizon action.
+- **Tool action — Figma (if available):**
+  - Generate FigJam board structure via generate_diagram with exercise zones, sticky-note areas, and voting sections.
+- **If** Figma unavailable → describe board layout in markdown for manual FigJam/Miro setup.
 - **Produces:** Populated `Agenda & Run of Show` and `Exercise Specs` sections
 
 ### Step 4: Add facilitation risk controls
 - **Reads:** Step 1 context, Step 3 agenda
+- **Ask user:** "Any interpersonal dynamics or tensions to plan around?" — informs facilitation interventions.
 - **Actions:**
   - Pre-identify likely failure modes (scope drift, dominant voices, low engagement, unresolved conflict).
   - Add explicit interventions for each failure mode.
   - Keep facilitation language practical and operational, not theoretical.
+- **If** interpersonal tensions flagged → add specific de-escalation strategies and structured turn-taking exercises.
 - **Produces:** Populated `Facilitation Risks & Interventions` section
 
-### Step 5: Produce the handoff packet
+### Step 5: Produce the handoff packet and schedule
 - **Reads:** All previous step outputs
+- **Ask user:** "Want me to book the calendar slot and send invites?" — Default: output schedule as markdown.
 - **Actions:**
   - Format output using `references/workshop-planning-template.md`.
   - Include a `FigJam Creator Handoff` section using `references/figjam-handoff-schema.md`.
   - Ensure the handoff is copy/paste-ready as input for `$figjam-workshop-prompt-creator`.
+- **Tool action — Google Calendar (if available and user confirms):**
+  - Find available slots across all participants.
+  - Book the workshop session with agenda in the calendar event description.
+- **Tool action — Zoom (if available and remote/hybrid):**
+  - Create meeting link with recording enabled.
+  - Include Zoom link in calendar event.
+- **Tool action — Gmail (if available and user confirms):**
+  - Send pre-read materials and agenda to all participants.
+  - Include logistics, preparation instructions, and Zoom link (if remote/hybrid).
+- **Tool action — Slack (if available):**
+  - Share agenda and logistics in the relevant team channel.
+  - Collect RSVPs or confirmations.
+- **Tool action — Notion (if available):**
+  - Publish workshop plan as a Notion page for team reference.
+- **If** no scheduling tools available → output proposed schedule and email drafts as markdown.
+- **Next steps:** Based on output, suggest:
+  - "Use `$figjam-workshop-prompt-creator` to generate the FigJam board from the handoff brief."
+  - "After the workshop, use `$research-synthesizer` to process any discovery findings."
+  - "If workshop outputs need to become specs, use `$design-spec-writer`."
 - **Produces:** Complete plan with all required sections including `Expected Artifacts` and `FigJam Creator Handoff`
 - **References:** `references/workshop-planning-template.md`, `references/figjam-handoff-schema.md`
 

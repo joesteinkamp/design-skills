@@ -35,6 +35,41 @@ batch:
   enabled: true
   input_key: design_screens
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: figma
+    actions: [get_screenshot, get_design_context]
+    when: "Capturing screenshots per screen and analyzing interaction details from Figma"
+  - name: chrome
+    actions: [navigate, interact, observe]
+    when: "Navigating live product for actual interaction evaluation"
+  - name: google_sheets
+    actions: [create_spreadsheet, populate_rows]
+    when: "Exporting scorecard and severity matrix as structured spreadsheet"
+  - name: linear
+    actions: [create_issue]
+    when: "Creating fix tickets from top priority findings"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "Quick scan or deep evaluation?"
+    options: [quick_scan, deep_evaluation]
+    default: deep_evaluation
+    required: true
+  - step: 1
+    question: "Custom heuristics or Nielsen's 10?"
+    options: [nielsens_10, custom]
+    default: nielsens_10
+    required: true
+  - step: 1
+    question: "Figma URL or live product URL?"
+    required: true
+  - step: 3
+    question: "Top 3 fixes identified. Create Linear tickets?"
+    required: false
+    default: false
 ---
 
 # Heuristic Evaluator
@@ -45,15 +80,35 @@ Use this skill to evaluate interfaces systematically against established usabili
 
 The output should be rigorous and actionable: every heuristic gets a score, every violation has a severity rating, and the top fixes are prioritized by impact. Output is formatted for use in Figma annotations, Notion, or Jira. When the target tool is specified, adapt the finding format for that tool's structure.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Figma** | Capture screenshots per screen for visual reference; use get_design_context for interaction analysis and component inspection | Evaluate based on provided screen descriptions or design specs; user provides screenshots manually |
+| **Chrome** | Navigate the live product to evaluate actual interactions, transitions, error states, and dynamic behavior | Evaluate based on static descriptions; flag that dynamic behavior was not directly observed |
+| **Google Sheets** | Export the full scorecard, severity matrix, and finding details as a structured spreadsheet for team review | Output scorecard and matrix as markdown tables; user creates spreadsheet manually |
+| **Linear** | Create fix tickets from the top 3 priority findings with severity, location, recommendation, and effort estimate | Output ticket-ready descriptions; user creates tickets manually |
+
 ## Workflow
 
 ### Step 1: Define scope
 - **Reads:** design_screens, design_spec (if provided)
+- **Ask user:** "Quick scan or deep evaluation?" — quick scan covers top-level screens only; deep evaluation examines every state, edge case, and error flow. Default: deep evaluation.
+- **Ask user:** "Custom heuristics or Nielsen's 10?" — Default: Nielsen's 10.
+- **Ask user:** "Figma URL or live product URL?" — determines the evaluation method.
 - **Actions:**
   - Identify what is being evaluated (screens, flows, components).
   - Select heuristic set: Nielsen's 10 (default), extended, or custom.
   - Determine evaluation depth: quick scan or deep evaluation.
   - Note platform and user context.
+- **If** Figma URL provided → use get_screenshot and get_design_context for each screen.
+- **Tool action — Figma (if Figma URL provided):** Capture screenshots per screen and pull design context for interaction analysis, node references, and component details.
+- **If** live product URL provided → use Chrome for interactive evaluation.
+- **Tool action — Chrome (if live URL provided):** Navigate the live product to evaluate actual interactions, transitions, error handling, and dynamic behavior.
+- **If** quick scan → evaluate top-level screens only, skip edge cases and error states.
+- **If** deep evaluation → evaluate every state including empty, loading, error, success, and edge cases.
 - **Produces:** Populated `Evaluation Scope` section
 
 ### Step 2: Evaluate per heuristic using Nielsen's 10 as the canonical baseline
@@ -74,16 +129,22 @@ The output should be rigorous and actionable: every heuristic gets a score, ever
   - Assess compliance for each heuristic.
   - Document violations with severity (0-4 scale), location, and evidence.
   - Note positive patterns where heuristics are well-satisfied.
+- **Checkpoint:** "I've completed the heuristic-by-heuristic assessment. Here are [N] violations across [M] heuristics. Ready for scoring and prioritization?"
 - **Produces:** Populated `Findings` section
 - **References:** `references/heuristic-definitions.md`
 
 ### Step 3: Score and rank
 - **Reads:** Step 2 findings
+- **Ask user:** "Top 3 fixes identified. Create Linear tickets?" — Default: no.
 - **Actions:**
   - Assign a score (0-4) per heuristic based on worst violation severity.
   - Calculate overall score.
   - Build severity matrix showing violation counts by severity level.
   - Identify top 3 most impactful violations.
+- **Tool action — Google Sheets (if available):** Export the full scorecard, severity matrix, and detailed findings as a structured spreadsheet for team review and tracking.
+- **If** Google Sheets unavailable → output scorecard and matrix as markdown tables.
+- **Tool action — Linear (if available and user confirms):** Create fix tickets for the top 3 priority findings with severity rating, screen location, violation description, recommended fix, and effort estimate.
+- **If** Linear unavailable → output ticket-ready descriptions for manual creation.
 - **Produces:** Populated `Scorecard`, `Severity Matrix`, and `Top 3 Priority Fixes` sections
 
 ### Step 4: Generate recommendations
@@ -100,6 +161,10 @@ The output should be rigorous and actionable: every heuristic gets a score, ever
   - Use `references/heuristic-eval-template.md` for the response structure.
   - Lead with the scorecard for quick scanning.
   - Highlight positive patterns alongside violations.
+- **Next steps:** Based on output, suggest:
+  - "For a broader design critique beyond heuristics, use `$design-critique`."
+  - "For WCAG accessibility compliance, use `$accessibility-auditor`."
+  - "To turn top fixes into design specs, use `$design-spec-writer`."
 - **Produces:** Complete evaluation with all required sections
 - **References:** `references/heuristic-eval-template.md`
 

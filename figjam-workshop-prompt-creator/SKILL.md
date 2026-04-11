@@ -35,6 +35,30 @@ batch:
   enabled: true
   input_key: workshop_details
   parallelizable: true
+
+# Tool Integration
+tools:
+  - name: figma
+    actions: [generate_diagram, get_figjam]
+    when: "Creating FigJam board with zones and prompts, or extending an existing board"
+  - name: slack
+    actions: [send_message]
+    when: "Sharing board link before workshop"
+
+# User Input Gates
+user_inputs:
+  - step: 1
+    question: "AI-native or traditional facilitation?"
+    options: [ai_native, traditional]
+    required: true
+    default: ai_native
+  - step: 2
+    question: "Any specific exercises to include?"
+    required: false
+  - step: 3
+    question: "Create the FigJam board now?"
+    required: false
+    default: false
 ---
 
 # FigJam Workshop Prompt Creator
@@ -48,32 +72,56 @@ Use this skill to generate reusable prompt packs that another AI model or facili
 
 Default to the AI-Native workshop baseline in `references/ai-native-workshop-instructions.md` when the user asks for AI-Native content or references previous AI-Native workshop work.
 
+## Tool Integration
+
+This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
+
+| Tool | What This Skill Does With It | If Unavailable |
+|------|------------------------------|----------------|
+| **Figma** | Create the actual FigJam board with zones, prompts, sticky-note areas, and voting sections using generate_diagram; extend an existing board using get_figjam | Output prompt pack as copy-ready text that user pastes into FigJam manually |
+| **Slack** | Share board link with participants before the workshop with pre-read instructions | Include "share board link" in facilitator prep checklist |
+
 ## Workflow
 
 ### Step 1: Collect session inputs
 - **Reads:** workshop_details, workshop_plan (if provided)
+- **Ask user:** "AI-native or traditional facilitation?" — determines the exercise pattern and board structure.
 - **Actions:**
   - Capture audience, duration, team size, workshop goal, and desired output artifacts.
   - Capture workshop constraints (remote vs in-person, tool stack, leadership attendance, time limits).
   - If details are missing, make pragmatic assumptions and label them clearly.
+- **If** workshop_plan provided from `$workshop-planner` → consume the agenda, exercises, and FigJam handoff block directly; skip pattern selection in Step 2.
 - **Produces:** Populated `Workshop Profile` and `Assumptions` sections
 
 ### Step 2: Select the workshop pattern
 - **Reads:** Step 1 output
+- **Ask user:** "Any specific exercises to include?" — allows the user to inject custom exercises into the pattern.
 - **Actions:**
   - Use the AI-Native baseline from `references/ai-native-workshop-instructions.md` when requested or implied.
   - Otherwise adapt the same structure (context -> reaction -> solutions/signals -> commitments).
   - Keep the sequence problem-first and action-oriented.
+- **If** AI-native selected → use the 3-exercise React/Riff/Solutions pattern from `references/ai-native-workshop-instructions.md`.
+- **If** traditional selected → adapt the structure but maintain context -> reaction -> solutions -> commitments flow.
+- **If** workshop_plan handoff → use the exercises defined in the handoff; adapt to FigJam board zones.
 - **Produces:** Selected pattern for prompt generation
 - **References:** `references/ai-native-workshop-instructions.md`
 
 ### Step 3: Generate a three-part prompt pack
 - **Reads:** Step 1 inputs, Step 2 pattern
+- **Ask user:** "Create the FigJam board now?" — Default: output as text prompts.
 - **Actions:**
   - Prompt A: FigJam board construction prompt.
   - Prompt B: Facilitation/run-of-show prompt.
   - Prompt C: Post-session synthesis prompt.
   - Use `references/prompt-pack-template.md` as the output shape.
+- **Tool action — Figma (if available and user confirms):**
+  - Create the actual FigJam board using generate_diagram with zones for each exercise, sticky-note areas, voting sections, and commitment capture areas.
+  - If extending an existing board, use get_figjam to read current board state first, then add new zones.
+- **Tool action — Slack (if available):**
+  - Share the board link with participants before the workshop.
+  - Include pre-read instructions and workshop goal in the message.
+- **If** FigJam MCP unavailable → output all three prompts as copy-ready text that the user pastes into FigJam or uses as a facilitation script.
+- **Checkpoint:** "Here is the 3-part prompt pack. Does the exercise flow match your workshop goals?"
 - **Produces:** Populated `Prompt A`, `Prompt B`, and `Prompt C` sections
 - **References:** `references/prompt-pack-template.md`
 
@@ -91,6 +139,10 @@ Default to the AI-Native workshop baseline in `references/ai-native-workshop-ins
   - Keep prompts copy/paste-ready.
   - Keep language direct and facilitator-friendly.
   - Remove internal planning notes from final prompt output.
+- **Next steps:** Based on output, suggest:
+  - "If you need to plan the workshop strategy first, use `$workshop-planner`."
+  - "After the workshop, synthesize findings with `$research-synthesizer`."
+  - "Turn workshop outcomes into a design spec with `$design-spec-writer`."
 - **Produces:** Complete prompt pack with all required sections
 
 ## Prompt Pack Contract
