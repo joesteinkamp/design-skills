@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* shadcn/ui CSS custom properties */
+        :root {
+            --background: 0 0% 100%;
+            --foreground: 222.2 84% 4.9%;
+            --card: 0 0% 100%;
+            --card-foreground: 222.2 84% 4.9%;
+            --popover: 0 0% 100%;
+            --popover-foreground: 222.2 84% 4.9%;
+            --primary: 222.2 47.4% 11.2%;
+            --primary-foreground: 210 40% 98%;
+            --secondary: 210 40% 96.1%;
+            --secondary-foreground: 222.2 47.4% 11.2%;
+            --muted: 210 40% 96.1%;
+            --muted-foreground: 215.4 16.3% 46.9%;
+            --accent: 210 40% 96.1%;
+            --accent-foreground: 222.2 47.4% 11.2%;
+            --destructive: 0 84.2% 60.2%;
+            --destructive-foreground: 210 40% 98%;
+            --border: 214.3 31.8% 91.4%;
+            --input: 214.3 31.8% 91.4%;
+            --ring: 222.2 84% 4.9%;
+            --radius: 0.5rem;
+        }
+        /* Base shadcn/ui component styles */
+        body { font-family: system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+        /* Button styles matching shadcn */
+        .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; transition: all 150ms; cursor: pointer; }
+        .btn-primary { background-color: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
+        .btn-secondary { background-color: hsl(var(--secondary)); color: hsl(var(--secondary-foreground)); }
+        .btn-outline { border: 1px solid hsl(var(--border)); background: transparent; }
+        .btn-ghost { background: transparent; }
+        .btn-destructive { background-color: hsl(var(--destructive)); color: hsl(var(--destructive-foreground)); }
+        /* Card styles */
+        .card { border-radius: var(--radius); border: 1px solid hsl(var(--border)); background: hsl(var(--card)); color: hsl(var(--card-foreground)); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .card-header { padding: 1.5rem 1.5rem 0; }
+        .card-title { font-size: 1.25rem; font-weight: 600; }
+        .card-description { font-size: 0.875rem; color: hsl(var(--muted-foreground)); }
+        .card-content { padding: 1.5rem; }
+        .card-footer { padding: 0 1.5rem 1.5rem; display: flex; align-items: center; }
+        /* Input styles */
+        .input { display: flex; height: 2.5rem; width: 100%; border-radius: calc(var(--radius) - 2px); border: 1px solid hsl(var(--input)); background: transparent; padding: 0.5rem 0.75rem; font-size: 0.875rem; }
+        .input:focus { outline: none; ring: 2px solid hsl(var(--ring)); }
+        /* Label */
+        .label { font-size: 0.875rem; font-weight: 500; }
+        /* Badge */
+        .badge { display: inline-flex; align-items: center; border-radius: 9999px; padding: 0.125rem 0.625rem; font-size: 0.75rem; font-weight: 600; }
+        /* Separator */
+        .separator { height: 1px; background: hsl(var(--border)); width: 100%; }
+        /* Avatar */
+        .avatar { display: inline-flex; align-items: center; justify-content: center; border-radius: 9999px; overflow: hidden; width: 2.5rem; height: 2.5rem; background: hsl(var(--muted)); }
+    </style>
+</head>
+<body class="bg-white p-6">
+    {{CONTENT}}
+</body>
+</html>
