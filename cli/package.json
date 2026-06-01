@@ -1,0 +1,41 @@
+{
+  "name": "@design-skills/cli",
+  "version": "0.1.0",
+  "description": "Designer task CLI that runs design-skills via the Claude CLI",
+  "type": "module",
+  "bin": {
+    "design": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "../*/SKILL.md",
+    "../*/references/**",
+    "../*/agents/**",
+    "../skills.yaml",
+    "../pipelines/**"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.0.0",
+    "commander": "^13.0.0",
+    "execa": "^9.5.0",
+    "gray-matter": "^4.0.3",
+    "yaml": "^2.6.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}
