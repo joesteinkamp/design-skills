@@ -31,13 +31,6 @@ const UserInput = z.object({
   default: z.union([z.string(), z.boolean(), z.number()]).optional(),
 });
 
-const Batch = z.object({
-  enabled: z.boolean().optional(),
-  input_key: z.string().optional(),
-  parallelizable: z.boolean().optional(),
-  notes: z.string().optional(),
-});
-
 export const SkillFrontmatterSchema = z.object({
   name: z.string(),
   description: z.string(),
@@ -51,7 +44,6 @@ export const SkillFrontmatterSchema = z.object({
   outputs: z.array(SkillOutput).optional().default([]),
   tools: z.array(SkillTool).optional().default([]),
   user_inputs: z.array(UserInput).optional().default([]),
-  batch: Batch.optional(),
 });
 
 export type SkillFrontmatter = z.infer<typeof SkillFrontmatterSchema>;

@@ -1,5 +1,5 @@
 import path from "node:path";
-import { findSkill } from "../skills/discover.js";
+import { defaultCategory, findSkill } from "../skills/discover.js";
 import { assemblePrompt } from "../skills/prompt.js";
 import { invokeClaude } from "../claude/invoke.js";
 import { collectInputs } from "../io/prompts.js";
@@ -12,6 +12,11 @@ interface RunOptions {
   outDir?: string;
   model?: string;
   maxBudgetUsd?: number;
+}
+
+// Schema validates `.+\.md$` on the envelope; strip extension once here.
+function slugForOutput(filename: string, fallback: string): string {
+  return slugify(filename.replace(/\.md$/i, ""), fallback);
 }
 
 export async function runCommand(
@@ -27,8 +32,8 @@ export async function runCommand(
   }
 
   const interactive = !opts.yes && process.stdin.isTTY === true;
-  const collected = await collectInputs(skill.frontmatter, { flags, interactive });
-  const assembled = await assemblePrompt(skill, collected.inputs);
+  const { inputs, userAnswers } = await collectInputs(skill, { flags, interactive });
+  const assembled = await assemblePrompt(skill, inputs, userAnswers);
   const model = opts.model ?? assembled.model;
 
   if (opts.dryRun) {
@@ -48,18 +53,19 @@ export async function runCommand(
     maxBudgetUsd: opts.maxBudgetUsd,
   });
 
-  const category = skill.frontmatter.category ?? "outputs";
-  const outRoot = path.resolve(process.cwd(), opts.outDir ?? "design", category);
-
-  // Honor envelope filename, but slugify defensively.
-  const baseSlug = slugify(envelope.filename.replace(/\.md$/i, ""), skill.frontmatter.name);
-  const primaryPath = await writeOutput(outRoot, `${baseSlug}.md`, envelope.body);
-  console.error(`Wrote ${primaryPath}`);
+  const outRoot = path.resolve(
+    process.cwd(),
+    opts.outDir ?? "design",
+    defaultCategory(skill),
+  );
+  const baseSlug = slugForOutput(envelope.filename, skill.frontmatter.name);
+  console.error(`Wrote ${await writeOutput(outRoot, `${baseSlug}.md`, envelope.body)}`);
 
   for (const side of envelope.sidecars ?? []) {
-    const slug = slugify(side.filename.replace(/\.md$/i, ""), "sidecar");
-    const p = await writeOutput(outRoot, `${baseSlug}.${slug}.md`, side.body);
-    console.error(`Wrote ${p}`);
+    const slug = slugForOutput(side.filename, "sidecar");
+    console.error(
+      `Wrote ${await writeOutput(outRoot, `${baseSlug}.${slug}.md`, side.body)}`,
+    );
   }
 
   if (typeof raw.total_cost_usd === "number") {

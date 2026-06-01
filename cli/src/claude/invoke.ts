@@ -10,26 +10,18 @@ export interface InvokeOptions {
   extraArgs?: string[];
 }
 
-export interface ClaudeJsonResult {
-  type: string;
-  subtype?: string;
-  result?: string;
-  session_id?: string;
-  total_cost_usd?: number;
-  is_error?: boolean;
-  [k: string]: unknown;
-}
-
 export interface SkillOutputEnvelope {
   filename: string;
   body: string;
   sidecars?: { filename: string; body: string }[];
 }
 
-export async function invokeClaude(opts: InvokeOptions): Promise<{
-  raw: ClaudeJsonResult;
+export interface ClaudeInvocationResult {
+  raw: { result: string; total_cost_usd?: number; session_id?: string; is_error?: boolean };
   envelope: SkillOutputEnvelope;
-}> {
+}
+
+export async function invokeClaude(opts: InvokeOptions): Promise<ClaudeInvocationResult> {
   const args: string[] = [
     "-p",
     "--bare",
@@ -44,9 +36,7 @@ export async function invokeClaude(opts: InvokeOptions): Promise<{
     JSON.stringify(OUTPUT_JSON_SCHEMA),
   ];
   if (opts.model) args.push("--model", opts.model);
-  if (opts.maxBudgetUsd !== undefined) {
-    args.push("--max-budget-usd", String(opts.maxBudgetUsd));
-  }
+  if (opts.maxBudgetUsd !== undefined) args.push("--max-budget-usd", String(opts.maxBudgetUsd));
   if (opts.extraArgs) args.push(...opts.extraArgs);
 
   let stdout: string;
@@ -67,9 +57,9 @@ export async function invokeClaude(opts: InvokeOptions): Promise<{
     );
   }
 
-  let raw: ClaudeJsonResult;
+  let raw: ClaudeInvocationResult["raw"];
   try {
-    raw = JSON.parse(stdout) as ClaudeJsonResult;
+    raw = JSON.parse(stdout);
   } catch {
     throw new Error(`claude returned non-JSON output:\n${stdout.slice(0, 500)}`);
   }
@@ -79,11 +69,9 @@ export async function invokeClaude(opts: InvokeOptions): Promise<{
 
   let envelope: SkillOutputEnvelope;
   try {
-    envelope = JSON.parse(raw.result) as SkillOutputEnvelope;
+    envelope = JSON.parse(raw.result);
   } catch {
-    throw new Error(
-      `Skill result was not valid JSON envelope:\n${raw.result.slice(0, 500)}`,
-    );
+    throw new Error(`Skill result was not valid JSON envelope:\n${raw.result.slice(0, 500)}`);
   }
   if (!envelope.filename || !envelope.body) {
     throw new Error(`Envelope missing filename/body: ${JSON.stringify(envelope)}`);

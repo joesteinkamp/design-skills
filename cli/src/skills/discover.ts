@@ -1,5 +1,4 @@
-import { readdir, readFile, stat } from "node:fs/promises";
-import { existsSync } from "node:fs";
+import { readdir, readFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,14 +10,25 @@ import {
   type AgentConfig,
   type SkillFrontmatter,
 } from "./schema.js";
+import { flagKey } from "../io/slug.js";
 
 export type SkillSource = "bundled" | "user" | "project";
+
+export interface UserInputWithFlag {
+  step?: number;
+  question: string;
+  required: boolean;
+  options?: string[];
+  default?: string | boolean | number;
+  flagKey: string;
+}
 
 export interface DiscoveredSkill {
   source: SkillSource;
   dir: string;
   skillMdPath: string;
   frontmatter: SkillFrontmatter;
+  userInputs: UserInputWithFlag[];
   body: string;
   agent?: AgentConfig;
 }
@@ -39,63 +49,81 @@ export function projectSkillsRoot(cwd = process.cwd()): string {
   return path.join(cwd, "skills");
 }
 
-async function isDir(p: string): Promise<boolean> {
-  try {
-    const s = await stat(p);
-    return s.isDirectory();
-  } catch {
-    return false;
-  }
+function skillRoots(cwd: string): { root: string; source: SkillSource }[] {
+  return [
+    { root: bundledSkillsRoot(), source: "bundled" },
+    { root: userSkillsRoot(), source: "user" },
+    { root: projectSkillsRoot(cwd), source: "project" },
+  ];
+}
+
+export function defaultCategory(skill: DiscoveredSkill): string {
+  return skill.frontmatter.category ?? "outputs";
+}
+
+function isEnoent(err: unknown): boolean {
+  return (err as NodeJS.ErrnoException)?.code === "ENOENT";
 }
 
 async function listSkillDirs(root: string): Promise<string[]> {
-  if (!(await isDir(root))) return [];
-  const entries = await readdir(root, { withFileTypes: true });
-  const dirs: string[] = [];
-  for (const e of entries) {
-    if (!e.isDirectory()) continue;
-    if (e.name.startsWith(".") || e.name === "node_modules") continue;
-    const skillMd = path.join(root, e.name, "SKILL.md");
-    if (existsSync(skillMd)) dirs.push(path.join(root, e.name));
+  let entries;
+  try {
+    entries = await readdir(root, { withFileTypes: true });
+  } catch (err) {
+    if (isEnoent(err)) return [];
+    throw err;
   }
-  return dirs;
+  return entries
+    .filter((e) => e.isDirectory() && !e.name.startsWith(".") && e.name !== "node_modules")
+    .map((e) => path.join(root, e.name));
 }
 
 async function loadAgentConfig(skillDir: string): Promise<AgentConfig | undefined> {
-  const p = path.join(skillDir, "agents", "claude.yaml");
-  if (!existsSync(p)) return undefined;
   try {
-    const raw = await readFile(p, "utf8");
-    const parsed = parseYaml(raw);
-    return AgentConfigSchema.parse(parsed);
-  } catch {
+    const raw = await readFile(path.join(skillDir, "agents", "claude.yaml"), "utf8");
+    return AgentConfigSchema.parse(parseYaml(raw));
+  } catch (err) {
+    if (isEnoent(err)) return undefined;
     return undefined;
   }
 }
 
-async function loadSkill(
-  skillDir: string,
-  source: SkillSource,
-): Promise<DiscoveredSkill | { error: string; dir: string }> {
+type LoadResult =
+  | { ok: true; skill: DiscoveredSkill }
+  | { ok: false; dir: string; error: string }
+  | { ok: false; dir: string; skipped: true };
+
+async function loadSkill(skillDir: string, source: SkillSource): Promise<LoadResult> {
   const skillMdPath = path.join(skillDir, "SKILL.md");
+  let raw: string;
   try {
-    const raw = await readFile(skillMdPath, "utf8");
+    raw = await readFile(skillMdPath, "utf8");
+  } catch (err) {
+    if (isEnoent(err)) return { ok: false, dir: skillDir, skipped: true };
+    return { ok: false, dir: skillDir, error: (err as Error).message };
+  }
+  try {
     const parsed = matter(raw);
     const frontmatter = SkillFrontmatterSchema.parse(parsed.data);
     const agent = await loadAgentConfig(skillDir);
+    const userInputs: UserInputWithFlag[] = frontmatter.user_inputs.map((q) => ({
+      ...q,
+      flagKey: flagKey(q.question),
+    }));
     return {
-      source,
-      dir: skillDir,
-      skillMdPath,
-      frontmatter,
-      body: parsed.content.trim(),
-      agent,
+      ok: true,
+      skill: {
+        source,
+        dir: skillDir,
+        skillMdPath,
+        frontmatter,
+        userInputs,
+        body: parsed.content.trim(),
+        agent,
+      },
     };
   } catch (err) {
-    return {
-      error: err instanceof Error ? err.message : String(err),
-      dir: skillDir,
-    };
+    return { ok: false, dir: skillDir, error: (err as Error).message };
   }
 }
 
@@ -105,25 +133,16 @@ export interface DiscoveryResult {
 }
 
 export async function discoverSkills(cwd = process.cwd()): Promise<DiscoveryResult> {
-  // Precedence: project > user > bundled. Later entries with same name win.
-  const sources: { root: string; source: SkillSource }[] = [
-    { root: bundledSkillsRoot(), source: "bundled" },
-    { root: userSkillsRoot(), source: "user" },
-    { root: projectSkillsRoot(cwd), source: "project" },
-  ];
-
   const byName = new Map<string, DiscoveredSkill>();
   const errors: DiscoveryResult["errors"] = [];
 
-  for (const { root, source } of sources) {
+  // Walk sources in precedence order; later (project > user > bundled) wins on name collision.
+  for (const { root, source } of skillRoots(cwd)) {
     const dirs = await listSkillDirs(root);
-    for (const dir of dirs) {
-      const loaded = await loadSkill(dir, source);
-      if ("error" in loaded) {
-        errors.push({ dir: loaded.dir, error: loaded.error });
-      } else {
-        byName.set(loaded.frontmatter.name, loaded);
-      }
+    const results = await Promise.all(dirs.map((d) => loadSkill(d, source)));
+    for (const r of results) {
+      if (r.ok) byName.set(r.skill.frontmatter.name, r.skill);
+      else if (!("skipped" in r)) errors.push({ dir: r.dir, error: r.error });
     }
   }
 
@@ -133,10 +152,12 @@ export async function discoverSkills(cwd = process.cwd()): Promise<DiscoveryResu
   return { skills, errors };
 }
 
-export async function findSkill(
-  name: string,
-  cwd = process.cwd(),
-): Promise<DiscoveredSkill | undefined> {
-  const { skills } = await discoverSkills(cwd);
-  return skills.find((s) => s.frontmatter.name === name);
+export async function findSkill(name: string): Promise<DiscoveredSkill | undefined> {
+  // Project > user > bundled. First match wins; no need to scan everything.
+  for (const { root, source } of skillRoots(process.cwd()).reverse()) {
+    const dir = path.join(root, name);
+    const r = await loadSkill(dir, source);
+    if (r.ok) return r.skill;
+  }
+  return undefined;
 }

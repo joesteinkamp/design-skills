@@ -7,6 +7,7 @@ import { runCommand } from "./commands/run.js";
 import { mcpAddCommand } from "./commands/mcp/add.js";
 import { mcpListCommand } from "./commands/mcp/list.js";
 import { mcpDoctorCommand } from "./commands/mcp/doctor.js";
+import { parsePassthroughFlags } from "./io/args.js";
 
 const program = new Command();
 program
@@ -19,18 +20,18 @@ program
   .command("init")
   .description("Scaffold a design workspace in the current directory")
   .option("--gitignore", "Append `design/` to .gitignore", false)
-  .action((opts) => initCommand(opts));
+  .action(initCommand);
 
 program
   .command("list")
   .description("List discovered skills (bundled + user + project)")
   .option("--json", "Emit JSON instead of a table")
-  .action((opts) => listCommand(opts));
+  .action(listCommand);
 
 program
   .command("describe <skill>")
   .description("Show the input/output contract for a skill")
-  .action((skill) => describeCommand(skill));
+  .action(describeCommand);
 
 program
   .command("run <skill> [skillArgs...]")
@@ -43,10 +44,9 @@ program
   .option("--out-dir <dir>", "Output directory root (default: ./design)")
   .option("--model <model>", "Override the skill's default model")
   .addOption(new Option("--max-budget-usd <amount>", "Cap claude spend").argParser(parseFloat))
-  .action(async (skill: string, skillArgs: string[], opts) => {
-    const flags = parsePassthroughFlags(skillArgs);
-    await runCommand(skill, flags, opts);
-  });
+  .action((skill: string, skillArgs: string[], opts) =>
+    runCommand(skill, parsePassthroughFlags(skillArgs), opts),
+  );
 
 const mcp = program.command("mcp").description("Manage MCP servers used by skills");
 mcp
@@ -55,34 +55,13 @@ mcp
   .option("--url <url>", "Override the server URL")
   .option("--transport <transport>", "http | sse | stdio")
   .option("--scope <scope>", "user | project | local")
-  .action((name, opts) => mcpAddCommand(name, opts));
-mcp.command("list").description("List configured MCP servers").action(() => mcpListCommand());
-mcp.command("doctor").description("Health-check configured MCP servers").action(() =>
-  mcpDoctorCommand(),
-);
+  .action(mcpAddCommand);
+mcp.command("list").description("List configured MCP servers").action(mcpListCommand);
+mcp.command("doctor").description("Health-check configured MCP servers").action(mcpDoctorCommand);
 
 try {
   await program.parseAsync(process.argv);
 } catch (err) {
   console.error(`Error: ${err instanceof Error ? err.message : String(err)}`);
   process.exit(1);
-}
-
-// Convert unknown args like ["--feature-description", "checkout", "--decision-stage", "build-ready"]
-// into a flag map. Boolean flags (no value following) become true.
-function parsePassthroughFlags(args: string[]): Record<string, unknown> {
-  const out: Record<string, unknown> = {};
-  for (let i = 0; i < args.length; i++) {
-    const a = args[i];
-    if (!a || !a.startsWith("--")) continue;
-    const key = a.slice(2);
-    const next = args[i + 1];
-    if (next === undefined || next.startsWith("--")) {
-      out[key] = true;
-    } else {
-      out[key] = next;
-      i++;
-    }
-  }
-  return out;
 }

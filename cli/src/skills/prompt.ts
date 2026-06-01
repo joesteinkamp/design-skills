@@ -1,5 +1,4 @@
 import { readFile } from "node:fs/promises";
-import { existsSync } from "node:fs";
 import path from "node:path";
 import type { DiscoveredSkill } from "./discover.js";
 
@@ -30,6 +29,10 @@ Return your response as a single JSON object matching this schema:
 - Do NOT wrap the JSON in markdown code fences. Emit raw JSON only.
 `.trim();
 
+function isEnoent(err: unknown): boolean {
+  return (err as NodeJS.ErrnoException)?.code === "ENOENT";
+}
+
 async function loadReferenceTemplates(skill: DiscoveredSkill): Promise<string> {
   const refs = new Set<string>();
   for (const out of skill.frontmatter.outputs) {
@@ -38,28 +41,29 @@ async function loadReferenceTemplates(skill: DiscoveredSkill): Promise<string> {
   }
   if (refs.size === 0) return "";
 
-  const blocks: string[] = [];
-  for (const rel of refs) {
-    const abs = path.isAbsolute(rel) ? rel : path.join(skill.dir, rel);
-    if (!existsSync(abs)) continue;
-    const content = await readFile(abs, "utf8");
-    blocks.push(`### Reference: \`${rel}\`\n\n${content.trim()}`);
-  }
-  if (blocks.length === 0) return "";
-  return `\n\n## Reference Templates\n\n${blocks.join("\n\n---\n\n")}`;
+  const loaded = await Promise.all(
+    [...refs].map(async (rel) => {
+      const abs = path.isAbsolute(rel) ? rel : path.join(skill.dir, rel);
+      try {
+        const content = await readFile(abs, "utf8");
+        return `### Reference: \`${rel}\`\n\n${content.trim()}`;
+      } catch (err) {
+        if (isEnoent(err)) return null;
+        throw err;
+      }
+    }),
+  );
+  const blocks = loaded.filter((b): b is string => b !== null);
+  return blocks.length === 0 ? "" : `\n\n## Reference Templates\n\n${blocks.join("\n\n---\n\n")}`;
 }
 
-function renderInputs(inputs: Record<string, unknown>): string {
+function renderKeyValues(entries: [string, unknown][]): string {
   const lines: string[] = [];
-  for (const [k, v] of Object.entries(inputs)) {
+  for (const [k, v] of entries) {
     if (v === undefined || v === null || v === "") continue;
     const value = typeof v === "string" ? v : JSON.stringify(v);
-    const isMultiline = value.includes("\n");
-    if (isMultiline) {
-      lines.push(`### ${k}\n\n${value}`);
-    } else {
-      lines.push(`- **${k}**: ${value}`);
-    }
+    if (value.includes("\n")) lines.push(`### ${k}\n\n${value}`);
+    else lines.push(`- **${k}**: ${value}`);
   }
   return lines.join("\n\n");
 }
@@ -67,6 +71,7 @@ function renderInputs(inputs: Record<string, unknown>): string {
 export async function assemblePrompt(
   skill: DiscoveredSkill,
   inputs: Record<string, unknown>,
+  userAnswers: Record<string, unknown> = {},
 ): Promise<AssembledPrompt> {
   const refs = await loadReferenceTemplates(skill);
   const systemPrompt = [
@@ -85,19 +90,22 @@ export async function assemblePrompt(
     OUTPUT_ENVELOPE_INSTRUCTIONS,
   ].join("\n");
 
-  const userMessage = [
+  const sections: string[] = [
     `Run the **${skill.frontmatter.name}** skill with the following inputs.`,
     "",
     "## Inputs",
     "",
-    renderInputs(inputs) || "_(no inputs provided)_",
-    "",
-    "Produce the output JSON envelope as instructed in the system prompt.",
-  ].join("\n");
+    renderKeyValues(Object.entries(inputs)) || "_(no inputs provided)_",
+  ];
+  const answerEntries = Object.entries(userAnswers);
+  if (answerEntries.length > 0) {
+    sections.push("", "## Answers to workflow questions", "", renderKeyValues(answerEntries));
+  }
+  sections.push("", "Produce the output JSON envelope as instructed in the system prompt.");
 
   return {
     systemPrompt,
-    userMessage,
+    userMessage: sections.join("\n"),
     model: skill.agent?.interface?.model,
   };
 }

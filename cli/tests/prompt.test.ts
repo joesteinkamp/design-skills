@@ -4,7 +4,7 @@ import { findSkill } from "../src/skills/discover.js";
 
 describe("assemblePrompt", () => {
   it("includes SKILL.md body, references, and output envelope instructions", async () => {
-    const skill = await findSkill("design-spec-writer", "/tmp/__nonexistent_cwd__");
+    const skill = await findSkill("design-spec-writer");
     expect(skill).toBeDefined();
     const out = await assemblePrompt(skill!, { feature_description: "checkout redesign" });
     expect(out.systemPrompt).toContain("design-spec-writer");
@@ -18,7 +18,7 @@ describe("assemblePrompt", () => {
   });
 
   it("handles minimal skills (no inputs / outputs / references)", async () => {
-    const skill = await findSkill("sketch-to-code", "/tmp/__nonexistent_cwd__");
+    const skill = await findSkill("sketch-to-code");
     expect(skill).toBeDefined();
     const out = await assemblePrompt(skill!, { description: "login page" });
     expect(out.systemPrompt).toContain("sketch-to-code");
