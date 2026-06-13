@@ -1,0 +1,8 @@
+interface:
+  display_name: "UX Copy Writer"
+  short_description: "Generate and refine UX microcopy in a consistent, accessible voice and tone"
+  invocation: "${ux-copy-writer}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/ux-copy-template.md"
+    - "../references/ux-copy-handoff-schema.md"

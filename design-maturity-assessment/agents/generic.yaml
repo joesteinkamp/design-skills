@@ -1,0 +1,8 @@
+interface:
+  display_name: "Design Maturity Assessment"
+  short_description: "Assess design org maturity across dimensions and produce a prioritized roadmap"
+  invocation: "${design-maturity-assessment}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/maturity-assessment-template.md"
+    - "../references/maturity-assessment-handoff-schema.md"

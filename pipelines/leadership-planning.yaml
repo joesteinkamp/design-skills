@@ -1,0 +1,39 @@
+name: leadership-planning
+description: "Pipeline for design leaders from maturity assessment through goals, prioritized roadmap, and a stakeholder-ready status. Use when setting team direction for a planning cycle."
+
+steps:
+  - skill: design-maturity-assessment
+    input_key: org_context
+    output_key: maturity_assessment
+    notes: "Optional starting point — establishes where the team is and where to invest."
+
+  - skill: design-okr-writer
+    input_from: design-maturity-assessment.maturity_assessment
+    output_key: okr_set
+    depends_on: [design-maturity-assessment]
+    notes: "Can run independently from company goals if no maturity assessment is needed."
+
+  - skill: roadmap-prioritizer
+    input_from: design-okr-writer.okr_set
+    output_key: prioritized_roadmap
+    depends_on: [design-okr-writer]
+
+  - skill: design-status-rollup
+    input_from:
+      - design-okr-writer.okr_set
+      - roadmap-prioritizer.prioritized_roadmap
+    output_key: status_digest
+    depends_on: [roadmap-prioritizer]
+    notes: "Rolls the plan and ongoing progress into a leadership-ready digest each cycle."
+
+entry_points:
+  - step: design-maturity-assessment
+    when: "Building the investment case before setting goals"
+  - step: design-okr-writer
+    when: "Maturity is understood; going straight to goal-setting"
+  - step: roadmap-prioritizer
+    when: "Goals exist; need to sequence the work"
+
+batch:
+  input_key: org_context
+  parallelizable_steps: []

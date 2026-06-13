@@ -164,6 +164,7 @@ This skill can connect to the following tools. For each, the skill describes wha
   - "Use `$dev-handoff-writer` to embed ARIA requirements and keyboard patterns into the engineering handoff."
   - "After remediation, re-run this audit to verify fixes."
   - "If design changes are needed, update the spec via `$design-spec-writer`."
+  - "To generate alt text and ARIA labels for images and icons flagged here, use `$alt-text-generator`."
 - **Produces:** Complete audit with all required sections including `Assistive Technology Notes` and optional `Dev Remediation Handoff`
 - **References:** `references/accessibility-audit-template.md`
 

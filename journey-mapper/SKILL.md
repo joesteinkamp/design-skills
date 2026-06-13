@@ -171,14 +171,14 @@ Revise before finalizing if any rule fails.
 
 | ID | Section | Rule | Severity |
 |----|---------|------|----------|
-| QB-01 | Phase Map | Any phase is missing one or more of the 5 layers (actions, thoughts, emotions, pain points, moments of delight) | blocker |
-| QB-02 | Phase Map | Pain points do not have severity ratings (critical / major / minor) | blocker |
-| QB-03 | Emotional Arc | Emotional valence is flat across all phases -- if the arc never dips or rises, the journey is under-analyzed | warning |
-| QB-04 | Phase Map | Fewer than 4 phases are mapped for a multi-touchpoint journey | blocker |
-| QB-05 | Opportunity Map | Opportunities do not map 1:1 to specific pain points (every pain point should have a corresponding opportunity) | blocker |
-| QB-06 | Opportunity Map | Opportunity classification is missing (quick-win / strategic / systemic) or impact/effort ratings are absent | warning |
-| QB-07 | Journey Overview | Journey has no clear start trigger ("user arrives at...") and end condition ("user has successfully...") | blocker |
-| QB-08 | Phase Map | Phases are at inconsistent granularity -- e.g., one phase covers 5 minutes and another covers 3 weeks | warning |
+| QB-01 | Phase Map | Every phase includes all 5 layers (actions, thoughts, emotions, pain points, moments of delight) | blocker |
+| QB-02 | Phase Map | Every pain point has a severity rating (critical / major / minor) | blocker |
+| QB-03 | Emotional Arc | Emotional arc varies across phases -- it dips and rises rather than staying flat (a flat arc signals an under-analyzed journey) | warning |
+| QB-04 | Phase Map | At least 4 phases are mapped for a multi-touchpoint journey | blocker |
+| QB-05 | Opportunity Map | Every pain point has a corresponding opportunity (opportunities map 1:1 to pain points) | blocker |
+| QB-06 | Opportunity Map | Every opportunity has a classification (quick-win / strategic / systemic) and impact/effort ratings | warning |
+| QB-07 | Journey Overview | Journey has a clear start trigger ("user arrives at...") and end condition ("user has successfully...") | blocker |
+| QB-08 | Phase Map | Phases are at consistent granularity -- avoid one phase covering 5 minutes and another covering 3 weeks | warning |
 
 ## Reference Navigation
 

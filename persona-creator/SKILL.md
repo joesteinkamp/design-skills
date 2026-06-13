@@ -171,14 +171,14 @@ Revise before finalizing if any rule fails.
 
 | ID | Section | Rule | Severity |
 |----|---------|------|----------|
-| QB-01 | Persona Cards | Personas are grouped by demographics (age, job title) rather than behavioral patterns (goals, frustrations, decision triggers) | blocker |
-| QB-02 | Persona Cards | Any persona card is missing a primary goal, at least one frustration, or at least two behavioral dimensions | blocker |
-| QB-03 | Persona Cards | Evidence quality is not tagged per attribute as research-backed, partially-evidenced, or assumed | blocker |
-| QB-04 | Persona Cards | Day-in-the-life scenario does not reference a specific task the user performs with the product | warning |
-| QB-05 | Persona Cards | Day-in-the-life scenario is fewer than 3 sentences or more than 5 sentences | warning |
-| QB-06 | Assumptions Log | Assumptions log is missing or has fewer entries than the number of assumed attributes | blocker |
-| QB-07 | Anti-Personas | Anti-personas are absent when the product has clear "not for this user" boundaries | warning |
-| QB-08 | Persona Summary Table | Persona names are generic labels ("Power User", "New User") rather than memorable, descriptive names | warning |
+| QB-01 | Persona Cards | Personas are grouped by behavioral patterns (goals, frustrations, decision triggers), not by demographics (age, job title) | blocker |
+| QB-02 | Persona Cards | Every persona card has a primary goal, at least one frustration, and at least two behavioral dimensions | blocker |
+| QB-03 | Persona Cards | Evidence quality is tagged per attribute as research-backed, partially-evidenced, or assumed | blocker |
+| QB-04 | Persona Cards | Day-in-the-life scenario references a specific task the user performs with the product | warning |
+| QB-05 | Persona Cards | Day-in-the-life scenario is 3-5 sentences | warning |
+| QB-06 | Assumptions Log | Assumptions log is present and has at least one entry per assumed attribute | blocker |
+| QB-07 | Anti-Personas | Anti-personas are included when the product has clear "not for this user" boundaries | warning |
+| QB-08 | Persona Summary Table | Persona names are memorable and descriptive, not generic labels ("Power User", "New User") | warning |
 
 ## Reference Navigation
 

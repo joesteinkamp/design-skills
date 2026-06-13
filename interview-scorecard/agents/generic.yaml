@@ -1,0 +1,8 @@
+interface:
+  display_name: "Interview Scorecard"
+  short_description: "Build competency-based interview scorecards and behavioral question banks for design hiring"
+  invocation: "${interview-scorecard}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/interview-scorecard-template.md"
+    - "../references/interview-scorecard-handoff-schema.md"

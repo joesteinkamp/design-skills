@@ -1,0 +1,6 @@
+interface:
+  display_name: "Design Maturity Assessment"
+  short_description: "Assess design org maturity across dimensions and produce a prioritized roadmap"
+  default_prompt: "Use $design-maturity-assessment to place a design org on a maturity model with evidence and produce a prioritized roadmap to advance."
+  model: sonnet
+  context_strategy: skill_and_templates

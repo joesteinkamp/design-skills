@@ -186,14 +186,14 @@ Revise before finalizing if any rule fails.
 
 | ID | Section | Rule | Severity |
 |----|---------|------|----------|
-| QB-01 | Curated Examples | Fewer than 8 examples are included without justification for the smaller set | blocker |
-| QB-02 | Curated Examples | All examples are from the same domain or industry -- at least 2 must be from analogous or cross-industry sources | blocker |
-| QB-03 | Curated Examples | Any example is missing a source URL, a description of what it does well, and an explanation of its relevance to the current challenge | blocker |
-| QB-04 | Curated Examples | No cross-industry or analogous inspiration is included -- at least 2 examples must come from outside the product's direct domain | blocker |
-| QB-05 | Pattern Analysis | Pattern analysis only lists what was found without stating a design implication for the current challenge | warning |
-| QB-06 | Curated Examples | Examples are concept work, dribbble shots, or awards pieces with no evidence of real-world production use -- unless explicitly labeled as "concept inspiration" | warning |
-| QB-07 | Design Implications | Design implications are generic ("good onboarding is important") instead of specific ("3 of 5 examples use progressive disclosure to reduce initial cognitive load -- consider collapsing advanced settings behind a 'More options' toggle") | warning |
-| QB-08 | Curated Examples | Sources are not provided for each example | blocker |
+| QB-01 | Curated Examples | At least 8 examples are included, or justification is given for a smaller set | blocker |
+| QB-02 | Curated Examples | Examples span more than one domain or industry -- at least 2 come from analogous or cross-industry sources | blocker |
+| QB-03 | Curated Examples | Every example has a source URL, a description of what it does well, and an explanation of its relevance to the current challenge | blocker |
+| QB-04 | Curated Examples | At least 2 examples come from outside the product's direct domain (cross-industry or analogous inspiration) | blocker |
+| QB-05 | Pattern Analysis | Pattern analysis states a design implication for the current challenge, not just what was found | warning |
+| QB-06 | Curated Examples | Examples show evidence of real-world production use, unless explicitly labeled as "concept inspiration" | warning |
+| QB-07 | Design Implications | Design implications are specific ("3 of 5 examples use progressive disclosure to reduce initial cognitive load -- consider collapsing advanced settings behind a 'More options' toggle"), not generic ("good onboarding is important") | warning |
+| QB-08 | Curated Examples | A source is provided for each example | blocker |
 
 ## Reference Navigation
 

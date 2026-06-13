@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Rationale Writer"
+  short_description: "Document a design decision ADR-style with options, trade-offs, and consequences"
+  default_prompt: "Use $design-rationale-writer to document a design decision ADR-style — context, options considered, trade-offs, the decision, and consequences."

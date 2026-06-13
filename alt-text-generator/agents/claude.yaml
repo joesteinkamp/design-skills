@@ -1,0 +1,6 @@
+interface:
+  display_name: "Alt Text Generator"
+  short_description: "Generate accessible alt text and ARIA labels for images, icons, and charts"
+  default_prompt: "Use $alt-text-generator to write accessible alt text and ARIA labels for images, classifying each asset and describing complex visuals."
+  model: sonnet
+  context_strategy: skill_and_templates

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Interview Scorecard"
+  short_description: "Build competency-based interview scorecards and behavioral question banks for design hiring"
+  default_prompt: "Use $interview-scorecard to build a competency-based interview scorecard with behavioral questions and rating anchors, or to score interview notes against the competencies."

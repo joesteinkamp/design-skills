@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design QA Reviewer"
+  short_description: "Redline a built UI against the design source of truth into a severity-ranked punch-list"
+  default_prompt: "Use $design-qa-reviewer to compare a built UI against the design source of truth and produce a severity-ranked redline punch-list of deviations."

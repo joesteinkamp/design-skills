@@ -1,0 +1,8 @@
+interface:
+  display_name: "Critique Notes Summarizer"
+  short_description: "Turn raw critique or review notes into a structured recap with decisions and action items"
+  invocation: "${critique-notes-summarizer}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/critique-recap-template.md"
+    - "../references/critique-recap-handoff-schema.md"

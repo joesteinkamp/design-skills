@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design OKR Writer"
+  short_description: "Draft design-team OKRs with measurable key results that ladder up to company goals"
+  default_prompt: "Use $design-okr-writer to draft design-team OKRs — an inspirational objective with 2-4 measurable key results and supporting initiatives that ladder up to company goals."

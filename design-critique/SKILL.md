@@ -149,6 +149,8 @@ This skill can connect to the following tools. For each, the skill describes wha
   - "To present these findings to stakeholders, use `$stakeholder-presentation-writer`."
   - "To turn priority fixes into design specs, use `$design-spec-writer`."
   - "For a systematic heuristic evaluation with scores, use `$heuristic-evaluator`."
+  - "To capture the session's decisions and action items, use `$critique-notes-summarizer`."
+  - "To document the rationale behind a decision reached here, use `$design-rationale-writer`."
 - **Produces:** Complete critique with all required sections including `Executive Summary` and `Open Questions for Designer`
 - **References:** `references/critique-output-template.md`
 

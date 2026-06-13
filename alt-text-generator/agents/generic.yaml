@@ -1,0 +1,8 @@
+interface:
+  display_name: "Alt Text Generator"
+  short_description: "Generate accessible alt text and ARIA labels for images, icons, and charts"
+  invocation: "${alt-text-generator}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/alt-text-template.md"
+    - "../references/alt-text-handoff-schema.md"

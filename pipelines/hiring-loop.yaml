@@ -1,0 +1,27 @@
+name: hiring-loop
+description: "Pipeline from candidate portfolio review through a calibrated interview loop. Use when evaluating a product designer candidate end-to-end, from portfolio screen to structured interview scorecards."
+
+steps:
+  - skill: portfolio-reviewer
+    input_from:
+      - portfolio
+      - role_level
+    output_key: portfolio_evaluation
+    notes: "Screens the portfolio against a level-calibrated rubric and surfaces gaps to probe."
+
+  - skill: interview-scorecard
+    input_from: portfolio-reviewer.portfolio_evaluation
+    output_key: interview_scorecard
+    depends_on: [portfolio-reviewer]
+    notes: "Builds round-specific scorecards and behavioral questions targeting the gaps from the portfolio review."
+
+entry_points:
+  - step: portfolio-reviewer
+    when: "Starting from a portfolio and a target role/level"
+  - step: interview-scorecard
+    when: "Portfolio already reviewed (or skipped); building the interview loop directly from a role spec"
+
+batch:
+  input_key: portfolio
+  parallelizable_steps: []
+  notes: "Run per candidate; multiple candidates can batch in parallel."
