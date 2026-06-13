@@ -1,0 +1,4 @@
+interface:
+  display_name: "Critique Notes Summarizer"
+  short_description: "Turn raw critique or review notes into a structured recap with decisions and action items"
+  default_prompt: "Use $critique-notes-summarizer to turn raw critique or review notes into a structured recap with decisions, action items, owners, and open questions."

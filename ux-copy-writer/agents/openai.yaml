@@ -1,0 +1,4 @@
+interface:
+  display_name: "UX Copy Writer"
+  short_description: "Generate and refine UX microcopy in a consistent, accessible voice and tone"
+  default_prompt: "Use $ux-copy-writer to write and refine UX microcopy -- CTAs, error and empty-state messages, tooltips, and confirmations -- with rationale and required UX states."

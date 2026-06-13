@@ -1,0 +1,8 @@
+interface:
+  display_name: "Design OKR Writer"
+  short_description: "Draft design-team OKRs with measurable key results that ladder up to company goals"
+  invocation: "${design-okr-writer}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/okr-template.md"
+    - "../references/okr-handoff-schema.md"

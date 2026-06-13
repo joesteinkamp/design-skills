@@ -1,0 +1,8 @@
+interface:
+  display_name: "Roadmap Prioritizer"
+  short_description: "Prioritize a backlog into a sequenced, defensible roadmap"
+  invocation: "${roadmap-prioritizer}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/roadmap-template.md"
+    - "../references/roadmap-handoff-schema.md"

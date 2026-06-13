@@ -1,0 +1,8 @@
+interface:
+  display_name: "Design QA Reviewer"
+  short_description: "Redline a built UI against the design source of truth into a severity-ranked punch-list"
+  invocation: "${design-qa-reviewer}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/qa-punch-list-template.md"
+    - "../references/qa-handoff-schema.md"

@@ -187,14 +187,14 @@ Revise before finalizing if any rule fails.
 
 | ID | Section | Rule | Severity |
 |----|---------|------|----------|
-| QB-01 | Scorecard | Scorecard is missing any of the 10 heuristics (or any heuristic in the selected set) | blocker |
-| QB-02 | Findings | Any violation is missing a severity rating on the 0-4 scale (0=not a problem, 1=cosmetic, 2=minor, 3=major, 4=catastrophic) | blocker |
-| QB-03 | Findings | Any violation lacks a specific location reference ("the settings page" not "somewhere in the app") | blocker |
-| QB-04 | Findings | Recommendations are generic ("improve error handling") rather than specific ("add inline validation to the email field that shows the error before form submission") | warning |
-| QB-05 | Top 3 Priority Fixes | Top 3 fixes are not ranked by impact -- the highest-severity, most-frequent violations should be first | blocker |
-| QB-06 | Positive Patterns | Positive patterns section is empty -- every evaluation must name at least 2 things done well | warning |
-| QB-07 | Severity Matrix | Severity matrix totals do not match the count of individual findings | blocker |
-| QB-08 | Top 3 Priority Fixes | A heuristic scored 3 or 4 but is not represented in the Top 3 Priority Fixes | warning |
+| QB-01 | Scorecard | Scorecard covers all 10 heuristics (or every heuristic in the selected set) | blocker |
+| QB-02 | Findings | Every violation has a severity rating on the 0-4 scale (0=not a problem, 1=cosmetic, 2=minor, 3=major, 4=catastrophic) | blocker |
+| QB-03 | Findings | Every violation has a specific location reference ("the settings page", not "somewhere in the app") | blocker |
+| QB-04 | Findings | Recommendations are specific ("add inline validation to the email field that shows the error before form submission"), not generic ("improve error handling") | warning |
+| QB-05 | Top 3 Priority Fixes | Top 3 fixes are ranked by impact -- the highest-severity, most-frequent violations come first | blocker |
+| QB-06 | Positive Patterns | Positive patterns section names at least 2 things done well | warning |
+| QB-07 | Severity Matrix | Severity matrix totals match the count of individual findings | blocker |
+| QB-08 | Top 3 Priority Fixes | Every heuristic scored 3 or 4 is represented in the Top 3 Priority Fixes | warning |
 
 ## Reference Navigation
 

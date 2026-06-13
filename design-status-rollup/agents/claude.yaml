@@ -1,0 +1,6 @@
+interface:
+  display_name: "Design Status Rollup"
+  short_description: "Roll up project updates into a leadership-ready status digest by initiative"
+  default_prompt: "Use $design-status-rollup to compile scattered project and IC updates into a concise status digest organized by initiative, with status labels, risks, and explicit asks."
+  model: sonnet
+  context_strategy: skill_and_templates

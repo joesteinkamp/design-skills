@@ -1,0 +1,8 @@
+interface:
+  display_name: "Portfolio Reviewer"
+  short_description: "Evaluate a designer's portfolio against a level-calibrated hiring rubric"
+  invocation: "${portfolio-reviewer}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/portfolio-evaluation-template.md"
+    - "../references/portfolio-handoff-schema.md"

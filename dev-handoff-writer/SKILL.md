@@ -157,6 +157,9 @@ This skill can connect to the following tools. For each, the skill describes wha
   - "If accessibility requirements need deeper review, use `$accessibility-auditor`."
   - "If the design spec needs updates based on engineering feedback, use `$design-spec-writer`."
   - "Linear tickets are ready for sprint planning — prioritize P0 items first."
+  - "Use `$ux-copy-writer` to finalize the microcopy referenced in this handoff."
+  - "Use `$alt-text-generator` to produce alt text and ARIA labels for the images and icons."
+  - "Once built, use `$design-qa-reviewer` to redline the implementation against the design."
 - **Produces:** Complete handoff with all required sections
 - **References:** `references/dev-handoff-template.md`, `references/implementation-checklist.md`
 
@@ -180,13 +183,13 @@ Revise before finalizing if any rule fails.
 
 | ID | Section | Rule | Severity |
 |----|---------|------|----------|
-| QB-01 | Component Inventory | Any component is missing at least 5 of these states: default, hover, focus, active, disabled, error, loading, empty | blocker |
-| QB-02 | Responsive Behavior | Responsive behavior does not specify layout at all 3 breakpoints (desktop >=1024px, tablet 768-1023px, mobile <768px) | blocker |
-| QB-03 | Interaction Specs | Any transition is missing from-state, to-state, duration, and easing values | blocker |
-| QB-04 | Content & Edge Cases | Edge cases section has fewer than 3 entries for a data-driven component (zero items, one item, max items, long text, missing data) | warning |
-| QB-05 | Accessibility Requirements | Accessibility requirements do not include keyboard interaction pattern and ARIA roles for interactive components | blocker |
-| QB-06 | Implementation Checklist | Implementation checklist is generic -- every checklist item must reference a specific component or interaction from this handoff | warning |
-| QB-07 | Component Inventory | Design system tokens (color, spacing, typography) are described with raw values ("16px", "#333") instead of token names ("spacing-4", "text-primary") | blocker |
+| QB-01 | Component Inventory | Every component documents at least 5 of these states: default, hover, focus, active, disabled, error, loading, empty | blocker |
+| QB-02 | Responsive Behavior | Responsive behavior specifies layout at all 3 breakpoints (desktop >=1024px, tablet 768-1023px, mobile <768px) | blocker |
+| QB-03 | Interaction Specs | Every transition specifies from-state, to-state, duration, and easing values | blocker |
+| QB-04 | Content & Edge Cases | Edge cases section has at least 3 entries for a data-driven component (zero items, one item, max items, long text, missing data) | warning |
+| QB-05 | Accessibility Requirements | Accessibility requirements include keyboard interaction pattern and ARIA roles for interactive components | blocker |
+| QB-06 | Implementation Checklist | Implementation checklist is specific -- every checklist item references a specific component or interaction from this handoff | warning |
+| QB-07 | Component Inventory | Design system tokens (color, spacing, typography) are described with token names ("spacing-4", "text-primary"), not raw values ("16px", "#333") | blocker |
 
 ## Reference Navigation
 

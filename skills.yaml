@@ -1,6 +1,6 @@
 # skills.yaml - Skill registry for automation orchestration
 # Use this file for skill discovery, auto-selection, graph traversal, pipeline validation, and tool mapping.
-version: "2.0"
+version: "2.1"
 
 skills:
   - name: ab-test-planner
@@ -17,9 +17,18 @@ skills:
     tags: [accessibility, wcag, a11y, compliance, assistive-technology, remediation]
     complexity: moderate
     output_length: long
-    upstream_skills: [design-spec-writer]
-    downstream_skills: [dev-handoff-writer]
+    upstream_skills: [design-spec-writer, ux-copy-writer]
+    downstream_skills: [dev-handoff-writer, alt-text-generator]
     tools: [figma, chrome, linear, google_sheets, notion]
+
+  - name: alt-text-generator
+    category: documentation
+    tags: [accessibility, alt-text, aria, a11y, images, screen-reader]
+    complexity: light
+    output_length: medium
+    upstream_skills: [accessibility-auditor, dev-handoff-writer]
+    downstream_skills: [dev-handoff-writer]
+    tools: [figma, chrome, github, linear]
 
   - name: competitive-analyzer
     category: evaluation
@@ -30,22 +39,67 @@ skills:
     downstream_skills: []
     tools: [web, chrome, google_sheets, notion, productboard]
 
+  - name: critique-notes-summarizer
+    category: documentation
+    tags: [meeting-notes, critique, action-items, decisions, recap, synthesis]
+    complexity: light
+    output_length: medium
+    upstream_skills: [design-critique]
+    downstream_skills: [design-spec-writer, design-rationale-writer]
+    tools: [gong, linear, slack, notion]
+
   - name: design-critique
     category: evaluation
     tags: [critique, feedback, design-review, severity-ranking]
     complexity: moderate
     output_length: medium
     upstream_skills: [design-spec-writer]
-    downstream_skills: [stakeholder-presentation-writer]
+    downstream_skills: [stakeholder-presentation-writer, critique-notes-summarizer, design-rationale-writer]
     tools: [figma, linear, slack]
+
+  - name: design-maturity-assessment
+    category: evaluation
+    tags: [design-maturity, design-ops, org-assessment, capability-model, design-leadership, roadmap]
+    complexity: moderate
+    output_length: long
+    upstream_skills: []
+    downstream_skills: [design-okr-writer, stakeholder-presentation-writer]
+    tools: [notion, google_sheets, figma]
+
+  - name: design-okr-writer
+    category: planning
+    tags: [okrs, goals, planning, outcomes, key-results, design-leadership]
+    complexity: moderate
+    output_length: medium
+    upstream_skills: [design-success-metrics-writer, design-maturity-assessment]
+    downstream_skills: [roadmap-prioritizer, design-status-rollup]
+    tools: [notion, linear, google_sheets]
+
+  - name: design-qa-reviewer
+    category: evaluation
+    tags: [design-qa, redline, visual-regression, implementation-review, pixel-perfect, ship-readiness]
+    complexity: moderate
+    output_length: medium
+    upstream_skills: [design-spec-writer, dev-handoff-writer]
+    downstream_skills: [dev-handoff-writer]
+    tools: [figma, chrome, linear, github]
+
+  - name: design-rationale-writer
+    category: documentation
+    tags: [decision-record, design-rationale, adr, trade-offs, documentation, institutional-memory]
+    complexity: light
+    output_length: medium
+    upstream_skills: [design-spectrums-creator, design-critique, critique-notes-summarizer]
+    downstream_skills: [stakeholder-presentation-writer, design-spec-writer]
+    tools: [notion, figma, linear]
 
   - name: design-spec-writer
     category: documentation
     tags: [specs, user-stories, acceptance-criteria, PRD, feature-spec, interaction-design]
     complexity: heavy
     output_length: long
-    upstream_skills: [persona-creator, journey-mapper, research-synthesizer]
-    downstream_skills: [dev-handoff-writer, ab-test-planner, accessibility-auditor, design-critique, heuristic-evaluator, usability-test-planner, user-flow-mapper, design-spectrums-creator, design-success-metrics-writer, inspiration-browser, research-plan-writer]
+    upstream_skills: [persona-creator, journey-mapper, research-synthesizer, critique-notes-summarizer, design-rationale-writer, roadmap-prioritizer]
+    downstream_skills: [dev-handoff-writer, ab-test-planner, accessibility-auditor, design-critique, heuristic-evaluator, usability-test-planner, user-flow-mapper, design-spectrums-creator, design-success-metrics-writer, inspiration-browser, research-plan-writer, ux-copy-writer, design-qa-reviewer]
     tools: [figma, linear, notion, github, productboard]
 
   - name: design-spectrums-creator
@@ -54,8 +108,17 @@ skills:
     complexity: light
     output_length: medium
     upstream_skills: [persona-creator, journey-mapper, inspiration-browser, design-spec-writer]
-    downstream_skills: []
+    downstream_skills: [design-rationale-writer]
     tools: [figma, notion, slack]
+
+  - name: design-status-rollup
+    category: documentation
+    tags: [status-report, leadership, rollup, exec-update, risks, initiatives]
+    complexity: moderate
+    output_length: medium
+    upstream_skills: [design-success-metrics-writer, design-okr-writer]
+    downstream_skills: [stakeholder-presentation-writer]
+    tools: [notion, linear, slack, gmail]
 
   - name: design-success-metrics-writer
     category: documentation
@@ -63,7 +126,7 @@ skills:
     complexity: moderate
     output_length: medium
     upstream_skills: [design-spec-writer, persona-creator, journey-mapper]
-    downstream_skills: [ab-test-planner, stakeholder-presentation-writer]
+    downstream_skills: [ab-test-planner, stakeholder-presentation-writer, design-okr-writer, design-status-rollup, roadmap-prioritizer]
     tools: [google_sheets, linear, notion]
 
   - name: dev-handoff-writer
@@ -72,7 +135,7 @@ skills:
     complexity: heavy
     output_length: long
     upstream_skills: [design-spec-writer, accessibility-auditor]
-    downstream_skills: []
+    downstream_skills: [ux-copy-writer, alt-text-generator, design-qa-reviewer]
     tools: [figma, linear, github, notion]
 
   - name: figjam-workshop-prompt-creator
@@ -102,13 +165,22 @@ skills:
     downstream_skills: [design-spectrums-creator]
     tools: [web, chrome, figma, notion]
 
+  - name: interview-scorecard
+    category: evaluation
+    tags: [hiring, interview, scorecard, competencies, behavioral-questions, calibration]
+    complexity: moderate
+    output_length: long
+    upstream_skills: [portfolio-reviewer]
+    downstream_skills: []
+    tools: [notion, gmail, google_calendar]
+
   - name: journey-mapper
     category: documentation
     tags: [journey-map, experience-map, pain-points, emotional-arc, touchpoints]
     complexity: heavy
     output_length: long
     upstream_skills: [persona-creator, research-synthesizer]
-    downstream_skills: [design-spec-writer, design-spectrums-creator, design-success-metrics-writer, ab-test-planner, usability-test-planner, user-flow-mapper, inspiration-browser, research-plan-writer]
+    downstream_skills: [design-spec-writer, design-spectrums-creator, design-success-metrics-writer, ab-test-planner, usability-test-planner, user-flow-mapper, inspiration-browser, research-plan-writer, roadmap-prioritizer]
     tools: [figma, notion, productboard]
 
   - name: persona-creator
@@ -119,6 +191,15 @@ skills:
     upstream_skills: [research-synthesizer]
     downstream_skills: [journey-mapper, design-spec-writer, design-spectrums-creator, design-success-metrics-writer, usability-test-planner, inspiration-browser]
     tools: [figma, notion, productboard]
+
+  - name: portfolio-reviewer
+    category: evaluation
+    tags: [hiring, portfolio-review, candidate-evaluation, rubric, leveling, design-craft]
+    complexity: moderate
+    output_length: long
+    upstream_skills: []
+    downstream_skills: [interview-scorecard]
+    tools: [chrome, web, notion, gmail]
 
   - name: research-plan-writer
     category: research
@@ -135,15 +216,24 @@ skills:
     complexity: heavy
     output_length: long
     upstream_skills: []
-    downstream_skills: [persona-creator, journey-mapper, design-spec-writer, stakeholder-presentation-writer]
+    downstream_skills: [persona-creator, journey-mapper, design-spec-writer, stakeholder-presentation-writer, roadmap-prioritizer]
     tools: [figma, gong, google_sheets, notion, productboard]
+
+  - name: roadmap-prioritizer
+    category: planning
+    tags: [prioritization, roadmap, rice, impact-effort, sequencing, planning]
+    complexity: moderate
+    output_length: long
+    upstream_skills: [research-synthesizer, design-success-metrics-writer, journey-mapper]
+    downstream_skills: [design-spec-writer, design-okr-writer]
+    tools: [productboard, linear, google_sheets, notion]
 
   - name: stakeholder-presentation-writer
     category: documentation
     tags: [presentation, stakeholders, narrative, decision-ask, objection-handling]
     complexity: moderate
     output_length: long
-    upstream_skills: [design-spec-writer, research-synthesizer, design-critique, design-success-metrics-writer]
+    upstream_skills: [design-spec-writer, research-synthesizer, design-critique, design-success-metrics-writer, design-rationale-writer, design-status-rollup, design-maturity-assessment]
     downstream_skills: []
     tools: [google_slides, figma, gmail, slack, google_calendar]
 
@@ -164,6 +254,15 @@ skills:
     upstream_skills: [design-spec-writer, journey-mapper]
     downstream_skills: [usability-test-planner]
     tools: [figma, notion]
+
+  - name: ux-copy-writer
+    category: documentation
+    tags: [ux-writing, microcopy, content-design, voice-tone, error-messages, empty-states]
+    complexity: moderate
+    output_length: medium
+    upstream_skills: [design-spec-writer, dev-handoff-writer]
+    downstream_skills: [accessibility-auditor]
+    tools: [figma, notion, linear]
 
   - name: workshop-planner
     category: planning

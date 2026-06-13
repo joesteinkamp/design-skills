@@ -190,6 +190,8 @@ This skill can connect to the following tools. For each, the skill describes wha
   - "Use `$accessibility-auditor` to audit this spec for WCAG compliance."
   - "Use `$usability-test-planner` to plan usability testing for the key flows."
   - "If user stories need validation, use `$research-plan-writer` to plan a concept test."
+  - "Use `$ux-copy-writer` to draft the microcopy (labels, errors, empty states) this spec calls for."
+  - "Once built, use `$design-qa-reviewer` to check the implementation against this spec."
 - **Produces:** Complete spec with all required sections
 - **References:** `references/design-spec-template.md`, `references/dev-handoff-schema.md`
 

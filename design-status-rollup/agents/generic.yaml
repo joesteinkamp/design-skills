@@ -1,0 +1,8 @@
+interface:
+  display_name: "Design Status Rollup"
+  short_description: "Roll up project updates into a leadership-ready status digest by initiative"
+  invocation: "${design-status-rollup}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/status-digest-template.md"
+    - "../references/status-digest-handoff-schema.md"

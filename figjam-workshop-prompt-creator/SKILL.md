@@ -193,11 +193,11 @@ Revise before finalizing if any rule fails.
 
 | ID | Section | Rule | Severity |
 |----|---------|------|----------|
-| QB-01 | All Prompts | The prompt is generic and not tied to workshop goals | blocker |
-| QB-02 | Prompt B | The prompt lacks time boxes or facilitation flow | blocker |
-| QB-03 | Prompt C | The prompt asks for abstract outcomes without owners and next actions | blocker |
-| QB-04 | Prompt C | The prompt asks for success metrics but not observable behaviors | warning |
-| QB-05 | All Prompts | The prompt does not define output format | blocker |
+| QB-01 | All Prompts | Every prompt is tied to a specific workshop goal, not generic | blocker |
+| QB-02 | Prompt B | The prompt includes time boxes and a facilitation flow | blocker |
+| QB-03 | Prompt C | The prompt asks for concrete outcomes with owners and next actions | blocker |
+| QB-04 | Prompt C | The prompt frames success metrics as observable behaviors | warning |
+| QB-05 | All Prompts | Every prompt defines its output format | blocker |
 
 ## Reference Navigation
 

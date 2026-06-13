@@ -1,0 +1,49 @@
+name: ship-readiness
+description: "Pre-ship quality gate that evaluates a built/implemented UI against the design and quality bars before launch. Use when a feature is implemented and you need a go/no-go review across design fidelity, accessibility, usability, and design quality."
+
+steps:
+  - skill: design-qa-reviewer
+    input_from:
+      - built_ui
+      - design_reference
+    output_key: qa_punch_list
+    notes: "Compares the implementation against the design source of truth (Figma/spec)."
+
+  - skill: accessibility-auditor
+    input_key: built_ui
+    output_key: accessibility_findings
+
+  - skill: heuristic-evaluator
+    input_key: built_ui
+    output_key: heuristic_findings
+
+  - skill: design-critique
+    input_key: built_ui
+    output_key: critique_findings
+
+  - skill: alt-text-generator
+    input_key: built_ui
+    output_key: alt_text_set
+    when: "Accessibility audit flags missing or weak alternative text on images/icons."
+    depends_on: [accessibility-auditor]
+
+parallel: true
+
+parallel_groups:
+  - name: ship-evaluation
+    steps: [design-qa-reviewer, accessibility-auditor, heuristic-evaluator, design-critique]
+    notes: "All four evaluations run independently against the built UI; alt-text-generator runs after if the a11y audit surfaces gaps."
+
+entry_points:
+  - step: design-qa-reviewer
+    when: "Built UI exists and you want fidelity-to-design checked first"
+  - step: ship-evaluation
+    when: "Running the full pre-ship gate across all dimensions"
+
+remediation:
+  notes: "Confirmed blockers from any evaluation can feed $dev-handoff-writer for fix specs, or $critique-notes-summarizer to turn the review into owned action items."
+
+batch:
+  input_key: built_ui
+  parallelizable_steps: [design-qa-reviewer, accessibility-auditor, heuristic-evaluator, design-critique]
+  notes: "Each evaluation runs independently per screen; multiple screens can batch in parallel."
