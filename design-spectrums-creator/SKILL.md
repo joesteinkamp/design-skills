@@ -67,6 +67,7 @@ tools:
 user_inputs:
   - step: 2
     question: "Identified [N] spectrums. Any tensions to add or remove?"
+    key: confirm-spectrums
     required: true
   - step: 3
     question: "Where would you position on [spectrum]?"

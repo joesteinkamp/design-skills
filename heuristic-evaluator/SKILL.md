@@ -68,6 +68,7 @@ user_inputs:
     required: true
   - step: 3
     question: "Top 3 fixes identified. Create Linear tickets?"
+    key: create-linear-tickets
     required: false
     default: false
 ---

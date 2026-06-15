@@ -57,15 +57,19 @@ tools:
 user_inputs:
   - step: 1
     question: "How many sessions do you have, and what methods were used?"
+    key: session-count
     required: true
   - step: 1
     question: "Are Gong recordings available for auto-pulling transcripts?"
+    key: gong-available
     required: false
   - step: 3
     question: "I've identified [N] themes. Want to review before I distill insights?"
+    key: confirm-themes
     required: true
   - step: 4
     question: "What's the downstream target for these insights?"
+    key: downstream-target
     options: [personas, journey_map, design_spec, all]
     default: all
   - step: 4

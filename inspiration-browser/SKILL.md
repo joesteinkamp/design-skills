@@ -69,9 +69,11 @@ user_inputs:
     required: true
   - step: 1
     question: "Any industries or products to include or exclude?"
+    key: industry-filter
     required: false
   - step: 3
     question: "Found [N] examples across [M] themes. Create a FigJam inspiration board?"
+    key: create-figjam
     required: false
     default: false
 ---

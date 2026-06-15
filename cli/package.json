@@ -1,6 +1,6 @@
 {
   "name": "@design-skills/cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Designer task CLI that runs design-skills via the Claude CLI",
   "type": "module",
   "bin": {

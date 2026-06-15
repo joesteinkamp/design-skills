@@ -61,6 +61,7 @@ tools:
 user_inputs:
   - step: 1
     question: "What decision should come out of this workshop?"
+    key: target-decision
     required: true
   - step: 1
     question: "Remote, hybrid, or in-person?"
@@ -75,9 +76,11 @@ user_inputs:
     options: [alignment, decision, discovery]
   - step: 4
     question: "Any interpersonal dynamics or tensions to plan around?"
+    key: team-dynamics
     required: false
   - step: 5
     question: "Want me to book the calendar slot and send invites?"
+    key: book-calendar
     required: false
     default: false
 ---

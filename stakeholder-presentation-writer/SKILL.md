@@ -76,6 +76,7 @@ user_inputs:
     required: true
   - step: 1
     question: "What specific decision do you need from them?"
+    key: target-decision
     required: true
   - step: 2
     question: "What is the time constraint?"
@@ -86,6 +87,7 @@ user_inputs:
     required: false
   - step: 6
     question: "Create a Google Slides deck? Send a pre-read email?"
+    key: publish
     required: false
     default: false
 ---

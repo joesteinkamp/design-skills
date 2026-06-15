@@ -26,6 +26,7 @@ const SkillTool = z.object({
 const UserInput = z.object({
   step: z.number().optional(),
   question: z.string(),
+  key: z.string().optional(),
   required: z.boolean().optional().default(false),
   options: z.array(z.string()).optional(),
   default: z.union([z.string(), z.boolean(), z.number()]).optional(),

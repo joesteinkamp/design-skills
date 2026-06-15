@@ -60,15 +60,19 @@ tools:
 user_inputs:
   - step: 1
     question: "What is the current baseline for the primary metric?"
+    key: baseline
     required: false
   - step: 1
     question: "What is the traffic volume (DAU on this flow)?"
+    key: traffic-volume
     required: false
   - step: 3
     question: "Primary metric: [X]. Confirm this is what we should optimize for?"
+    key: confirm-primary-metric
     required: true
   - step: 5
     question: "Create a Linear ticket for implementation?"
+    key: create-linear-ticket
     required: false
     default: false
 ---

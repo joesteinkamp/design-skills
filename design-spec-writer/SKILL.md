@@ -83,9 +83,11 @@ user_inputs:
     required: false
   - step: 2
     question: "Scope drafted — anything to add to in/out-of-scope?"
+    key: confirm-scope
     required: false
   - step: 5
     question: "Want me to create Linear tickets for each user story?"
+    key: create-linear-tickets
     required: false
     default: false
 ---

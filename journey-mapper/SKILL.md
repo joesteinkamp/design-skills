@@ -66,12 +66,15 @@ user_inputs:
     required: true
   - step: 1
     question: "Who is the primary persona for this journey?"
+    key: primary-persona
     required: true
   - step: 3
     question: "I've mapped [N] phases with the emotional arc. Does the emotional arc look right?"
+    key: confirm-emotional-arc
     required: true
   - step: 3
     question: "Push top pain points to Productboard?"
+    key: push-pain-points
     required: false
     default: false
 ---

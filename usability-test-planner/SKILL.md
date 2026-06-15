@@ -90,6 +90,7 @@ user_inputs:
     options: [figma_url, other_url, not_yet]
   - step: 5
     question: "Want me to create the Typeform screener and book Zoom sessions?"
+    key: create-typeform
     required: false
     default: false
 ---

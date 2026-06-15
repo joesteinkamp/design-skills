@@ -66,6 +66,7 @@ user_inputs:
     required: false
   - step: 5
     question: "Want me to create Linear tickets? GitHub issues?"
+    key: create-tickets
     required: false
     default: false
 ---

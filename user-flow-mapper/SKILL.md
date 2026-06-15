@@ -54,12 +54,14 @@ tools:
 user_inputs:
   - step: 1
     question: "What is the entry point for this flow?"
+    key: entry-point
     required: true
   - step: 1
     question: "What is the success state (end goal)?"
     required: true
   - step: 3
     question: "Happy path is mapped. Want me to add error and edge-case branches?"
+    key: add-edge-cases
     required: true
     default: true
   - step: 6

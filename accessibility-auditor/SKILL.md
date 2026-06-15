@@ -69,6 +69,7 @@ user_inputs:
     required: false
   - step: 3
     question: "Found [N] issues. Create Linear tickets for must-fix items?"
+    key: create-linear-tickets
     required: false
     default: false
 ---

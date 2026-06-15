@@ -55,13 +55,16 @@ tools:
 user_inputs:
   - step: 1
     question: "What type of evidence are you working with?"
+    key: evidence-type
     options: [transcripts, survey, stakeholder_assumptions, mixed]
     required: true
   - step: 2
     question: "Identified [N] behavioral segments. Does this grouping feel right?"
+    key: confirm-segments
     required: true
   - step: 4
     question: "Any user groups to explicitly exclude (anti-personas)?"
+    key: anti-personas
     required: false
 ---
 

@@ -108,7 +108,7 @@ async function loadSkill(skillDir: string, source: SkillSource): Promise<LoadRes
     const agent = await loadAgentConfig(skillDir);
     const userInputs: UserInputWithFlag[] = frontmatter.user_inputs.map((q) => ({
       ...q,
-      flagKey: flagKey(q.question),
+      flagKey: q.key ?? flagKey(q.question),
     }));
     return {
       ok: true,

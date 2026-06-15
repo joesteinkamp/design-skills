@@ -54,6 +54,7 @@ tools:
 user_inputs:
   - step: 1
     question: "Confirm competitor set. Any to add/remove?"
+    key: confirm-competitors
     required: true
   - step: 1
     question: "Competitor URLs?"

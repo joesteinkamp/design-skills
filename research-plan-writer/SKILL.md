@@ -69,9 +69,11 @@ tools:
 user_inputs:
   - step: 1
     question: "What business decision will this research inform?"
+    key: business-decision
     required: true
   - step: 1
     question: "What do you already know vs. need to learn?"
+    key: known-vs-unknown
     required: false
   - step: 2
     question: "Constraints?"
@@ -83,6 +85,7 @@ user_inputs:
     default: let_me_recommend
   - step: 4
     question: "Want me to create the Typeform screener and schedule sessions?"
+    key: create-typeform
     required: false
     default: false
 ---

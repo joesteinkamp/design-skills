@@ -67,16 +67,20 @@ tools:
 user_inputs:
   - step: 1
     question: "What does success look like in plain language?"
+    key: success-definition
     required: true
   - step: 2
     question: "Do you have current baseline data for any metrics?"
+    key: has-baseline
     required: false
   - step: 3
     question: "What analytics platform are you using?"
+    key: analytics-platform
     options: [Amplitude, Mixpanel, GA4, other]
     required: false
   - step: 4
     question: "Create Linear tickets for instrumentation?"
+    key: create-linear-tickets
     required: false
     default: false
 ---
