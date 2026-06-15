@@ -76,6 +76,7 @@ research-synthesizer → persona-creator → journey-mapper → design-spec-writ
 - `portfolio-reviewer` — level-calibrated candidate portfolio evaluation *(leader/hiring)*
 - `interview-scorecard` — competency rubrics and behavioral question banks *(leader/hiring)*
 - `design-maturity-assessment` — leveled org maturity scorecard and roadmap *(leader)*
+- `performance-review-writer` — level-calibrated design performance review with growth plan *(leader)*
 
 **Facilitation** — run the room
 - `figjam-workshop-prompt-creator` — FigJam board prompts and facilitation flow

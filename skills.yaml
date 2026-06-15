@@ -71,7 +71,7 @@ skills:
     tags: [okrs, goals, planning, outcomes, key-results, design-leadership]
     complexity: moderate
     output_length: medium
-    upstream_skills: [design-success-metrics-writer, design-maturity-assessment]
+    upstream_skills: [design-success-metrics-writer, design-maturity-assessment, performance-review-writer]
     downstream_skills: [roadmap-prioritizer, design-status-rollup]
     tools: [notion, linear, google_sheets]
 
@@ -117,7 +117,7 @@ skills:
     complexity: moderate
     output_length: medium
     upstream_skills: [design-success-metrics-writer, design-okr-writer]
-    downstream_skills: [stakeholder-presentation-writer]
+    downstream_skills: [stakeholder-presentation-writer, performance-review-writer]
     tools: [notion, linear, slack, gmail]
 
   - name: design-success-metrics-writer
@@ -183,6 +183,15 @@ skills:
     downstream_skills: [design-spec-writer, design-spectrums-creator, design-success-metrics-writer, ab-test-planner, usability-test-planner, user-flow-mapper, inspiration-browser, research-plan-writer, roadmap-prioritizer]
     tools: [figma, notion, productboard]
 
+  - name: performance-review-writer
+    category: evaluation
+    tags: [performance-review, calibration, competency-rubric, growth-plan, design-leadership, feedback-synthesis]
+    complexity: heavy
+    output_length: long
+    upstream_skills: [design-status-rollup]
+    downstream_skills: [design-okr-writer, stakeholder-presentation-writer]
+    tools: [notion, google_sheets, gmail]
+
   - name: persona-creator
     category: planning
     tags: [personas, archetypes, behavioral-segmentation, user-profiles, evidence-based]
@@ -233,7 +242,7 @@ skills:
     tags: [presentation, stakeholders, narrative, decision-ask, objection-handling]
     complexity: moderate
     output_length: long
-    upstream_skills: [design-spec-writer, research-synthesizer, design-critique, design-success-metrics-writer, design-rationale-writer, design-status-rollup, design-maturity-assessment]
+    upstream_skills: [design-spec-writer, research-synthesizer, design-critique, design-success-metrics-writer, design-rationale-writer, design-status-rollup, design-maturity-assessment, performance-review-writer]
     downstream_skills: []
     tools: [google_slides, figma, gmail, slack, google_calendar]
 

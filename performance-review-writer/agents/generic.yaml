@@ -1,0 +1,9 @@
+interface:
+  display_name: "Performance Review Writer"
+  short_description: "Write a level-calibrated design performance review from self, peer, and manager input"
+  invocation: "${performance-review-writer}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/performance-review-template.md"
+    - "../references/performance-rubric.md"
+    - "../references/performance-review-handoff-schema.md"
