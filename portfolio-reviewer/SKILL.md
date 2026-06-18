@@ -45,12 +45,14 @@ batch:
 
 # Tool Integration
 tools:
-  - name: chrome
-    actions: [open_url, capture_screenshot]
-    when: "Opening the live portfolio and each case study for review"
+  - name: playwright
+    required: true
+    mcp: "mcp__playwright__*"
+    actions: [browser_navigate, browser_snapshot, browser_click, browser_take_screenshot]
+    when: "Required for live portfolios: navigate the site, traverse into each case-study page, and capture screenshots. JS-rendered sites (Framer/Webflow/Squarespace SPAs) only render under a real browser."
   - name: web
     actions: [fetch_page]
-    when: "Reading case study content from a portfolio URL"
+    when: "Fallback only — reading static case-study content from a URL when Playwright is unavailable or a page is plain HTML"
   - name: notion
     actions: [publish_scorecard]
     when: "Writing the evaluation to the hiring database"
@@ -85,14 +87,20 @@ Use this skill to evaluate a product designer's portfolio against a structured, 
 
 The output should be fair, evidence-based, and calibrated to the target level: every dimension is scored against a specific citation from the portfolio, and the review judges thinking and outcomes rather than aesthetics alone. Built for design leaders and hiring managers. Output is formatted for use in a hiring database, an interview-panel doc, or a debrief note. When the target tool is specified, adapt the scorecard format accordingly.
 
+## Requirements
+
+**Playwright MCP (`mcp__playwright__*`) is required** to review a live portfolio. WebFetch alone cannot execute JavaScript, so the JS-rendered portfolio sites most designers use (Framer, Webflow, Squarespace, Notion) return an empty shell — and it can't navigate from the landing page into individual case-study pages or capture screenshots of visual craft. Playwright provides all three: `browser_navigate` (open + follow internal case-study links), `browser_snapshot` (read the rendered accessibility tree / text), and `browser_take_screenshot` (visual reference for the Craft dimension).
+
+If Playwright is not connected, this skill runs **degraded**: fall back to WebFetch for static pages, evaluate only from PDF/pasted content, and **explicitly note in the output that the live site could not be traversed and prototypes/visual craft were not directly observed.**
+
 ## Tool Integration
 
 This skill can connect to the following tools. For each, the skill describes what it does and how to proceed if the tool is unavailable.
 
 | Tool | What This Skill Does With It | If Unavailable |
 |------|------------------------------|----------------|
-| **Chrome** | Open the live portfolio and each case study with open_url and capture_screenshot for visual reference of craft and layout | Evaluate based on the provided PDF or pasted case studies; note that live interactions and prototypes were not directly observed |
-| **Web** | Fetch case study content with fetch_page when a portfolio URL is provided | Evaluate based on pasted content; ask the user to paste case studies the fetch could not reach |
+| **Playwright** (required) | Navigate the live portfolio, traverse into each case study via `browser_navigate`, read rendered content with `browser_snapshot`, and capture craft/layout with `browser_take_screenshot` | Fall back to **Web** below for static pages; evaluate from PDF/pasted content; note that the live site was not traversed and prototypes/visual craft were not directly observed |
+| **Web** (fallback) | Fetch static case-study content with fetch_page when Playwright is unavailable or a page is plain HTML | Evaluate based on pasted content; ask the user to paste case studies the fetch could not reach |
 | **Notion** | Publish the completed scorecard to the hiring database with role, level, scores, recommendation, and evidence | Output the scorecard as markdown; user adds it to the hiring database manually |
 | **Gmail** | Draft an optional candidate feedback or interview-panel note summarizing the recommendation and probes | Output the draft note as text; user sends it manually |
 
@@ -107,9 +115,9 @@ This skill can connect to the following tools. For each, the skill describes wha
   - Capture role, level, and the rubric to apply.
   - Use the default rubric dimensions unless a custom rubric is supplied: Problem framing & strategy; Craft & visual execution; Interaction & systems thinking; Research & evidence; Outcomes & impact; Process & collaboration; Communication & storytelling.
   - Open the portfolio and inventory the case studies available for review.
-- **If** a portfolio URL provided → fetch and open it.
-- **Tool action — Web (if URL provided):** Fetch case study content with fetch_page.
-- **Tool action — Chrome (if URL provided):** Open the portfolio and each case study with open_url and capture_screenshot for visual reference.
+- **If** a portfolio URL is provided → open and traverse it with Playwright.
+- **Tool action — Playwright (required, if URL provided):** `browser_navigate` to the landing page, inventory the case-study links, navigate into each, `browser_snapshot` to read rendered content, and `browser_take_screenshot` for visual reference of craft and layout.
+- **Tool action — Web (fallback only):** if Playwright is unavailable, `fetch_page` the static URL(s) and note the live site was not traversed.
 - **If** only a PDF or pasted text is provided → evaluate from that content and note that live prototypes were not observed.
 - **Produces:** Populated `Candidate Context` section
 
