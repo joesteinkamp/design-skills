@@ -40,6 +40,7 @@ export async function collectInputs(
   }
 
   for (const q of skill.userInputs) {
+    if (q.checkpoint) continue;
     const fromFlag = opts.flags[q.flagKey];
     if (fromFlag !== undefined) {
       userAnswers[q.question] = fromFlag;

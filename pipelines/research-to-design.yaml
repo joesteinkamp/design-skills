@@ -23,7 +23,7 @@ steps:
       - persona-creator.personas
       - research-synthesizer.research_synthesis
     output_key: journey_map
-    depends_on: [persona-creator]
+    depends_on: [research-synthesizer, persona-creator]
 
   - skill: design-spec-writer
     input_from:
@@ -31,7 +31,7 @@ steps:
       - journey-mapper.journey_map
       - research-synthesizer.research_synthesis
     output_key: design_spec
-    depends_on: [journey-mapper]
+    depends_on: [research-synthesizer, persona-creator, journey-mapper]
 
 entry_points:
   - step: research-plan-writer

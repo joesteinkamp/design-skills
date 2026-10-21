@@ -3,9 +3,7 @@ description: "Pre-ship quality gate that evaluates a built/implemented UI agains
 
 steps:
   - skill: design-qa-reviewer
-    input_from:
-      - built_ui
-      - design_reference
+    input_keys: [built_ui, design_reference]
     output_key: qa_punch_list
     notes: "Compares the implementation against the design source of truth (Figma/spec)."
 

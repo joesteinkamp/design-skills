@@ -10,7 +10,7 @@ output_length: medium
 
 # Skill Graph
 upstream_skills: [persona-creator, journey-mapper, inspiration-browser, design-spec-writer]
-downstream_skills: []
+downstream_skills: [design-rationale-writer]
 
 # Input Contract
 inputs:
@@ -67,10 +67,10 @@ tools:
 user_inputs:
   - step: 2
     question: "Identified [N] spectrums. Any tensions to add or remove?"
-    required: true
+    checkpoint: true
   - step: 3
     question: "Where would you position on [spectrum]?"
-    required: true
+    checkpoint: true
   - step: 4
     question: "Share on Slack for team input?"
     required: false

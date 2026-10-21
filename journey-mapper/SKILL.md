@@ -10,7 +10,7 @@ output_length: long
 
 # Skill Graph
 upstream_skills: [persona-creator, research-synthesizer]
-downstream_skills: [design-spec-writer, design-spectrums-creator, design-success-metrics-writer, ab-test-planner, usability-test-planner, user-flow-mapper, inspiration-browser, research-plan-writer]
+downstream_skills: [design-spec-writer, design-spectrums-creator, design-success-metrics-writer, ab-test-planner, usability-test-planner, user-flow-mapper, inspiration-browser, research-plan-writer, roadmap-prioritizer]
 
 # Input Contract
 inputs:
@@ -69,7 +69,7 @@ user_inputs:
     required: true
   - step: 3
     question: "I've mapped [N] phases with the emotional arc. Does the emotional arc look right?"
-    required: true
+    checkpoint: true
   - step: 3
     question: "Push top pain points to Productboard?"
     required: false

@@ -9,7 +9,7 @@ complexity: moderate
 output_length: long
 
 # Skill Graph
-upstream_skills: [design-spec-writer, research-synthesizer, design-critique, design-success-metrics-writer]
+upstream_skills: [design-spec-writer, research-synthesizer, design-critique, design-success-metrics-writer, design-rationale-writer, design-status-rollup, design-maturity-assessment, performance-review-writer]
 downstream_skills: []
 
 # Input Contract

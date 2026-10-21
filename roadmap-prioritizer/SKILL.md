@@ -10,7 +10,7 @@ output_length: long
 
 # Skill Graph
 upstream_skills: [research-synthesizer, design-success-metrics-writer, journey-mapper]
-downstream_skills: [design-spec-writer, design-okr-writer]
+downstream_skills: [design-spec-writer, design-okr-writer, design-status-rollup]
 
 # Input Contract
 inputs:

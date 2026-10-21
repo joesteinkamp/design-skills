@@ -20,6 +20,7 @@ export interface UserInputWithFlag {
   required: boolean;
   options?: string[];
   default?: string | boolean | number;
+  checkpoint: boolean;
   flagKey: string;
 }
 

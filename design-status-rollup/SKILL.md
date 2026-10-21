@@ -9,8 +9,8 @@ complexity: moderate
 output_length: medium
 
 # Skill Graph
-upstream_skills: [design-success-metrics-writer]
-downstream_skills: [stakeholder-presentation-writer]
+upstream_skills: [design-success-metrics-writer, design-okr-writer]
+downstream_skills: [stakeholder-presentation-writer, performance-review-writer]
 
 # Input Contract
 inputs:

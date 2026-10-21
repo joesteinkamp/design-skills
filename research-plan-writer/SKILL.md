@@ -71,18 +71,22 @@ user_inputs:
     question: "What business decision will this research inform?"
     required: true
   - step: 1
-    question: "What do you already know vs. need to learn?"
+    question: "What do you already know vs. what do you need to learn?"
     required: false
   - step: 2
-    question: "Constraints?"
+    question: "Any constraints I should know about?"
     options: [tight_timeline, limited_budget, no_user_access, no_constraints]
     default: no_constraints
   - step: 2
-    question: "Preferred method?"
+    question: "Do you have a preferred method, or should I recommend one?"
     options: [interviews, survey, diary_study, concept_test, let_me_recommend]
     default: let_me_recommend
   - step: 4
-    question: "Want me to create the Typeform screener and schedule sessions?"
+    question: "Want me to create the Typeform screener from these criteria?"
+    required: false
+    default: false
+  - step: 5
+    question: "Want me to find available time slots and book sessions?"
     required: false
     default: false
 ---

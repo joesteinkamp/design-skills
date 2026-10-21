@@ -59,7 +59,7 @@ user_inputs:
     required: true
   - step: 2
     question: "Identified [N] behavioral segments. Does this grouping feel right?"
-    required: true
+    checkpoint: true
   - step: 4
     question: "Any user groups to explicitly exclude (anti-personas)?"
     required: false

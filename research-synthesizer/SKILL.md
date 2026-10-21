@@ -10,7 +10,7 @@ output_length: long
 
 # Skill Graph
 upstream_skills: []
-downstream_skills: [persona-creator, journey-mapper, design-spec-writer, stakeholder-presentation-writer]
+downstream_skills: [persona-creator, journey-mapper, design-spec-writer, stakeholder-presentation-writer, roadmap-prioritizer]
 
 # Input Contract
 inputs:
@@ -62,8 +62,8 @@ user_inputs:
     question: "Are Gong recordings available for auto-pulling transcripts?"
     required: false
   - step: 3
-    question: "I've identified [N] themes. Want to review before I distill insights?"
-    required: true
+    question: "I've identified [N] themes from the data. Want to review the theme list before I distill insights?"
+    checkpoint: true
   - step: 4
     question: "What's the downstream target for these insights?"
     options: [personas, journey_map, design_spec, all]

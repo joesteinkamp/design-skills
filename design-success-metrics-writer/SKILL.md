@@ -10,7 +10,7 @@ output_length: medium
 
 # Skill Graph
 upstream_skills: [design-spec-writer, persona-creator, journey-mapper]
-downstream_skills: [ab-test-planner, stakeholder-presentation-writer]
+downstream_skills: [ab-test-planner, stakeholder-presentation-writer, design-okr-writer, design-status-rollup, roadmap-prioritizer]
 
 # Input Contract
 inputs:

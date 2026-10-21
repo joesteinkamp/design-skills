@@ -10,7 +10,7 @@ output_length: medium
 
 # Skill Graph
 upstream_skills: [design-spec-writer]
-downstream_skills: [stakeholder-presentation-writer]
+downstream_skills: [stakeholder-presentation-writer, critique-notes-summarizer, design-rationale-writer]
 
 # Input Contract
 inputs:

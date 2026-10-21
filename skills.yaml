@@ -234,7 +234,7 @@ skills:
     complexity: moderate
     output_length: long
     upstream_skills: [research-synthesizer, design-success-metrics-writer, journey-mapper]
-    downstream_skills: [design-spec-writer, design-okr-writer]
+    downstream_skills: [design-spec-writer, design-okr-writer, design-status-rollup]
     tools: [productboard, linear, google_sheets, notion]
 
   - name: stakeholder-presentation-writer
