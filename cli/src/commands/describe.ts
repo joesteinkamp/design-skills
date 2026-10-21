@@ -41,9 +41,10 @@ export async function describeCommand(name: string): Promise<void> {
       lines.push(`- ${o.name}${o.optional ? " (optional)" : ""}: ${o.type ?? ""}`);
     }
   }
-  if (skill.userInputs.length > 0) {
+  const askable = skill.userInputs.filter((q) => !q.checkpoint);
+  if (askable.length > 0) {
     lines.push("", "## Interactive questions (pass as --<flag>)");
-    for (const q of skill.userInputs) {
+    for (const q of askable) {
       const opts = q.options ? ` [${q.options.join("|")}]` : "";
       const def = q.default !== undefined ? ` (default: ${q.default})` : "";
       lines.push(`- --${q.flagKey}${opts}${def}: ${q.question}`);

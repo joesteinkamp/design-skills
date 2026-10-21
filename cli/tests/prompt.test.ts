@@ -17,11 +17,26 @@ describe("assemblePrompt", () => {
     expect(out.model).toBe("sonnet");
   });
 
-  it("handles minimal skills (no inputs / outputs / references)", async () => {
+  it("handles skills without declared inputs / outputs, inlining body references", async () => {
     const skill = await findSkill("sketch-to-code");
     expect(skill).toBeDefined();
     const out = await assemblePrompt(skill!, { description: "login page" });
     expect(out.systemPrompt).toContain("sketch-to-code");
-    expect(out.systemPrompt).not.toContain("## Reference Templates");
+    expect(out.systemPrompt).toContain("references/component-catalog.json");
+  });
+
+  it("inlines rubrics the workflow reads, not just output templates", async () => {
+    const skill = await findSkill("design-critique");
+    const out = await assemblePrompt(skill!, { design_artifact: "settings page" });
+    expect(out.systemPrompt).toContain("### Reference: `references/critique-rubric.md`");
+    expect(out.systemPrompt).toContain("## Running Non-Interactively");
+  });
+
+  it("inlines cross-skill references", async () => {
+    const skill = await findSkill("workshop-planner");
+    const out = await assemblePrompt(skill!, { workshop_goal: "kickoff" });
+    expect(out.systemPrompt).toContain(
+      "../figjam-workshop-prompt-creator/references/ai-native-workshop-instructions.md",
+    );
   });
 });

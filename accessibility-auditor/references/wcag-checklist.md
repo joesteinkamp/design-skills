@@ -75,6 +75,7 @@ Use this checklist to evaluate designs against WCAG 2.2 success criteria, organi
 - 3.2.2 On Input (A): Changing a UI component does not automatically cause a change of context.
 - 3.2.3 Consistent Navigation (AA): Navigation mechanisms are consistent across pages.
 - 3.2.4 Consistent Identification (AA): Components with the same function are identified consistently.
+- 3.2.6 Consistent Help (A): Help mechanisms (contact details, chat, self-help links) appear in the same relative order across pages. *(new in 2.2)*
 
 ### 3.3 Input Assistance
 - 3.3.1 Error Identification (A): Input errors are identified and described in text.

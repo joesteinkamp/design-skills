@@ -29,6 +29,20 @@ Return your response as a single JSON object matching this schema:
 - Do NOT wrap the JSON in markdown code fences. Emit raw JSON only.
 `.trim();
 
+const HEADLESS_INSTRUCTIONS = `
+## Running Non-Interactively
+
+This run is one-shot: nobody can answer questions mid-run.
+
+- Treat "Answers to workflow questions" in the user message as the answers to the matching **Ask user** prompts.
+- For any **Ask user** or **Checkpoint** without an answer, proceed with the documented default (or the most reasonable choice) instead of stopping, and record each such choice under an \`Assumptions\` heading at the end of the body.
+- Never take an external write action (creating tickets, publishing pages, posting messages, booking sessions) unless its question was explicitly answered yes.
+- Before returning, check the output against every Quality Bar rule and revise until all blocker rules pass.
+`.trim();
+
+// Matches `references/x.md` and `../other-skill/references/x.md` mentions in SKILL.md.
+const REFERENCE_PATH = /(?:\.\.\/[a-z0-9-]+\/)?references\/[\w.-]+\.(?:md|json|html|ya?ml)/g;
+
 function isEnoent(err: unknown): boolean {
   return (err as NodeJS.ErrnoException)?.code === "ENOENT";
 }
@@ -39,6 +53,9 @@ async function loadReferenceTemplates(skill: DiscoveredSkill): Promise<string> {
     if (out.template) refs.add(out.template);
     if (out.schema) refs.add(out.schema);
   }
+  // Rubrics, checklists, and catalogs the workflow reads; the model cannot open
+  // them itself because the skill directory is not the working directory.
+  for (const match of skill.body.matchAll(REFERENCE_PATH)) refs.add(match[0]);
   if (refs.size === 0) return "";
 
   const loaded = await Promise.all(
@@ -86,6 +103,8 @@ export async function assemblePrompt(
     refs,
     "",
     "---",
+    "",
+    HEADLESS_INSTRUCTIONS,
     "",
     OUTPUT_ENVELOPE_INSTRUCTIONS,
   ].join("\n");

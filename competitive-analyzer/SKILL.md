@@ -37,9 +37,12 @@ batch:
 
 # Tool Integration
 tools:
-  - name: web_chrome
-    actions: [fetch_page, take_screenshot]
-    when: "Fetching competitor sites, capturing screenshots, and extracting pricing"
+  - name: web
+    actions: [WebSearch, WebFetch]
+    when: "Discovering competitors and fetching current product, pricing, and changelog pages"
+  - name: chrome
+    actions: [navigate, take_screenshot]
+    when: "Walking through live onboarding and core flows and capturing screenshots"
   - name: google_sheets
     actions: [create_spreadsheet, export_data]
     when: "Creating comparison matrix spreadsheet"
@@ -83,7 +86,7 @@ This skill can connect to the following tools. For each, the skill describes wha
 
 | Tool | What This Skill Does With It | If Unavailable |
 |------|------------------------------|----------------|
-| **Web / Chrome** | Fetch competitor sites, capture screenshots, extract pricing and feature information | Rely on descriptions and public knowledge; flag unverified claims |
+| **Web / Chrome** | Fetch competitor sites, capture screenshots, extract pricing and feature information | Rely on provided descriptions and model knowledge; label every such claim `unverified (model knowledge)` — pricing, feature sets, and UI change often and may be out of date |
 | **Google Sheets** | Create comparison matrix spreadsheet for sharing and collaboration | Output comparison matrix as markdown table; user creates spreadsheet manually |
 | **Notion** | Publish competitive analysis as a Notion page for team reference | Output as markdown; user pastes into Notion |
 | **Productboard** | Push opportunity gaps and differentiation insights to Productboard | Include opportunity gaps in output; user adds to Productboard manually |
@@ -105,7 +108,8 @@ This skill can connect to the following tools. For each, the skill describes wha
   - Fetch competitor site pages for feature and UX analysis.
   - Capture screenshots of key screens (homepage, onboarding, core feature, pricing).
   - Extract pricing tiers and feature lists where publicly available.
-- **If** no URLs provided → rely on descriptions and public knowledge; flag unverified claims.
+- **If** no URLs provided and Web is available → search for each competitor's current product, pricing, and changelog pages before analyzing.
+- **If** no URLs provided and no Web → rely on descriptions and model knowledge; label each such claim `unverified (model knowledge)` and state that the analysis may predate recent changes.
 - **If** <3 competitors → justify the smaller set with rationale (niche market, emerging category, etc.).
 - **Produces:** Populated `Analysis Scope` section
 
@@ -124,7 +128,7 @@ This skill can connect to the following tools. For each, the skill describes wha
   - Profile each competitor using `references/competitor-profile-template.md`.
   - Document strengths, weaknesses, and notable patterns.
   - Rate each competitor on every dimension.
-  - Note evidence for each rating.
+  - Note evidence for each rating, with its source (URL, screenshot, user-provided, or `unverified (model knowledge)`) and the date it was observed.
 - **If** URLs provided and Web/Chrome available → cross-reference auto-captured data with analysis.
 - **If** no URLs → document analysis based on available information; flag evidence gaps.
 - **Produces:** Populated `Competitor Profiles` section
@@ -188,6 +192,7 @@ Revise before finalizing if any rule fails.
 | QB-06 | Design Recommendations | Recommendations are grounded in specific gaps found in the analysis, not generic advice | blocker |
 | QB-07 | Comparison Matrix | At least 4 evaluation dimensions are used | warning |
 | QB-08 | Design Recommendations | Recommendations include priority ratings (must-do / should-do / could-do) | warning |
+| QB-09 | Competitor Profiles | Every factual claim about pricing, features, or UI cites a source and observation date, or is labeled `unverified (model knowledge)` — no unlabeled claims | blocker |
 
 ## Reference Navigation
 

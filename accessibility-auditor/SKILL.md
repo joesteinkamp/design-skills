@@ -9,8 +9,8 @@ complexity: moderate
 output_length: long
 
 # Skill Graph
-upstream_skills: [design-spec-writer]
-downstream_skills: [dev-handoff-writer]
+upstream_skills: [design-spec-writer, ux-copy-writer]
+downstream_skills: [dev-handoff-writer, alt-text-generator]
 
 # Input Contract
 inputs:

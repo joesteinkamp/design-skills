@@ -3,9 +3,7 @@ description: "Pipeline from candidate portfolio review through a calibrated inte
 
 steps:
   - skill: portfolio-reviewer
-    input_from:
-      - portfolio
-      - role_level
+    input_keys: [portfolio, role_level]
     output_key: portfolio_evaluation
     notes: "Screens the portfolio against a level-calibrated rubric and surfaces gaps to probe."
 

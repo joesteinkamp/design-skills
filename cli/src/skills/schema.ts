@@ -29,6 +29,8 @@ const UserInput = z.object({
   required: z.boolean().optional().default(false),
   options: z.array(z.string()).optional(),
   default: z.union([z.string(), z.boolean(), z.number()]).optional(),
+  // Mid-run review of intermediate results; cannot be answered before the run starts.
+  checkpoint: z.boolean().optional().default(false),
 });
 
 export const SkillFrontmatterSchema = z.object({

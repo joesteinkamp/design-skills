@@ -23,7 +23,7 @@ steps:
       - design-okr-writer.okr_set
       - roadmap-prioritizer.prioritized_roadmap
     output_key: status_digest
-    depends_on: [roadmap-prioritizer]
+    depends_on: [design-okr-writer, roadmap-prioritizer]
     notes: "Rolls the plan and ongoing progress into a leadership-ready digest each cycle."
 
 entry_points:

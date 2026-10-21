@@ -66,7 +66,7 @@ user_inputs:
     required: false
   - step: 3
     question: "Primary metric: [X]. Confirm this is what we should optimize for?"
-    required: true
+    checkpoint: true
   - step: 5
     question: "Create a Linear ticket for implementation?"
     required: false

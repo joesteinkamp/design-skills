@@ -22,7 +22,7 @@ steps:
       - design-spec-writer.design_spec
       - accessibility-auditor.accessibility_findings
     output_key: dev_handoff
-    depends_on: [accessibility-auditor]
+    depends_on: [design-spec-writer, accessibility-auditor]
 
 parallel_groups:
   - name: post-spec-evaluation

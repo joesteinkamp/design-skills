@@ -25,7 +25,7 @@ Every skill is a self-contained folder with the same shape:
 - **Input Contract** — what it needs, what's required vs. optional, and which upstream skill can supply each input.
 - **Output Contract** — the named sections it returns, in order, with required/min-items/format.
 - **Tool Integration** — the tools it can use (Figma, Linear, Notion, etc.) and, critically, a manual fallback for every tool so the skill still works when nothing is connected.
-- **User Input Gates** — the few questions it asks up front (and where) instead of guessing.
+- **User Input Gates** — the few questions it asks up front (and where) instead of guessing. Gates marked `checkpoint: true` review intermediate results mid-run; one-shot runners (like the CLI) skip them, and the model proceeds on defaults and lists its assumptions.
 - **Workflow** — numbered steps, each declaring what it reads, does, and produces, with explicit conditional branches.
 - **Quality Bar** — a table of pass-condition rules (blocker/warning) the output is checked against before it's returned.
 - **Trigger Examples** — positive, negative (routes to the right sibling skill), and ambiguous cases, so the right skill gets selected.
@@ -98,4 +98,5 @@ Pre-defined multi-skill flows live in [`pipelines/`](./pipelines). Each declares
 - **Quality-bar rules are pass-conditions** — each rule states what must be *true* for the output to ship, and the output is revised if any rule fails.
 - **Every tool has a fallback** — skills degrade gracefully to manual/markdown output when a tool isn't connected.
 - **Behavior over format** — skills produce structured content first; tool-specific formatting (Notion page, Linear ticket, FigJam board) is an optional last step.
+- **Graph edges live in two places** — `upstream_skills`/`downstream_skills` in each `SKILL.md` must match `skills.yaml`; `cli/tests/registry.test.ts` enforces this and checks that every referenced file exists.
 - **Handoffs are typed** — when a skill feeds another, it emits a handoff block matching the downstream skill's schema, so chains stay lossless.

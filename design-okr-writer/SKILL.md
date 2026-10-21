@@ -9,7 +9,7 @@ complexity: moderate
 output_length: medium
 
 # Skill Graph
-upstream_skills: [design-success-metrics-writer]
+upstream_skills: [design-success-metrics-writer, design-maturity-assessment, performance-review-writer]
 downstream_skills: [roadmap-prioritizer, design-status-rollup]
 
 # Input Contract

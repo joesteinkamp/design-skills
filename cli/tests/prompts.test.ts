@@ -24,8 +24,10 @@ const skill: DiscoveredSkill = {
         question: "Decision stage: proposal, refinement, or build-ready?",
         required: true,
         options: ["proposal", "refinement", "build-ready"],
+        checkpoint: false,
       },
-      { question: "Figma URL?", required: false },
+      { question: "Figma URL?", required: false, checkpoint: false },
+      { question: "Found [N] themes. Review them?", required: false, checkpoint: true },
     ],
   },
   userInputs: [
@@ -33,9 +35,16 @@ const skill: DiscoveredSkill = {
       question: "Decision stage: proposal, refinement, or build-ready?",
       required: true,
       options: ["proposal", "refinement", "build-ready"],
+      checkpoint: false,
       flagKey: "decision-stage",
     },
-    { question: "Figma URL?", required: false, flagKey: "figma-url" },
+    { question: "Figma URL?", required: false, checkpoint: false, flagKey: "figma-url" },
+    {
+      question: "Found [N] themes. Review them?",
+      required: false,
+      checkpoint: true,
+      flagKey: "found-n-themes-review-them",
+    },
   ],
 };
 
@@ -70,5 +79,13 @@ describe("collectInputs (non-interactive)", () => {
     });
     expect(out.inputs.personas).toBeUndefined();
     expect(out.userAnswers["Figma URL?"]).toBeUndefined();
+  });
+
+  it("never asks mid-run checkpoints up front", async () => {
+    const out = await collectInputs(skill, {
+      flags: { feature_description: "x", "decision-stage": "proposal" },
+      interactive: false,
+    });
+    expect(out.userAnswers).not.toHaveProperty("Found [N] themes. Review them?");
   });
 });

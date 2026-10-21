@@ -10,7 +10,7 @@ output_length: long
 
 # Skill Graph
 upstream_skills: [design-spec-writer, accessibility-auditor]
-downstream_skills: []
+downstream_skills: [ux-copy-writer, alt-text-generator, design-qa-reviewer]
 
 # Input Contract
 inputs:

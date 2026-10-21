@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
 import { execa, type ExecaError } from "execa";
 import { OUTPUT_JSON_SCHEMA } from "../skills/prompt.js";
 
@@ -17,7 +19,13 @@ export interface SkillOutputEnvelope {
 }
 
 export interface ClaudeInvocationResult {
-  raw: { result: string; total_cost_usd?: number; session_id?: string; is_error?: boolean };
+  raw: {
+    result: string;
+    structured_output?: unknown;
+    total_cost_usd?: number;
+    session_id?: string;
+    is_error?: boolean;
+  };
   envelope: SkillOutputEnvelope;
 }
 
@@ -35,6 +43,9 @@ export async function invokeClaude(opts: InvokeOptions): Promise<ClaudeInvocatio
     "--json-schema",
     JSON.stringify(OUTPUT_JSON_SCHEMA),
   ];
+  // --bare skips MCP auto-discovery, so pass the project's servers (from `design init`) explicitly.
+  const mcpConfig = path.join(opts.cwd ?? process.cwd(), ".mcp.json");
+  if (existsSync(mcpConfig)) args.push("--mcp-config", mcpConfig);
   if (opts.model) args.push("--model", opts.model);
   if (opts.maxBudgetUsd !== undefined) args.push("--max-budget-usd", String(opts.maxBudgetUsd));
   if (opts.extraArgs) args.push(...opts.extraArgs);
@@ -63,13 +74,17 @@ export async function invokeClaude(opts: InvokeOptions): Promise<ClaudeInvocatio
   } catch {
     throw new Error(`claude returned non-JSON output:\n${stdout.slice(0, 500)}`);
   }
-  if (raw.is_error || !raw.result) {
+  if (raw.is_error || (!raw.result && raw.structured_output === undefined)) {
     throw new Error(`claude returned error envelope: ${JSON.stringify(raw)}`);
   }
 
   let envelope: SkillOutputEnvelope;
   try {
-    envelope = JSON.parse(raw.result);
+    // --json-schema returns the validated object in structured_output; older CLIs put it in result.
+    envelope =
+      raw.structured_output !== undefined
+        ? (raw.structured_output as SkillOutputEnvelope)
+        : JSON.parse(raw.result);
   } catch {
     throw new Error(`Skill result was not valid JSON envelope:\n${raw.result.slice(0, 500)}`);
   }
