@@ -47,8 +47,8 @@ export async function collectInputs(
       continue;
     }
     if (!opts.interactive) {
-      if (q.required) throw new Error(`Missing required answer --${q.flagKey}: ${q.question}`);
       if (q.default !== undefined) userAnswers[q.question] = q.default;
+      else if (q.required) throw new Error(`Missing required answer --${q.flagKey}: ${q.question}`);
       continue;
     }
     if (q.options && q.options.length > 0) {

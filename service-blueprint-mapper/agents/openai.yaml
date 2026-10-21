@@ -1,0 +1,8 @@
+interface:
+  display_name: "Service Blueprint Mapper"
+  short_description: "Map frontstage, backstage, and support processes with fail and wait points"
+  invocation: "${service-blueprint-mapper}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/blueprint-notation-guide.md"
+    - "../references/service-blueprint-template.md"

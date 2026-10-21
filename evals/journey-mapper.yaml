@@ -1,0 +1,15 @@
+# Golden eval cases for journey-mapper. Run with: design eval journey-mapper
+skill: journey-mapper
+cases:
+- id: baseline
+  description: Representative journey-mapper request
+  inputs:
+    scenario_description: 'A small-business owner switches payroll providers mid-year: from deciding to
+      switch, through data migration and the first payroll run, to filing year-end tax forms. Known pains:
+      migrating year-to-date totals, fear of paying employees late, unclear who to call.'
+  answers:
+    what-is-the-journey-scope: end_to_end
+    who-is-the-primary-persona-for-this-journey: Owner-operator with 12 employees, no HR staff
+  expect:
+    contains:
+    - opportunit

@@ -1,0 +1,15 @@
+# Golden eval cases for design-critique. Run with: design eval design-critique
+skill: design-critique
+cases:
+- id: baseline
+  description: Representative design-critique request
+  inputs:
+    design_artifact: High-fidelity settings page for a project-management app. Left nav with 9 items;
+      the main panel has 14 toggles in one long list with no grouping; 'Save' button is fixed at the bottom
+      right in the same blue as the toggles; destructive 'Delete workspace' sits directly under 'Export
+      data' with the same button style; no empty, loading, or error states shown.
+  answers:
+    what-design-stage-is-this: high_fi
+  expect:
+    contains:
+    - Delete workspace

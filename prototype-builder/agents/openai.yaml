@@ -1,0 +1,8 @@
+interface:
+  display_name: "Prototype Builder"
+  short_description: "Build a clickable, test-ready multi-screen prototype in code"
+  invocation: "${prototype-builder}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/prototype-fidelity-guide.md"
+    - "../references/prototype-template.md"

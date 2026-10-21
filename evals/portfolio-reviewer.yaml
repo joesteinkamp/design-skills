@@ -1,0 +1,17 @@
+# Golden eval cases for portfolio-reviewer. Run with: design eval portfolio-reviewer
+skill: portfolio-reviewer
+cases:
+- id: baseline
+  description: Representative portfolio-reviewer request
+  inputs:
+    portfolio: 'Case study 1: Redesigned a grocery delivery checkout; shows final screens, mentions ''conversion
+      went up''; no process, no role clarity. Case study 2: Internal admin tool; detailed problem framing,
+      3 rounds of testing, trade-offs explained, says ''I led research; the PM owned scope''. Case study
+      3: Visual brand refresh concepts, no outcomes.'
+    role_level: Senior Product Designer
+  answers:
+    what-role-and-level-is-this-candidate-being-considered-for: Senior Product Designer, B2B
+    use-the-default-design-rubric-or-a-custom-one: default
+  expect:
+    contains:
+    - probe

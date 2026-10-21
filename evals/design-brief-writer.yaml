@@ -1,0 +1,17 @@
+# Golden eval cases for design-brief-writer. Run with: design eval design-brief-writer
+skill: design-brief-writer
+cases:
+- id: baseline
+  description: Representative design-brief-writer request
+  inputs:
+    request: 'From the VP Sales in Slack: ''Enterprise prospects keep asking for an admin dashboard. Can
+      design mock one up for the QBR in three weeks?'''
+    business_context: 'Enterprise is 60% of new ARR this year. Admin-related support tickets doubled last
+      quarter; top tags: ''seat management'', ''who has access'', ''usage by team''.'
+  answers:
+    who-asked-for-this-and-what-decision-or-outcome-do-they-need: VP Sales; they need to decide what to
+      promise enterprise prospects at the QBR
+  expect:
+    contains:
+    - How might we
+    - non-goal

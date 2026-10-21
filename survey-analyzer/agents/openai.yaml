@@ -1,0 +1,8 @@
+interface:
+  display_name: "Survey Analyzer"
+  short_description: "Analyze survey data with honest statistics and coded open-text themes"
+  invocation: "${survey-analyzer}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/survey-analysis-template.md"
+    - "../references/survey-metrics.md"

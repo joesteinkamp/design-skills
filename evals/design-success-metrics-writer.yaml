@@ -1,0 +1,14 @@
+# Golden eval cases for design-success-metrics-writer. Run with: design eval design-success-metrics-writer
+skill: design-success-metrics-writer
+cases:
+- id: baseline
+  description: Representative design-success-metrics-writer request
+  inputs:
+    feature_description: 'Saved report views: users can save filter and column settings as named views
+      and share them with teammates.'
+  answers:
+    what-does-success-look-like-in-plain-language: People stop rebuilding the same report every day, and
+      teams share one view instead of screenshots.
+  expect:
+    contains:
+    - baseline

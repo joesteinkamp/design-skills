@@ -1,7 +1,7 @@
 import path from "node:path";
 import { defaultCategory, findSkill } from "../skills/discover.js";
 import { assemblePrompt } from "../skills/prompt.js";
-import { invokeClaude } from "../claude/invoke.js";
+import { inputFileDirs, invokeClaude } from "../claude/invoke.js";
 import { collectInputs } from "../io/prompts.js";
 import { writeOutput } from "../io/fs.js";
 import { slugify } from "../io/slug.js";
@@ -51,6 +51,7 @@ export async function runCommand(
     userMessage: assembled.userMessage,
     model,
     maxBudgetUsd: opts.maxBudgetUsd,
+    addDirs: inputFileDirs(inputs),
   });
 
   const outRoot = path.resolve(

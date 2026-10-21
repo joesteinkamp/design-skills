@@ -9,8 +9,8 @@ complexity: moderate
 output_length: long
 
 # Skill Graph
-upstream_skills: [design-spec-writer, journey-mapper]
-downstream_skills: [research-synthesizer]
+upstream_skills: [design-spec-writer, journey-mapper, design-brief-writer]
+downstream_skills: [research-synthesizer, survey-analyzer]
 
 # Input Contract
 inputs:

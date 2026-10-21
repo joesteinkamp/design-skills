@@ -10,7 +10,7 @@ output_length: long
 
 # Skill Graph
 upstream_skills: [persona-creator, research-synthesizer]
-downstream_skills: [design-spec-writer, design-spectrums-creator, design-success-metrics-writer, ab-test-planner, usability-test-planner, user-flow-mapper, inspiration-browser, research-plan-writer, roadmap-prioritizer]
+downstream_skills: [design-spec-writer, design-spectrums-creator, design-success-metrics-writer, ab-test-planner, usability-test-planner, user-flow-mapper, inspiration-browser, research-plan-writer, roadmap-prioritizer, ideation-facilitator, service-blueprint-mapper]
 
 # Input Contract
 inputs:

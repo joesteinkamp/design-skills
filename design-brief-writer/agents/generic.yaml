@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Brief Writer"
+  short_description: "Frame the problem with a design brief: problem statement, goals, non-goals, risks, HMWs"
+  default_prompt: "Use $design-brief-writer to write a design brief that frames the problem, goals, non-goals, assumptions, and How Might We questions."

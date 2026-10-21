@@ -9,8 +9,8 @@ complexity: heavy
 output_length: long
 
 # Skill Graph
-upstream_skills: [persona-creator, journey-mapper, research-synthesizer, critique-notes-summarizer, design-rationale-writer, roadmap-prioritizer]
-downstream_skills: [dev-handoff-writer, ab-test-planner, accessibility-auditor, design-critique, heuristic-evaluator, usability-test-planner, user-flow-mapper, design-spectrums-creator, design-success-metrics-writer, inspiration-browser, research-plan-writer, ux-copy-writer, design-qa-reviewer]
+upstream_skills: [persona-creator, journey-mapper, research-synthesizer, critique-notes-summarizer, design-rationale-writer, roadmap-prioritizer, ideation-facilitator, service-blueprint-mapper, design-brief-writer, ia-researcher]
+downstream_skills: [dev-handoff-writer, ab-test-planner, accessibility-auditor, design-critique, heuristic-evaluator, usability-test-planner, user-flow-mapper, design-spectrums-creator, design-success-metrics-writer, inspiration-browser, research-plan-writer, ux-copy-writer, design-qa-reviewer, prototype-builder, localization-reviewer]
 
 # Input Contract
 inputs:

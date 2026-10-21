@@ -1,0 +1,21 @@
+# Golden eval cases for design-qa-reviewer. Run with: design eval design-qa-reviewer
+skill: design-qa-reviewer
+cases:
+- id: baseline
+  description: Representative design-qa-reviewer request
+  inputs:
+    built_ui: 'Built signup page (staging): heading 28px/600 (spec 32px/700); primary button height 40px
+      (spec 48px), radius 4px (spec 8px); input focus ring missing; error text appears below the button
+      instead of under the field; spacing between fields 12px (spec 16px); mobile layout overflows horizontally
+      at 360px.'
+    design_reference: 'Figma spec: heading 32/700, inputs 48px tall with 16px gaps, 2px focus ring in
+      brand blue, field-level errors under each input, button 48px with 8px radius, mobile breakpoint
+      360px single column.'
+  answers:
+    what-are-we-qa-ing-a-screen-a-component-or-a-flow: a screen
+    figma-url-source-of-truth-and-the-built-url-or-screenshot: Figma spec as described; staging build
+      as described
+    tolerance: functional-parity
+  expect:
+    contains:
+    - focus

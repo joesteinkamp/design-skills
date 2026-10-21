@@ -1,0 +1,15 @@
+# Golden eval cases for usability-test-planner. Run with: design eval usability-test-planner
+skill: usability-test-planner
+cases:
+- id: baseline
+  description: Representative usability-test-planner request
+  inputs:
+    design_to_test: 'Invite-teammates flow prototype: Members page → Invite → paste emails → choose role
+      → send → pending list with revoke.'
+  answers:
+    moderated-or-unmoderated: moderated
+    remote-or-in-person: remote
+    prototype-available: other_url
+  expect:
+    contains:
+    - task

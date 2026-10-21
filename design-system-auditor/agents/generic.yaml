@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design System Auditor"
+  short_description: "Measure design system adoption and drift and plan remediation"
+  default_prompt: "Use $design-system-auditor to audit design system adoption and drift across Figma and code and produce a prioritized remediation plan."

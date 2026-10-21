@@ -9,7 +9,7 @@ complexity: moderate
 output_length: long
 
 # Skill Graph
-upstream_skills: [design-spec-writer, user-flow-mapper, persona-creator]
+upstream_skills: [design-spec-writer, user-flow-mapper, persona-creator, ideation-facilitator, prototype-builder, design-brief-writer]
 downstream_skills: [research-synthesizer]
 
 # Input Contract

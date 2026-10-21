@@ -15,6 +15,6 @@ describe("discoverSkills (bundled)", () => {
     expect(dsw!.frontmatter.category).toBe("documentation");
     expect(dsw!.frontmatter.inputs.some((i) => i.name === "feature_description")).toBe(true);
     expect(dsw!.frontmatter.outputs.some((o) => o.name === "design_spec")).toBe(true);
-    expect(dsw!.agent?.interface?.model).toBe("sonnet");
+    expect(dsw!.agent?.interface?.model).toBe("opus");
   });
 });

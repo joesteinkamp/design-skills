@@ -3,61 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS v4 browser build (pinned). Matches the v4 setup current shadcn/ui installs. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.11"></script>
     <style>
-        /* shadcn/ui CSS custom properties */
+        /* shadcn/ui design tokens (Tailwind v4, OKLCH, neutral base) */
         :root {
-            --background: 0 0% 100%;
-            --foreground: 222.2 84% 4.9%;
-            --card: 0 0% 100%;
-            --card-foreground: 222.2 84% 4.9%;
-            --popover: 0 0% 100%;
-            --popover-foreground: 222.2 84% 4.9%;
-            --primary: 222.2 47.4% 11.2%;
-            --primary-foreground: 210 40% 98%;
-            --secondary: 210 40% 96.1%;
-            --secondary-foreground: 222.2 47.4% 11.2%;
-            --muted: 210 40% 96.1%;
-            --muted-foreground: 215.4 16.3% 46.9%;
-            --accent: 210 40% 96.1%;
-            --accent-foreground: 222.2 47.4% 11.2%;
-            --destructive: 0 84.2% 60.2%;
-            --destructive-foreground: 210 40% 98%;
-            --border: 214.3 31.8% 91.4%;
-            --input: 214.3 31.8% 91.4%;
-            --ring: 222.2 84% 4.9%;
-            --radius: 0.5rem;
+            --radius: 0.625rem;
+            --background: oklch(1 0 0);
+            --foreground: oklch(0.145 0 0);
+            --card: oklch(1 0 0);
+            --card-foreground: oklch(0.145 0 0);
+            --popover: oklch(1 0 0);
+            --popover-foreground: oklch(0.145 0 0);
+            --primary: oklch(0.205 0 0);
+            --primary-foreground: oklch(0.985 0 0);
+            --secondary: oklch(0.97 0 0);
+            --secondary-foreground: oklch(0.205 0 0);
+            --muted: oklch(0.97 0 0);
+            --muted-foreground: oklch(0.556 0 0);
+            --accent: oklch(0.97 0 0);
+            --accent-foreground: oklch(0.205 0 0);
+            --destructive: oklch(0.577 0.245 27.325);
+            --border: oklch(0.922 0 0);
+            --input: oklch(0.922 0 0);
+            --ring: oklch(0.708 0 0);
         }
-        /* Base shadcn/ui component styles */
         body { font-family: system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
-        /* Button styles matching shadcn */
-        .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; transition: all 150ms; cursor: pointer; }
-        .btn-primary { background-color: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
-        .btn-secondary { background-color: hsl(var(--secondary)); color: hsl(var(--secondary-foreground)); }
-        .btn-outline { border: 1px solid hsl(var(--border)); background: transparent; }
-        .btn-ghost { background: transparent; }
-        .btn-destructive { background-color: hsl(var(--destructive)); color: hsl(var(--destructive-foreground)); }
-        /* Card styles */
-        .card { border-radius: var(--radius); border: 1px solid hsl(var(--border)); background: hsl(var(--card)); color: hsl(var(--card-foreground)); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-        .card-header { padding: 1.5rem 1.5rem 0; }
-        .card-title { font-size: 1.25rem; font-weight: 600; }
-        .card-description { font-size: 0.875rem; color: hsl(var(--muted-foreground)); }
-        .card-content { padding: 1.5rem; }
-        .card-footer { padding: 0 1.5rem 1.5rem; display: flex; align-items: center; }
-        /* Input styles */
-        .input { display: flex; height: 2.5rem; width: 100%; border-radius: calc(var(--radius) - 2px); border: 1px solid hsl(var(--input)); background: transparent; padding: 0.5rem 0.75rem; font-size: 0.875rem; }
-        .input:focus { outline: none; ring: 2px solid hsl(var(--ring)); }
-        /* Label */
-        .label { font-size: 0.875rem; font-weight: 500; }
-        /* Badge */
-        .badge { display: inline-flex; align-items: center; border-radius: 9999px; padding: 0.125rem 0.625rem; font-size: 0.75rem; font-weight: 600; }
-        /* Separator */
-        .separator { height: 1px; background: hsl(var(--border)); width: 100%; }
-        /* Avatar */
-        .avatar { display: inline-flex; align-items: center; justify-content: center; border-radius: 9999px; overflow: hidden; width: 2.5rem; height: 2.5rem; background: hsl(var(--muted)); }
+    </style>
+    <style type="text/tailwindcss">
+        /* Expose the tokens as utilities (bg-primary, text-muted-foreground, border-border, rounded-lg…)
+           so the preview uses the same class names as the React component. */
+        @theme inline {
+            --color-background: var(--background);
+            --color-foreground: var(--foreground);
+            --color-card: var(--card);
+            --color-card-foreground: var(--card-foreground);
+            --color-popover: var(--popover);
+            --color-popover-foreground: var(--popover-foreground);
+            --color-primary: var(--primary);
+            --color-primary-foreground: var(--primary-foreground);
+            --color-secondary: var(--secondary);
+            --color-secondary-foreground: var(--secondary-foreground);
+            --color-muted: var(--muted);
+            --color-muted-foreground: var(--muted-foreground);
+            --color-accent: var(--accent);
+            --color-accent-foreground: var(--accent-foreground);
+            --color-destructive: var(--destructive);
+            --color-border: var(--border);
+            --color-input: var(--input);
+            --color-ring: var(--ring);
+            --radius-sm: calc(var(--radius) - 4px);
+            --radius-md: calc(var(--radius) - 2px);
+            --radius-lg: var(--radius);
+            --radius-xl: calc(var(--radius) + 4px);
+        }
+        /* Static stand-ins for shadcn components, which can't be imported in a plain HTML file. */
+        @layer components {
+            .btn { @apply inline-flex h-9 items-center justify-center gap-2 rounded-md px-4 text-sm font-medium transition-colors cursor-pointer; }
+            .btn-primary { @apply bg-primary text-primary-foreground hover:bg-primary/90; }
+            .btn-secondary { @apply bg-secondary text-secondary-foreground hover:bg-secondary/80; }
+            .btn-outline { @apply border border-input bg-background hover:bg-accent; }
+            .btn-ghost { @apply hover:bg-accent; }
+            .btn-link { @apply text-primary underline-offset-4 hover:underline; }
+            .btn-destructive { @apply bg-destructive text-white hover:bg-destructive/90; }
+            .card { @apply flex flex-col gap-6 rounded-xl border border-border bg-card py-6 text-card-foreground shadow-sm; }
+            .card-header { @apply grid gap-1.5 px-6; }
+            .card-title { @apply font-semibold leading-none; }
+            .card-description { @apply text-sm text-muted-foreground; }
+            .card-content { @apply px-6; }
+            .card-footer { @apply flex items-center px-6; }
+            .input { @apply flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50; }
+            .label { @apply text-sm font-medium leading-none; }
+            .badge { @apply inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-medium; }
+            .separator { @apply h-px w-full bg-border; }
+            .avatar { @apply inline-flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-muted; }
+        }
     </style>
 </head>
-<body class="bg-white p-6">
+<body class="bg-background text-foreground p-6">
     {{CONTENT}}
 </body>
 </html>

@@ -12,7 +12,8 @@
     "../*/references/**",
     "../*/agents/**",
     "../skills.yaml",
-    "../pipelines/**"
+    "../pipelines/**",
+    "../evals/**"
   ],
   "scripts": {
     "build": "tsc",

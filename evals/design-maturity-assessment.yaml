@@ -1,0 +1,16 @@
+# Golden eval cases for design-maturity-assessment. Run with: design eval design-maturity-assessment
+skill: design-maturity-assessment
+cases:
+- id: baseline
+  description: Representative design-maturity-assessment request
+  inputs:
+    org_context: 12 designers across 5 product squads at a 400-person SaaS company; 1 design manager,
+      no design ops. A component library exists in Figma but there is no coded equivalent; research is
+      done ad hoc by designers (~4 studies/year); design joins after PRDs are written; no design metrics
+      are tracked; designers report into product managers.
+  answers:
+    what-model-or-dimensions-should-we-assess-against-the-defaul: default
+    do-you-have-evidence-survey-interviews-artifacts-or-is-this-: self-assessment
+  expect:
+    contains:
+    - roadmap

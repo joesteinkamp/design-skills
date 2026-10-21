@@ -1,0 +1,6 @@
+interface:
+  display_name: "Ideation Facilitator"
+  short_description: "Generate divergent concepts and converge on a tested shortlist"
+  default_prompt: "Use $ideation-facilitator to generate a divergent concept set and recommend a shortlist with the riskiest assumption and cheapest test for each."
+  model: sonnet
+  context_strategy: skill_and_templates

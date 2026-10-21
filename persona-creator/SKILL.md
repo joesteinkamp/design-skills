@@ -9,7 +9,7 @@ complexity: moderate
 output_length: medium
 
 # Skill Graph
-upstream_skills: [research-synthesizer]
+upstream_skills: [research-synthesizer, survey-analyzer]
 downstream_skills: [journey-mapper, design-spec-writer, design-spectrums-creator, design-success-metrics-writer, usability-test-planner, inspiration-browser]
 
 # Input Contract

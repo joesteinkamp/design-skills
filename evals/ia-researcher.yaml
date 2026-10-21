@@ -1,0 +1,13 @@
+# Golden eval cases for ia-researcher. Run with: design eval ia-researcher
+skill: ia-researcher
+cases:
+- id: baseline
+  description: Representative ia-researcher request
+  inputs:
+    ia_context: 'B2B analytics product. Settings has grown to 46 pages under 6 top-level items: Account,
+      Workspace, Billing, Integrations, Advanced, Labs. Support tickets show people can''t find SSO setup
+      (under Advanced), invoices (under Account), and data retention (under Labs). We want to restructure
+      settings.'
+  expect:
+    contains:
+    - tree test

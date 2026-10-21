@@ -1,0 +1,13 @@
+# Golden eval cases for competitive-analyzer. Run with: design eval competitive-analyzer
+skill: competitive-analyzer
+cases:
+- id: baseline
+  description: Representative competitive-analyzer request
+  inputs:
+    focal_product: Our B2B expense-management app's mobile receipt capture and approval flow, aimed at
+      companies of 50–500 employees.
+  answers:
+    confirm-competitor-set-any-to-add-remove: Expensify, Ramp, Brex, Navan
+  expect:
+    contains:
+    - unverified

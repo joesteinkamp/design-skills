@@ -1,0 +1,17 @@
+# Golden eval cases for interview-scorecard. Run with: design eval interview-scorecard
+skill: interview-scorecard
+cases:
+- id: baseline
+  description: Representative interview-scorecard request
+  inputs:
+    role_spec: Senior Product Designer, B2B SaaS, owns end-to-end design for the billing area; works with
+      1 PM and 6 engineers; expected to lead research and influence roadmap.
+    interview_type: craft
+  answers:
+    what-role-and-level-and-which-competencies-matter-for-this-h: 'Senior Product Designer; competencies:
+      craft, problem framing, collaboration'
+    which-interview-round-is-this-portfolio-craft-app-collaborat: craft
+    generate-questions-for-an-upcoming-interview-or-score-a-comp: generate
+  expect:
+    contains:
+    - rubric

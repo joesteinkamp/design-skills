@@ -1,0 +1,40 @@
+# Golden eval cases for survey-analyzer. Run with: design eval survey-analyzer
+skill: survey-analyzer
+cases:
+- id: baseline
+  description: Representative survey-analyzer request
+  inputs:
+    survey_data: 'respondent_id,plan,tenure_months,nps,csat_reporting,completion_seconds,open_text
+
+      1,pro,14,9,5,212,"Reports are fast, love the saved views"
+
+      2,starter,3,4,2,48,"Filters reset every time I leave the page"
+
+      3,pro,22,10,5,190,"Best tool we use"
+
+      4,starter,5,6,3,175,"Totals don''t match my bank, timezone issue?"
+
+      5,enterprise,30,8,4,240,"Need scheduled email reports for execs"
+
+      6,starter,2,3,1,30,"asdf"
+
+      7,pro,9,7,4,160,"Export is hidden in the new navigation"
+
+      8,enterprise,26,9,5,205,"Scheduled exports would save my team hours"
+
+      9,starter,4,5,2,150,"Filters reset, have to rebuild views daily"
+
+      10,pro,16,10,5,180,"Works great"
+
+      11,starter,1,2,1,140,"Couldn''t find export after the redesign"
+
+      12,pro,12,8,4,170,"Date picker defaults to UTC which breaks month-end"
+
+      '
+    survey_instrument: In-product intercept shown to active users in October; NPS 0–10; reporting CSAT
+      1–5; one open-text 'What would make reporting better?'
+  answers:
+    what-decision-should-this-analysis-inform: Which reporting problems to fix first next quarter
+  expect:
+    contains:
+    - NPS

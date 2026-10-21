@@ -10,7 +10,7 @@ output_length: medium
 
 # Skill Graph
 upstream_skills: []
-downstream_skills: []
+downstream_skills: [design-brief-writer, ia-researcher]
 
 # Input Contract
 inputs:

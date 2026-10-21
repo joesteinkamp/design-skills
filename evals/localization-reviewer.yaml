@@ -1,0 +1,15 @@
+# Golden eval cases for localization-reviewer. Run with: design eval localization-reviewer
+skill: localization-reviewer
+cases:
+- id: baseline
+  description: Representative localization-reviewer request
+  inputs:
+    ui_artifact: Checkout page (React). Button widths fixed at 120px ('Buy now', 'Apply'). Order summary
+      string built as `'You have ' + count + ' items in your cart'`. Dates rendered with `${month}/${day}/${year}`.
+      Price shown as `'$' + amount.toFixed(2)`. Back arrow icon hardcoded with `margin-left`. Address
+      form requires State and a 5-digit ZIP. A thumbs-up icon confirms success.
+    target_locales: de-DE, ja-JP, ar-SA, pt-BR
+  expect:
+    contains:
+    - ICU
+    - RTL

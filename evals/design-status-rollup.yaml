@@ -1,0 +1,17 @@
+# Golden eval cases for design-status-rollup. Run with: design eval design-status-rollup
+skill: design-status-rollup
+cases:
+- id: baseline
+  description: Representative design-status-rollup request
+  inputs:
+    updates: 'Ana (onboarding): v3 tested with 6 users, 5/6 completed setup, shipping to 10% next week.
+      Ben (billing): blocked — payments API change pushed out by platform team two weeks; invoice redesign
+      on hold. Chen (design system): 14 of 22 components now in code; Tabs and Table slipping to next
+      sprint. Dee (research): churn interviews 8/12 done; early theme is ''too hard to share reports''.
+      Hiring: senior designer offer accepted, starts Nov 4.'
+  answers:
+    who-s-the-audience-exec-leadership-cross-functional-partners: exec
+    what-cadence-is-this-weekly-or-monthly: weekly
+  expect:
+    contains:
+    - blocked

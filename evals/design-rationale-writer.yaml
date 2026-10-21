@@ -1,0 +1,17 @@
+# Golden eval cases for design-rationale-writer. Run with: design eval design-rationale-writer
+skill: design-rationale-writer
+cases:
+- id: baseline
+  description: Representative design-rationale-writer request
+  inputs:
+    decision_context: 'We decided to replace our custom date picker with the native browser date input
+      on mobile web only, keeping the custom picker on desktop. Alternatives considered: keep custom everywhere
+      (accessibility bugs, 3 open a11y tickets), adopt a third-party picker (bundle +40kb, theming limits).
+      Engineering effort: 3 days vs 2 weeks.'
+  answers:
+    what-decision-is-being-recorded-and-what-prompted-it: Native date input on mobile web; prompted by
+      a11y bugs in the custom picker
+    is-this-a-one-way-door-hard-to-reverse-or-two-way-door-easil: two-way
+  expect:
+    contains:
+    - alternative

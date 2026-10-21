@@ -1,0 +1,38 @@
+name: concept-to-test
+description: "Pipeline from a framed problem to a prototype ready for usability testing. Use when a team has a request or problem and wants to explore concepts and test the most promising one with users quickly."
+
+steps:
+  - skill: design-brief-writer
+    input_key: request
+    output_key: design_brief
+    notes: "Skip if a brief with a problem statement and HMWs already exists."
+
+  - skill: ideation-facilitator
+    input_from: design-brief-writer.design_brief
+    output_key: concept_set
+    depends_on: [design-brief-writer]
+
+  - skill: prototype-builder
+    input_from: ideation-facilitator.concept_set
+    output_key: prototype
+    depends_on: [ideation-facilitator]
+    notes: "Prototype the shortlisted concept whose riskiest assumption is best tested with a prototype."
+
+  - skill: usability-test-planner
+    input_from:
+      - prototype-builder.prototype
+      - design-brief-writer.design_brief
+    output_key: usability_test_plan
+    depends_on: [design-brief-writer, prototype-builder]
+
+entry_points:
+  - step: design-brief-writer
+    when: "Starting from a raw request or vague problem"
+  - step: ideation-facilitator
+    when: "Problem is framed; need concepts"
+  - step: prototype-builder
+    when: "A concept is chosen; need something testable"
+
+batch:
+  input_key: request
+  parallelizable_steps: []

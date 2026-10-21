@@ -1,0 +1,8 @@
+interface:
+  display_name: "Design System Auditor"
+  short_description: "Measure design system adoption and drift and plan remediation"
+  invocation: "${design-system-auditor}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/audit-checklist.md"
+    - "../references/system-audit-template.md"

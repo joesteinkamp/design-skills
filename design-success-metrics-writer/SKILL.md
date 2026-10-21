@@ -9,7 +9,7 @@ complexity: moderate
 output_length: medium
 
 # Skill Graph
-upstream_skills: [design-spec-writer, persona-creator, journey-mapper]
+upstream_skills: [design-spec-writer, persona-creator, journey-mapper, survey-analyzer, design-brief-writer]
 downstream_skills: [ab-test-planner, stakeholder-presentation-writer, design-okr-writer, design-status-rollup, roadmap-prioritizer]
 
 # Input Contract

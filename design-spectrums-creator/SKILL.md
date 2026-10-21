@@ -9,7 +9,7 @@ complexity: light
 output_length: medium
 
 # Skill Graph
-upstream_skills: [persona-creator, journey-mapper, inspiration-browser, design-spec-writer]
+upstream_skills: [persona-creator, journey-mapper, inspiration-browser, design-spec-writer, design-brief-writer]
 downstream_skills: [design-rationale-writer]
 
 # Input Contract

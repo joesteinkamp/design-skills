@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prototype Builder"
+  short_description: "Build a clickable, test-ready multi-screen prototype in code"
+  default_prompt: "Use $prototype-builder to build a clickable, test-ready prototype with realistic content and key states."
+  model: opus
+  context_strategy: skill_and_templates

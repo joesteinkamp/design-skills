@@ -9,8 +9,8 @@ complexity: moderate
 output_length: long
 
 # Skill Graph
-upstream_skills: []
-downstream_skills: [figjam-workshop-prompt-creator]
+upstream_skills: [design-brief-writer]
+downstream_skills: [figjam-workshop-prompt-creator, sketch-to-code]
 
 # Input Contract
 inputs:

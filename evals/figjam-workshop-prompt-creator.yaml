@@ -1,0 +1,14 @@
+# Golden eval cases for figjam-workshop-prompt-creator. Run with: design eval figjam-workshop-prompt-creator
+skill: figjam-workshop-prompt-creator
+cases:
+- id: baseline
+  description: Representative figjam-workshop-prompt-creator request
+  inputs:
+    workshop_details: '90-minute remote workshop with 8 people (2 designers, 3 engineers, PM, support
+      lead, sales engineer) to align on the top 3 problems in admin onboarding. Inputs: 40 support tickets
+      and 6 interview summaries.'
+  answers:
+    ai-native-or-traditional-facilitation: traditional
+  expect:
+    contains:
+    - sticky

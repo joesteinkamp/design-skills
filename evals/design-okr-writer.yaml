@@ -1,0 +1,15 @@
+# Golden eval cases for design-okr-writer. Run with: design eval design-okr-writer
+skill: design-okr-writer
+cases:
+- id: baseline
+  description: Representative design-okr-writer request
+  inputs:
+    team_context: 'Design team of 8 at a fintech. Company goals this half: grow self-serve revenue 30%
+      and cut onboarding support tickets 25%. Design pains: no shared component code, research backlog
+      of 6 studies, onboarding completion is 54%.'
+  answers:
+    what-time-horizon-quarter-half-or-year: half
+    what-s-the-team-scope-whole-design-org-a-squad-a-craft: whole design org
+  expect:
+    contains:
+    - Key Result

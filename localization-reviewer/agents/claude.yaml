@@ -1,0 +1,6 @@
+interface:
+  display_name: "Localization Reviewer"
+  short_description: "Review UI for i18n and localization readiness, including RTL"
+  default_prompt: "Use $localization-reviewer to review a design or build for localization readiness and produce severity-ranked fixes and a pseudo-localization test plan."
+  model: sonnet
+  context_strategy: skill_and_templates
