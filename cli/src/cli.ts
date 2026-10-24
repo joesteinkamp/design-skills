@@ -4,6 +4,7 @@ import { initCommand } from "./commands/init.js";
 import { listCommand } from "./commands/list.js";
 import { describeCommand } from "./commands/describe.js";
 import { runCommand } from "./commands/run.js";
+import { evalCommand } from "./commands/eval.js";
 import { mcpAddCommand } from "./commands/mcp/add.js";
 import { mcpListCommand } from "./commands/mcp/list.js";
 import { mcpDoctorCommand } from "./commands/mcp/doctor.js";
@@ -47,6 +48,19 @@ program
   .action((skill: string, skillArgs: string[], opts) =>
     runCommand(skill, parsePassthroughFlags(skillArgs), opts),
   );
+
+program
+  .command("eval [skills...]")
+  .description(
+    "Run golden eval cases (evals/<skill>.yaml) and grade outputs against each skill's contract and quality bar",
+  )
+  .option("--no-judge", "Only run structural checks; skip the LLM quality-bar judge")
+  .option("--case <id>", "Run a single case id")
+  .option("--model <model>", "Override the model under test")
+  .option("--judge-model <model>", "Model for the quality-bar judge (default: claude's default)")
+  .option("--out-dir <dir>", "Where to write the JSON report (default: ./design/evals)")
+  .addOption(new Option("--max-budget-usd <amount>", "Cap spend per skill run").argParser(parseFloat))
+  .action(evalCommand);
 
 const mcp = program.command("mcp").description("Manage MCP servers used by skills");
 mcp

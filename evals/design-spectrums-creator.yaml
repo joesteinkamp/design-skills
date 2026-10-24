@@ -1,0 +1,12 @@
+# Golden eval cases for design-spectrums-creator. Run with: design eval design-spectrums-creator
+skill: design-spectrums-creator
+cases:
+- id: baseline
+  description: Representative design-spectrums-creator request
+  inputs:
+    design_brief: 'A personal finance app for freelancers: help them set aside money for quarterly taxes
+      automatically. Users range from anxious first-year freelancers to experienced ones who want control.
+      The team is split on how much the app should decide for the user.'
+  expect:
+    contains:
+    - automat

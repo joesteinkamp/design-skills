@@ -1,0 +1,8 @@
+interface:
+  display_name: "Localization Reviewer"
+  short_description: "Review UI for i18n and localization readiness, including RTL"
+  invocation: "${localization-reviewer}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/i18n-checklist.md"
+    - "../references/localization-review-template.md"

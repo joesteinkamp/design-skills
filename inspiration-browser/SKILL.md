@@ -10,7 +10,7 @@ output_length: medium
 
 # Skill Graph
 upstream_skills: [persona-creator, journey-mapper, design-spec-writer]
-downstream_skills: [design-spectrums-creator]
+downstream_skills: [design-spectrums-creator, ideation-facilitator]
 
 # Input Contract
 inputs:

@@ -2,5 +2,5 @@ interface:
   display_name: "Performance Review Writer"
   short_description: "Write a level-calibrated design performance review from self, peer, and manager input"
   default_prompt: "Use $performance-review-writer to write a manager-authored, level-calibrated performance review for a designer, producing goal attainment, competency scores with evidence, an overall rating, and a growth plan."
-  model: sonnet
+  model: opus
   context_strategy: skill_and_templates

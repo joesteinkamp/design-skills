@@ -1,0 +1,30 @@
+# Golden eval cases for research-synthesizer. Run with: design eval research-synthesizer
+skill: research-synthesizer
+cases:
+- id: baseline
+  description: Representative research-synthesizer request
+  inputs:
+    raw_research_data: 'P1 (ops manager, 40 seats): "I export to Excel every Friday because the report
+      filters reset when I leave the page." Spends ~2h/week rebuilding the same view.
+
+      P2 (finance lead): "I don''t trust the totals until I reconcile them with the bank. Twice last quarter
+      they were off by a day." Keeps a parallel spreadsheet.
+
+      P3 (ops analyst): "Saved views? I didn''t know those existed." Rebuilds filters daily; asked a teammate
+      to screenshot the settings.
+
+      P4 (CFO, 200 seats): "My team spends Monday mornings stitching exports together for my review."
+      Wants a scheduled summary.
+
+      P5 (finance analyst): "The date picker defaults to UTC, so our month-end numbers never match." Workaround:
+      shifts dates by hand.
+
+      P6 (ops manager): "I''d pay more for this to just email me the numbers." Uses exports to share with
+      execs who don''t log in.
+
+      P7 (bookkeeper): Couldn''t find export in the new nav; found it after 4 minutes under ''More''.'
+  answers:
+    how-many-sessions-do-you-have-and-what-methods-were-used: 7 remote interviews, 45 minutes each
+  expect:
+    contains:
+    - P2

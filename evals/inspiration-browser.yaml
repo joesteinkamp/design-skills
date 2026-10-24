@@ -1,0 +1,13 @@
+# Golden eval cases for inspiration-browser. Run with: design eval inspiration-browser
+skill: inspiration-browser
+cases:
+- id: baseline
+  description: Representative inspiration-browser request
+  inputs:
+    design_challenge: Making a dense data table (40+ columns, 10k rows) feel approachable for non-analyst
+      users in an operations tool.
+  answers:
+    what-aspect-of-design-are-you-exploring: info_density
+  expect:
+    contains:
+    - table

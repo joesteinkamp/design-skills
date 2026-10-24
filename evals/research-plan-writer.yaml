@@ -1,0 +1,15 @@
+# Golden eval cases for research-plan-writer. Run with: design eval research-plan-writer
+skill: research-plan-writer
+cases:
+- id: baseline
+  description: Representative research-plan-writer request
+  inputs:
+    research_questions: Why do mid-market finance teams stop using our reporting module after the first
+      month, and what would make it part of their weekly routine?
+  answers:
+    what-business-decision-will-this-research-inform: Whether to invest next half in scheduled reports
+      or in report sharing
+  expect:
+    contains:
+    - discussion guide
+    - screener

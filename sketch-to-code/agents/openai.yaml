@@ -1,0 +1,11 @@
+interface:
+  display_name: "Sketch to Code"
+  short_description: "Turn a wireframe sketch into a shadcn/ui React component and HTML preview"
+  invocation: "${sketch-to-code}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/sketch-build-template.md"
+    - "../references/system-prompt.md"
+    - "../references/refinement-prompt.md"
+    - "../references/component-catalog.json"
+    - "../references/preview-template.html"

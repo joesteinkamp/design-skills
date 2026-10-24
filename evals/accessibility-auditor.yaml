@@ -1,0 +1,16 @@
+# Golden eval cases for accessibility-auditor. Run with: design eval accessibility-auditor
+skill: accessibility-auditor
+cases:
+- id: baseline
+  description: Representative accessibility-auditor request
+  inputs:
+    design_screens: 'Checkout payment step: card number, expiry, CVC fields with placeholder-only labels;
+      a ''Pay $49'' button in light gray (#A0A0A0) on white; inline errors shown in red text only; a 3-second
+      auto-dismissing toast confirms payment; a drag-to-reorder list of saved cards.'
+  answers:
+    which-screens-to-audit: Checkout payment step
+    wcag-level: AA
+  expect:
+    contains:
+    - 1.4.3
+    - 3.3.2

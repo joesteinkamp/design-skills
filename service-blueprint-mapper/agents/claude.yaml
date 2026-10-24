@@ -1,0 +1,6 @@
+interface:
+  display_name: "Service Blueprint Mapper"
+  short_description: "Map frontstage, backstage, and support processes with fail and wait points"
+  default_prompt: "Use $service-blueprint-mapper to map a service blueprint with fail points, wait points, handoffs, and operational opportunities."
+  model: opus
+  context_strategy: skill_and_templates

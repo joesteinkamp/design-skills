@@ -9,7 +9,7 @@ complexity: light
 output_length: medium
 
 # Skill Graph
-upstream_skills: [design-spectrums-creator, design-critique, critique-notes-summarizer]
+upstream_skills: [design-spectrums-creator, design-critique, critique-notes-summarizer, design-system-auditor, ideation-facilitator]
 downstream_skills: [stakeholder-presentation-writer, design-spec-writer]
 
 # Input Contract

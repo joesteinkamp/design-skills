@@ -1,0 +1,4 @@
+interface:
+  display_name: "IA Researcher"
+  short_description: "Plan and analyze card sorts and tree tests into a recommended navigation structure"
+  default_prompt: "Use $ia-researcher to plan or analyze a card sort or tree test and recommend a navigation structure and labels."

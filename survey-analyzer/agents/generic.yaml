@@ -1,0 +1,4 @@
+interface:
+  display_name: "Survey Analyzer"
+  short_description: "Analyze survey data with honest statistics and coded open-text themes"
+  default_prompt: "Use $survey-analyzer to analyze survey results with data-quality checks, standard scores, confidence intervals, segment tests, and coded open-text themes."

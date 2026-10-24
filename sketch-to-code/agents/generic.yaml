@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sketch to Code"
+  short_description: "Turn a wireframe sketch into a shadcn/ui React component and HTML preview"
+  default_prompt: "Use $sketch-to-code to convert this sketch into an HTML preview and a shadcn/ui React component."

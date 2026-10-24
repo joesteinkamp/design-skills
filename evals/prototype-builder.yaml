@@ -1,0 +1,16 @@
+# Golden eval cases for prototype-builder. Run with: design eval prototype-builder
+skill: prototype-builder
+cases:
+- id: baseline
+  description: Representative prototype-builder request
+  inputs:
+    prototype_brief: 'Clickable prototype of the invite-teammates flow: admin opens Members, clicks Invite,
+      pastes multiple emails, picks a role, sends; sees pending invites; can revoke one. Include an invalid-email
+      error and the empty state when there are no members yet.'
+  answers:
+    what-question-should-this-prototype-answer-in-testing: Can a new admin invite three teammates with
+      different roles without help?
+  expect:
+    contains:
+    - Reset
+    - '#/'

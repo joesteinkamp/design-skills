@@ -9,8 +9,8 @@ complexity: moderate
 output_length: long
 
 # Skill Graph
-upstream_skills: [design-spec-writer, journey-mapper]
-downstream_skills: [usability-test-planner]
+upstream_skills: [design-spec-writer, journey-mapper, ia-researcher]
+downstream_skills: [usability-test-planner, prototype-builder]
 
 # Input Contract
 inputs:

@@ -1,0 +1,16 @@
+# Golden eval cases for workshop-planner. Run with: design eval workshop-planner
+skill: workshop-planner
+cases:
+- id: baseline
+  description: Representative workshop-planner request
+  inputs:
+    workshop_brief: Half-day kickoff for the admin dashboard initiative with design, PM, eng lead, sales,
+      and support. We need agreement on which admin problems to tackle first.
+  answers:
+    what-decision-should-come-out-of-this-workshop: Top 3 admin problems to solve this half
+    remote-hybrid-or-in-person: remote
+    how-many-participants: '9'
+    workshop-type: decision
+  expect:
+    contains:
+    - agenda

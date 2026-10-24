@@ -1,0 +1,12 @@
+# Golden eval cases for ideation-facilitator. Run with: design eval ideation-facilitator
+skill: ideation-facilitator
+cases:
+- id: baseline
+  description: Representative ideation-facilitator request
+  inputs:
+    problem: 'How might we help new freelancers set aside enough for quarterly taxes without feeling the
+      app is taking their money? Constraint: we can''t move money between banks ourselves (no money transmitter
+      license).'
+  expect:
+    contains:
+    - shortlist

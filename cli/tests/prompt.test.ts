@@ -14,7 +14,7 @@ describe("assemblePrompt", () => {
     expect(out.systemPrompt).toContain('"filename"');
     expect(out.userMessage).toContain("feature_description");
     expect(out.userMessage).toContain("checkout redesign");
-    expect(out.model).toBe("sonnet");
+    expect(out.model).toBe("opus");
   });
 
   it("handles skills without declared inputs / outputs, inlining body references", async () => {

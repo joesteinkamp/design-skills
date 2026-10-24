@@ -1,0 +1,30 @@
+# Golden eval cases for critique-notes-summarizer. Run with: design eval critique-notes-summarizer
+skill: critique-notes-summarizer
+cases:
+- id: baseline
+  description: Representative critique-notes-summarizer request
+  inputs:
+    raw_notes: 'Design crit 10/14 — onboarding v3. Present: Maya (design lead, decider), Jon (PM), Priya
+      (eng), Ana (designer, presenting).
+
+      - Maya: step 2 asks for company size before showing value; move it after the first report? Jon agrees.
+
+      - Priya: the import progress bar can''t be accurate, the API doesn''t return progress. Suggest indeterminate
+      spinner + email when done.
+
+      - Jon worried about drop-off at the integrations step; data shows 38% abandon there.
+
+      - Ana will explore a ''skip for now'' on integrations. Maya: yes, but only if we can show sample
+      data.
+
+      - Unresolved: whether to keep the welcome video. Jon wants it, Maya doesn''t. Revisit next week
+      with the video completion data (Jon to pull).
+
+      - Decision: ship the new empty state for reports as-is.'
+  answers:
+    who-attended-and-who-are-the-decision-makers: Maya (design lead, decider), Jon (PM), Priya (eng),
+      Ana (designer)
+  expect:
+    contains:
+    - Jon
+    - Ana

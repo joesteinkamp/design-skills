@@ -1,0 +1,15 @@
+# Golden eval cases for design-spec-writer. Run with: design eval design-spec-writer
+skill: design-spec-writer
+cases:
+- id: baseline
+  description: Representative design-spec-writer request
+  inputs:
+    feature_description: Let workspace admins invite teammates by email in bulk (paste up to 50 addresses),
+      choose a role per invite (admin, member, viewer), see pending invites, and resend or revoke them.
+      Invites expire after 7 days.
+  answers:
+    decision-stage: build-ready
+  expect:
+    contains:
+    - acceptance criteria
+    - expire

@@ -1,0 +1,14 @@
+# Golden eval cases for user-flow-mapper. Run with: design eval user-flow-mapper
+skill: user-flow-mapper
+cases:
+- id: baseline
+  description: Representative user-flow-mapper request
+  inputs:
+    feature_or_flow: 'Password reset for a web app: request link by email, open link (valid 30 minutes),
+      set new password with strength rules, get signed in.'
+  answers:
+    what-is-the-entry-point-for-this-flow: '''Forgot password?'' link on the sign-in page'
+    what-is-the-success-state-end-goal: User is signed in with the new password
+  expect:
+    contains:
+    - expired

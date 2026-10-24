@@ -1,0 +1,8 @@
+interface:
+  display_name: "IA Researcher"
+  short_description: "Plan and analyze card sorts and tree tests into a recommended navigation structure"
+  invocation: "${ia-researcher}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/ia-methods.md"
+    - "../references/ia-study-template.md"

@@ -1,0 +1,16 @@
+# Golden eval cases for alt-text-generator. Run with: design eval alt-text-generator
+skill: alt-text-generator
+cases:
+- id: baseline
+  description: Representative alt-text-generator request
+  inputs:
+    images: '1) Hero photo on the homepage: a nurse in scrubs reviewing a tablet chart with an elderly
+      patient in a bright clinic room. 2) Icon-only button showing a trash can, used to delete a saved
+      report. 3) Line chart on the analytics page: monthly active users rising from 12k in January to
+      31k in June, with a dip in April to 18k. 4) Decorative blurred gradient blob behind the pricing
+      header.'
+  answers:
+    are-these-images-decorative-informative-or-functional-e-g-ic: mixed
+  expect:
+    contains:
+    - decorative

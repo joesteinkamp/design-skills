@@ -1,0 +1,15 @@
+# Golden eval cases for dev-handoff-writer. Run with: design eval dev-handoff-writer
+skill: dev-handoff-writer
+cases:
+- id: baseline
+  description: Representative dev-handoff-writer request
+  inputs:
+    design_spec: 'Toast notification component: variants success, error, info; title (required), description
+      (optional), one action button (optional), close button. Auto-dismiss after 5s except error, which
+      persists. Stack up to 3, newest on top, bottom-right on desktop, top full-width on mobile. Pause
+      dismissal on hover/focus. Announce via a live region.'
+  answers:
+    target-framework: react
+  expect:
+    contains:
+    - aria

@@ -1,0 +1,8 @@
+interface:
+  display_name: "Ideation Facilitator"
+  short_description: "Generate divergent concepts and converge on a tested shortlist"
+  invocation: "${ideation-facilitator}"
+  system_prompt_path: "../SKILL.md"
+  reference_paths:
+    - "../references/concept-set-template.md"
+    - "../references/ideation-methods.md"

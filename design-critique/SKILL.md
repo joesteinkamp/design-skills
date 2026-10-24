@@ -9,7 +9,7 @@ complexity: moderate
 output_length: medium
 
 # Skill Graph
-upstream_skills: [design-spec-writer]
+upstream_skills: [design-spec-writer, sketch-to-code, prototype-builder]
 downstream_skills: [stakeholder-presentation-writer, critique-notes-summarizer, design-rationale-writer]
 
 # Input Contract

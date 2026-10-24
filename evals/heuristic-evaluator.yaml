@@ -1,0 +1,17 @@
+# Golden eval cases for heuristic-evaluator. Run with: design eval heuristic-evaluator
+skill: heuristic-evaluator
+cases:
+- id: baseline
+  description: Representative heuristic-evaluator request
+  inputs:
+    design_screens: 'Mobile banking transfer flow: screen 1 pick recipient (search only, no recent list);
+      screen 2 amount (keyboard covers the Continue button, no fee shown); screen 3 review (no edit links,
+      back button clears the amount); screen 4 success shows only a checkmark, no reference number; errors
+      appear as ''Error 4012'' with no explanation.'
+  answers:
+    quick-scan-or-deep-evaluation: deep_evaluation
+    custom-heuristics-or-nielsen-s-10: nielsens_10
+    figma-url-or-live-product-url: none, described above
+  expect:
+    contains:
+    - severity

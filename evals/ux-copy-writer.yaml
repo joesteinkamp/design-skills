@@ -1,0 +1,14 @@
+# Golden eval cases for ux-copy-writer. Run with: design eval ux-copy-writer
+skill: ux-copy-writer
+cases:
+- id: baseline
+  description: Representative ux-copy-writer request
+  inputs:
+    copy_request: 'Write copy for the bulk invite modal: title, helper text for the email field (paste
+      up to 50 addresses), role picker labels, primary button, success toast, and errors for invalid email,
+      duplicate invite, and over the 50-address limit.'
+  answers:
+    what-surface-or-component-is-this-copy-for: Bulk invite modal
+  expect:
+    contains:
+    - '50'

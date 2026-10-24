@@ -37,6 +37,13 @@ describe("skills.yaml registry", async () => {
     },
   );
 
+  it("pins opus for heavy skills and sonnet otherwise", () => {
+    for (const skill of bundled) {
+      const want = skill.frontmatter.complexity === "heavy" ? "opus" : "sonnet";
+      expect(skill.agent?.interface?.model, skill.frontmatter.name).toBe(want);
+    }
+  });
+
   it("every reference a SKILL.md mentions exists", () => {
     const ref = /(?:\.\.\/[a-z0-9-]+\/)?references\/[\w.-]+\.(?:md|json|html|ya?ml)/g;
     for (const skill of bundled) {

@@ -1,0 +1,13 @@
+# Golden eval cases for ab-test-planner. Run with: design eval ab-test-planner
+skill: ab-test-planner
+cases:
+- id: baseline
+  description: Representative ab-test-planner request
+  inputs:
+    design_decision: 'We redesigned the pricing page: the new version shows annual pricing by default
+      with a ''save 20%'' badge, and moves the plan comparison table above the fold. Current trial-start
+      rate is 3.1% of pricing page visitors (~40k visitors/month).'
+  expect:
+    contains:
+    - hypothesis
+    - sample size

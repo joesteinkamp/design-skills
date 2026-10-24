@@ -1,0 +1,16 @@
+# Golden eval cases for roadmap-prioritizer. Run with: design eval roadmap-prioritizer
+skill: roadmap-prioritizer
+cases:
+- id: baseline
+  description: Representative roadmap-prioritizer request
+  inputs:
+    initiatives: 1) Saved report views — reach 6k users/qtr, est. 3 weeks. 2) Scheduled email reports
+      — reach 2k execs, 5 weeks. 3) Timezone fix for date picker — reach 4k, 1 week. 4) New navigation
+      polish — reach 9k, 4 weeks, impact unclear. 5) SSO self-serve setup — reach 300 admins, 2 weeks,
+      unblocks enterprise deals.
+  answers:
+    which-prioritization-framework-rice-impact-effort-or-wsjf: RICE
+    what-s-the-team-capacity-and-time-horizon: 2 designers, 6 engineers, one quarter (12 weeks)
+  expect:
+    contains:
+    - RICE

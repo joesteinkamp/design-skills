@@ -9,8 +9,8 @@ complexity: heavy
 output_length: long
 
 # Skill Graph
-upstream_skills: []
-downstream_skills: [persona-creator, journey-mapper, design-spec-writer, stakeholder-presentation-writer, roadmap-prioritizer]
+upstream_skills: [survey-analyzer]
+downstream_skills: [persona-creator, journey-mapper, design-spec-writer, stakeholder-presentation-writer, roadmap-prioritizer, ideation-facilitator, service-blueprint-mapper, design-brief-writer, ia-researcher]
 
 # Input Contract
 inputs:

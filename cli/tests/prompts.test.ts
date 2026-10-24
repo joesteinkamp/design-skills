@@ -81,6 +81,26 @@ describe("collectInputs (non-interactive)", () => {
     expect(out.userAnswers["Figma URL?"]).toBeUndefined();
   });
 
+  it("uses the default for a required question instead of failing", async () => {
+    const withDefault: DiscoveredSkill = {
+      ...skill,
+      userInputs: [
+        {
+          question: "Add error branches?",
+          required: true,
+          default: true,
+          checkpoint: false,
+          flagKey: "add-error-branches",
+        },
+      ],
+    };
+    const out = await collectInputs(withDefault, {
+      flags: { feature_description: "x" },
+      interactive: false,
+    });
+    expect(out.userAnswers["Add error branches?"]).toBe(true);
+  });
+
   it("never asks mid-run checkpoints up front", async () => {
     const out = await collectInputs(skill, {
       flags: { feature_description: "x", "decision-stage": "proposal" },

@@ -1,0 +1,16 @@
+# Golden eval cases for design-system-auditor. Run with: design eval design-system-auditor
+skill: design-system-auditor
+cases:
+- id: baseline
+  description: Representative design-system-auditor request
+  inputs:
+    audit_scope: 'Audit the web app and the marketing site against our ''Atlas'' design system (v4). Findings
+      so far from a scan: web app imports Atlas Button in 212 files but also has a local PrimaryButton
+      in 37 files; 318 hardcoded hex colors in web app CSS, top values #1A73E8 (Atlas blue-600 is #1A73E9),
+      #333333, #F5F5F5; 3 different Card components (Atlas Card, DashboardCard, PanelBox); Figma: Atlas
+      Modal detached in 41% of instances, most common override is removing the footer; marketing site
+      uses no Atlas components.'
+  expect:
+    contains:
+    - product
+    - system

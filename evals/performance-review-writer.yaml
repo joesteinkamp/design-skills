@@ -1,0 +1,21 @@
+# Golden eval cases for performance-review-writer. Run with: design eval performance-review-writer
+skill: performance-review-writer
+cases:
+- id: baseline
+  description: Representative performance-review-writer request
+  inputs:
+    designer_context: 'Sam, Product Designer II (L3), annual review Jan–Dec. Self-assessment: led the
+      onboarding v3 redesign (completion 54% → 71%), ran 3 usability studies, mentored an intern. Peer
+      feedback: ''clear communicator'', ''sometimes commits to solutions before aligning with eng'' (2
+      of 5 peers). Manager notes: missed the March billing deadline by 2 weeks after scope creep; strong
+      crit facilitation from Q3. Prior goals: ship onboarding v3 (met), contribute 3 components to the
+      design system (1 of 3).'
+  answers:
+    what-review-cycle-is-this-annual-mid-year-or-a-promotion-cas: annual
+    what-is-the-designer-s-current-level-and-should-we-use-the-d: default
+    which-inputs-do-you-have-self-assessment-peer-360-feedback-m: self-assessment, peer feedback, manager
+      notes, prior goals
+  expect:
+    contains:
+    - onboarding
+    - growth

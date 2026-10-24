@@ -9,8 +9,8 @@ complexity: moderate
 output_length: medium
 
 # Skill Graph
-upstream_skills: [design-spec-writer, dev-handoff-writer]
-downstream_skills: [accessibility-auditor]
+upstream_skills: [design-spec-writer, dev-handoff-writer, localization-reviewer, ia-researcher]
+downstream_skills: [accessibility-auditor, localization-reviewer]
 
 # Input Contract
 inputs:

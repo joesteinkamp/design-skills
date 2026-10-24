@@ -37,6 +37,7 @@ If the user writes a component name inside a drawn box (e.g., they wrote "Select
   - Plain underlined text → `<Button variant="link">`
   - Red / "danger" / "delete" labeled → `<Button variant="destructive">`
 - Maintain consistent spacing using Tailwind's spacing scale, not arbitrary values.
+- Target Tailwind v4 (what current shadcn/ui installs): `size-*`, `shadow-xs`, opacity modifiers like `bg-primary/90`, tokens via CSS variables rather than `tailwind.config` theme extensions. If the project is still on v3 (a `tailwind.config` with `theme.extend` and no `@import "tailwindcss"` in its CSS), follow the project instead.
 - For ambiguous elements, choose the most common UI interpretation (text in a row at the top → `NavigationMenu`; small circle near a name → `Avatar`).
 
 ## Design system override
@@ -49,8 +50,8 @@ Produce two artifacts. Both must be complete and self-contained.
 
 ### htmlPreview
 - A complete `<!DOCTYPE html>` document with viewport meta tag.
-- Includes `<script src="https://cdn.tailwindcss.com"></script>` in `<head>`.
-- Embeds the shadcn CSS variables + base component styles from `references/preview-template.html`. Substitute `{{CONTENT}}` with the rendered body markup.
+- Starts from `references/preview-template.html` verbatim: the pinned Tailwind v4 browser build, the shadcn tokens, and the `@theme inline` mapping. Substitute `{{CONTENT}}` with the rendered body markup.
+- Uses the same token utilities as the React code (`bg-primary`, `text-muted-foreground`, `border-border`) so preview and component match; use the template's `.btn`, `.card`, `.input` classes where a shadcn component would render.
 - Renders a faithful visual approximation of the React component using plain HTML + Tailwind classes (no JSX).
 
 ### reactCode

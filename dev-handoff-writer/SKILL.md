@@ -9,8 +9,8 @@ complexity: heavy
 output_length: long
 
 # Skill Graph
-upstream_skills: [design-spec-writer, accessibility-auditor]
-downstream_skills: [ux-copy-writer, alt-text-generator, design-qa-reviewer]
+upstream_skills: [design-spec-writer, accessibility-auditor, design-system-auditor, prototype-builder, localization-reviewer]
+downstream_skills: [ux-copy-writer, alt-text-generator, design-qa-reviewer, localization-reviewer]
 
 # Input Contract
 inputs:

@@ -1,0 +1,15 @@
+# Golden eval cases for sketch-to-code. Run with: design eval sketch-to-code
+skill: sketch-to-code
+cases:
+- id: baseline
+  description: Representative sketch-to-code request
+  inputs:
+    sketch_image: fixtures/login-sketch.png
+    screen_name: login screen
+  answers:
+    target-stack: nextjs_shadcn
+  expect:
+    contains:
+    - Button
+    - Input
+    - Checkbox

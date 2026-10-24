@@ -1,0 +1,16 @@
+# Golden eval cases for service-blueprint-mapper. Run with: design eval service-blueprint-mapper
+skill: service-blueprint-mapper
+cases:
+- id: baseline
+  description: Representative service-blueprint-mapper request
+  inputs:
+    service_context: 'Customer returns an online order in a physical store for a refund. Known: store
+      associates must look up the order in the OMS by typing the order ID; refunds to cards go through
+      finance review if over $200; customers often wait 5–10 business days and contact support to ask
+      about status.'
+  answers:
+    which-scenario-and-which-customer-segment-should-the-bluepri: 'Online order returned in store, refunded
+      to the original card; segment: first-time online buyers'
+  expect:
+    contains:
+    - line of visibility

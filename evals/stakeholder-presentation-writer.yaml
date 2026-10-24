@@ -1,0 +1,14 @@
+# Golden eval cases for stakeholder-presentation-writer. Run with: design eval stakeholder-presentation-writer
+skill: stakeholder-presentation-writer
+cases:
+- id: baseline
+  description: Representative stakeholder-presentation-writer request
+  inputs:
+    presentation_topic: Recommend investing next half in scheduled email reports over saved views, based
+      on churn interviews and survey results showing execs rely on exported spreadsheets.
+  answers:
+    who-is-the-audience-names-roles: VP Product, CFO, Head of Sales
+    what-specific-decision-do-you-need-from-them: Approve 2 squads for scheduled reports next half
+  expect:
+    contains:
+    - decision
